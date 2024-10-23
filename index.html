@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Typing Animation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Primeira secção, com o título centralizado -->
+    <section id="title" class="section">
+        <div class="animated-text">
+            Do you know what is <span></span>
+        </div>
+        <!-- Seta para avançar -->
+        <a href="#dislexia" class="scroll-arrow next">
+            &#8595;
+        </a>
+    </section>
+
+    <!-- Segunda secção com informações sobre dislexia -->
+    <section id="dislexia" class="section">
+        <div class="dislexia-content">
+            <div class="dislexia-text">
+                <h2>Dislexia</h2>
+                <p>
+                    A dislexia é uma condição neurológica que afeta a habilidade de leitura e escrita. Ela não está
+                    relacionada à inteligência, mas sim a diferenças na forma como o cérebro processa a linguagem
+                    escrita.
+                </p>
+            </div>
+            <div class="dislexia-canvas">
+                <canvas id="myCanvas" width="400" height="400"></canvas> <!-- Adicione o canvas aqui -->
+            </div>
+        </div>
+        <!-- Seta para voltar -->
+        <a href="#title" class="scroll-arrow previous">
+            &#8593;
+        </a>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
