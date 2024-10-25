@@ -20,6 +20,10 @@ body {
     justify-content: center;
     align-items: center;
     position: relative;
+    /**/
+    flex-direction: column;
+    padding: 20px;
+    margin:  0 auto;
 }
 
 
@@ -31,13 +35,16 @@ body {
     max-width: 1200px; /* Largura máxima da seção */
     width: 100%; /* Largura total */
     margin: 20px; /* Margem em volta do conteúdo */
+    /**/
+    flex-wrap: wrap;
+    /*transform: translateY(100vh);*/
 }
 
 /* Estilo do texto da dislexia */
 .dislexia-text {
     flex: 1; /* Ocupa o dobro do espaço em relação ao canvas */
     padding-right: 20px; /* Espaço entre o texto e o canvas */
-    margin-left: -500px; /* Margem negativa para mover mais para a esquerda */
+    margin-left: 0px; /* Margem negativa para mover mais para a esquerda */
     text-align: left; /* Alinha o texto à esquerda */
 }
 
@@ -48,9 +55,31 @@ body {
     justify-content: center; /* Centraliza o canvas na coluna */
     align-items: center; /* Centraliza o canvas verticalmente */
     width: 500px; /* Largura fixa para o canvas */
+    /**/
+    max-width: 400px;
 }
 
+/**/
+canvas{
+    max-width: 100%;
+    height: auto;
+}
 
+@media (max-width: 768px) {
+    .dislexia-content{
+        flex-direction: column;
+    }
+
+    .dislexia-text {
+        padding-right: 0;
+        margin-right: 0px;
+    }
+
+    .dislexia-canvas{
+        margin-top: 20px;
+    }
+}
+/**/
 
 #dislexia h2 {
     font-size: 48px; /* Tamanho do título */
