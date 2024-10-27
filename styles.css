@@ -1,121 +1,108 @@
-/* Reset básico */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Estilo global */
+/* Global styles */
 body {
     background-color: #2f3542;
     color: #fff;
     font-family: "Montserrat", sans-serif;
-    scroll-behavior: smooth; /* Scroll suave */
+    scroll-behavior: smooth;
 }
 
-/* Cada secção ocupa 100vh */
+/* Each section occupies 100vh */
 .section {
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative;
-    /**/
     flex-direction: column;
     padding: 20px;
-    margin:  0 auto;
 }
 
-
-/* Estilo para o conteúdo da seção dislexia */
-.dislexia-content {
-    display: flex; /* Utiliza flexbox para dividir em duas colunas */
-    justify-content: flex-start; /* Alinha tudo à esquerda */
-    align-items: flex-start; /* Alinha os itens ao topo */
-    max-width: 1200px; /* Largura máxima da seção */
-    width: 100%; /* Largura total */
-    margin: 20px; /* Margem em volta do conteúdo */
-    /**/
+/* Styles for the Dyslexia section content */
+.dislexia-content, .dyscalculia-content {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    max-width: 1200px;
+    width: 100%;
+    margin: 20px;
     flex-wrap: wrap;
-    /*transform: translateY(100vh);*/
 }
 
-/* Estilo do texto da dislexia */
-.dislexia-text {
-    flex: 1; /* Ocupa o dobro do espaço em relação ao canvas */
-    padding-right: 20px; /* Espaço entre o texto e o canvas */
-    margin-left: 0px; /* Margem negativa para mover mais para a esquerda */
-    text-align: left; /* Alinha o texto à esquerda */
+.dislexia-text, .dyscalculia-text {
+    flex: 1;
+    padding-right: 20px;
+    text-align: left;
 }
 
-/* Estilo do canvas */
-.dislexia-canvas {
-    flex: 1; /* Ocupa o espaço restante da coluna */
-    display: flex; /* Permite centralizar o canvas */
-    justify-content: center; /* Centraliza o canvas na coluna */
-    align-items: center; /* Centraliza o canvas verticalmente */
-    width: 500px; /* Largura fixa para o canvas */
-    /**/
+.dislexia-canvas, .dyscalculia-canvas {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 500px;
     max-width: 400px;
 }
 
-/**/
-canvas{
+canvas {
     max-width: 100%;
     height: auto;
 }
 
 @media (max-width: 768px) {
-    .dislexia-content{
+    .dislexia-content, .dyscalculia-content {
         flex-direction: column;
     }
 
-    .dislexia-text {
+    .dislexia-text, .dyscalculia-text {
         padding-right: 0;
         margin-right: 0px;
     }
 
-    .dislexia-canvas{
+    .dislexia-canvas, .dyscalculia-canvas {
         margin-top: 20px;
     }
 }
-/**/
 
-#dislexia h2 {
-    font-size: 48px; /* Tamanho do título */
-    margin-bottom: 20px; /* Espaço abaixo do título */
+#dislexia h2, #dyscalculia h2 {
+    font-size: 48px;
+    margin-bottom: 20px;
 }
 
-#dislexia p {
-    max-width: 600px; /* Largura máxima do parágrafo */
-    font-size: 24px; /* Tamanho do texto */
+#dislexia p, #dyscalculia p {
+    max-width: 600px;
+    font-size: 24px;
 }
 
-/* Texto animado */
+/* Animated text styles */
 .animated-text {
     font-size: 34px;
     font-weight: 600;
     min-width: 280px;
 }
 
-/* Estilo da seta de rolagem */
+/* Arrow styles */
 .scroll-arrow {
     position: absolute;
     font-size: 48px;
     color: #ff7f50;
     text-decoration: none;
     animation: bounce 2s infinite;
+    cursor: pointer;
 }
 
 .scroll-arrow.next {
-    bottom: 20px; /* Seta de avançar */
+    bottom: 20px;
 }
 
 .scroll-arrow.previous {
-    top: 20px; /* Seta de voltar */
+    top: 20px;
 }
 
-/* Efeito "bounce" na seta */
 @keyframes bounce {
     0%, 20%, 50%, 80%, 100% {
         transform: translateY(0);
@@ -128,22 +115,43 @@ canvas{
     }
 }
 
-/* Animação de entrada da secção "Dislexia" */
-.section.active {
-    animation: slideIn 1s forwards;
-}
-
-/* Efeito de "slide" na transição */
-@keyframes slideIn {
+/* Slide-in animations */
+@keyframes slideInFromBottom {
     0% {
         transform: translateY(100%);
+        opacity: 0;
     }
     100% {
         transform: translateY(0);
+        opacity: 1;
     }
 }
 
-/* Estilo da animação de cursor e texto (igual ao anterior) */
+@keyframes slideInFromTop {
+    0% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Apply animations to active sections */
+.section.active {
+    animation-duration: 0.5s; /* Adjust the duration as needed */
+    animation-fill-mode: forwards; /* Maintain the final state */
+}
+
+.section.slide-in-bottom {
+    animation-name: slideInFromBottom;
+}
+
+.section.slide-in-top {
+    animation-name: slideInFromTop;
+}
+
 .animated-text span {
     position: relative;
 }
@@ -196,4 +204,20 @@ canvas{
     5%, 20%, 25%, 40%, 45%, 60%, 65%, 80%, 85% {
         width: calc(100% + 8px);
     }
+}
+
+/* Additional styling for Game Section */
+#dyslexia-game .game-content, #dyscalculia-game .game-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#dyslexia-game h2, #dyscalculia-game h2 {
+    font-size: 48px;
+    color: #ff7f50;
+}
+
+#dyslexia-game p, #dyscalculia-game p {
+    font-size: 24px;
 }

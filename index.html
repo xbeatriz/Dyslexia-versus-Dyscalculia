@@ -10,36 +10,64 @@
 </head>
 
 <body>
-    <!-- Primeira secção, com o título centralizado -->
+
+    <!-- Title Section -->
     <section id="title" class="section">
         <div class="animated-text">
             Do you know what is <span></span>
         </div>
-        <!-- Seta para avançar -->
-        <a href="#dislexia" class="scroll-arrow next">
-            &#8595;
-        </a>
+        <a href="#dislexia" class="scroll-arrow next">&#8595;</a> <!-- Only next arrow -->
     </section>
 
-    <!-- Segunda secção com informações sobre dislexia -->
+    <!-- Dyslexia Section -->
     <section id="dislexia" class="section">
         <div class="dislexia-content">
             <div class="dislexia-text">
-                <h2>Dislexia</h2>
-                <p>
-                    A dislexia é uma condição neurológica que afeta a habilidade de leitura e escrita. Ela não está
-                    relacionada à inteligência, mas sim a diferenças na forma como o cérebro processa a linguagem
-                    escrita.
-                </p>
+                <h2>Dyslexia</h2>
+                <p>Dyslexia is a neurological condition that affects reading and writing skills...</p>
             </div>
             <div class="dislexia-canvas">
-                <canvas id="myCanvas" width="400" height="400"></canvas> <!-- Adicione o canvas aqui -->
+                <canvas id="dyslexiaCanvas" width="400" height="400"></canvas>
             </div>
         </div>
-        <!-- Seta para voltar -->
-        <a href="#title" class="scroll-arrow previous">
-            &#8593;
-        </a>
+        <a href="#title" class="scroll-arrow previous">&#8593;</a> <!-- Previous arrow -->
+        <a href="#dyslexia-game" class="scroll-arrow next">&#8595;</a> <!-- Next arrow -->
+    </section>
+
+    <!-- Dyslexia Game Section -->
+    <section id="dyslexia-game" class="section">
+        <div class="game-content">
+            <h2>Dyslexia Game</h2>
+            <p>Welcome to the Dyslexia Game! Here you'll experience reading challenges similar to those faced by
+                individuals with dyslexia.</p>
+        </div>
+        <a href="#dislexia" class="scroll-arrow previous">&#8593;</a> <!-- Previous arrow -->
+        <a href="#dyscalculia" class="scroll-arrow next">&#8595;</a> <!-- Next arrow -->
+    </section>
+
+    <!-- Dyscalculia Section -->
+    <section id="dyscalculia" class="section">
+        <div class="dyscalculia-content">
+            <div class="dyscalculia-text">
+                <h2>Dyscalculia</h2>
+                <p>Dyscalculia is a learning difficulty that affects the ability to understand numbers...</p>
+            </div>
+            <div class="dyscalculia-canvas">
+                <canvas id="dyscalculiaCanvas" width="400" height="400"></canvas>
+            </div>
+        </div>
+        <a href="#dyslexia-game" class="scroll-arrow previous">&#8593;</a> <!-- Previous arrow -->
+        <a href="#dyscalculia-game" class="scroll-arrow next">&#8595;</a> <!-- Next arrow -->
+    </section>
+
+    <!-- Dyscalculia Game Section -->
+    <section id="dyscalculia-game" class="section">
+        <div class="game-content">
+            <h2>Dyscalculia Game</h2>
+            <p>Welcome to the Dyscalculia Game! Here you'll experience challenges related to number comprehension.</p>
+        </div>
+        <a href="#dyscalculia" class="scroll-arrow previous">&#8593;</a> <!-- Previous arrow -->
+        <!-- No next arrow -->
     </section>
 
     <script src="script.js"></script>
