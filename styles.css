@@ -118,7 +118,7 @@ canvas {
 /* Slide-in animations */
 @keyframes slideInFromBottom {
     0% {
-        transform: translateY(-100%);
+        transform: translateY(100%);
         opacity: 0;
     }
     100% {
@@ -129,13 +129,28 @@ canvas {
 
 @keyframes slideInFromTop {
     0% {
-        transform: translateY(100%);
+        transform: translateY(-100%);
         opacity: 0;
     }
     100% {
         transform: translateY(0);
         opacity: 1;
     }
+}
+
+/* Apply animations to active sections */
+.section.active {
+    animation-duration: 2s; /* Ajusta para 1.5 segundos para uma transição mais lenta */
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in-out; /* Suaviza a animação */
+}
+
+.section.slide-in-bottom {
+    animation-name: slideInFromBottom;
+}
+
+.section.slide-in-top {
+    animation-name: slideInFromTop;
 }
 
 /* Apply animations to active sections */

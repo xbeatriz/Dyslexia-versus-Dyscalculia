@@ -14,9 +14,9 @@
     <!-- Title Section -->
     <section id="title" class="section">
         <div class="animated-text">
-            Do you know what is <span></span>
-        </div>
-        <a href="#dislexia" class="scroll-arrow next">&#8595;</a> <!-- Only next arrow -->
+        Do you know what is <span></span>
+    </div>
+        <a href="#dislexia" class="scroll-arrow next">&#8595;</a> <!-- Next arrow -->
     </section>
 
     <!-- Dyslexia Section -->
@@ -27,19 +27,19 @@
                 <p>Dyslexia is a neurological condition that affects reading and writing skills...</p>
             </div>
             <div class="dislexia-canvas">
-                <canvas id="dyslexiaCanvas" width="400" height="400"></canvas>
+                <canvas id="dyslexiaCanvas" width="1000" height="200"></canvas>
             </div>
         </div>
+        <!--<button id="startDyslexiaGame" class="start-button">Iniciar Jogo de Dislexia</button>-->
         <a href="#title" class="scroll-arrow previous">&#8593;</a> <!-- Previous arrow -->
         <a href="#dyslexia-game" class="scroll-arrow next">&#8595;</a> <!-- Next arrow -->
     </section>
 
     <!-- Dyslexia Game Section -->
-    <section id="dyslexia-game" class="section">
+    <section id="dyslexia-game" class="section hidden">
         <div class="game-content">
             <h2>Dyslexia Game</h2>
-            <p>Welcome to the Dyslexia Game! Here you'll experience reading challenges similar to those faced by
-                individuals with dyslexia.</p>
+            <p>Welcome to the Dyslexia Game! Here you'll experience reading challenges similar to those faced by individuals with dyslexia.</p>
         </div>
         <a href="#dislexia" class="scroll-arrow previous">&#8593;</a> <!-- Previous arrow -->
         <a href="#dyscalculia" class="scroll-arrow next">&#8595;</a> <!-- Next arrow -->
@@ -52,22 +52,20 @@
                 <h2>Dyscalculia</h2>
                 <p>Dyscalculia is a learning difficulty that affects the ability to understand numbers...</p>
             </div>
-            <div class="dyscalculia-canvas">
-                <canvas id="dyscalculiaCanvas" width="400" height="400"></canvas>
-            </div>
+            <canvas id="shapesCanvas" width="800" height="400"></canvas>
         </div>
+        <!--<button id="startDyscalculiaGame" class="start-button">Iniciar Jogo de Discalculia</button>-->
         <a href="#dyslexia-game" class="scroll-arrow previous">&#8593;</a> <!-- Previous arrow -->
         <a href="#dyscalculia-game" class="scroll-arrow next">&#8595;</a> <!-- Next arrow -->
     </section>
 
     <!-- Dyscalculia Game Section -->
-    <section id="dyscalculia-game" class="section">
+    <section id="dyscalculia-game" class="section hidden">
         <div class="game-content">
             <h2>Dyscalculia Game</h2>
             <p>Welcome to the Dyscalculia Game! Here you'll experience challenges related to number comprehension.</p>
         </div>
         <a href="#dyscalculia" class="scroll-arrow previous">&#8593;</a> <!-- Previous arrow -->
-        <!-- No next arrow -->
     </section>
 
     <script src="script.js"></script>
