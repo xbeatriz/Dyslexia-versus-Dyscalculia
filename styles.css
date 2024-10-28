@@ -4,7 +4,7 @@
     box-sizing: border-box;
 }
 
-/* Global styles */
+
 body {
     background-color: #2f3542;
     color: #fff;
@@ -12,7 +12,7 @@ body {
     scroll-behavior: smooth;
 }
 
-/* Each section occupies 100vh */
+
 .section {
     height: 100vh;
     display: flex;
@@ -22,7 +22,7 @@ body {
     padding: 20px;
 }
 
-/* Styles for the Dyslexia section content */
+
 .dislexia-content, .dyscalculia-content {
     display: flex;
     justify-content: flex-start;
@@ -78,14 +78,14 @@ canvas {
     font-size: 24px;
 }
 
-/* Animated text styles */
+
 .animated-text {
     font-size: 34px;
     font-weight: 600;
     min-width: 280px;
 }
 
-/* Arrow styles */
+
 .scroll-arrow {
     position: absolute;
     font-size: 48px;
@@ -115,7 +115,7 @@ canvas {
     }
 }
 
-/* Slide-in animations */
+
 @keyframes slideInFromBottom {
     0% {
         transform: translateY(100%);
@@ -138,25 +138,10 @@ canvas {
     }
 }
 
-/* Apply animations to active sections */
 .section.active {
-    animation-duration: 2s; /* Ajusta para 1.5 segundos para uma transição mais lenta */
-    animation-fill-mode: forwards;
-    animation-timing-function: ease-in-out; /* Suaviza a animação */
-}
-
-.section.slide-in-bottom {
-    animation-name: slideInFromBottom;
-}
-
-.section.slide-in-top {
-    animation-name: slideInFromTop;
-}
-
-/* Apply animations to active sections */
-.section.active {
-    animation-duration: 0.5s; /* Adjust the duration as needed */
-    animation-fill-mode: forwards; /* Maintain the final state */
+    animation-duration: 0.5s; 
+    animation-fill-mode: forwards; 
+    animation-timing-function: ease-in-out;
 }
 
 .section.slide-in-bottom {
@@ -221,7 +206,7 @@ canvas {
     }
 }
 
-/* Additional styling for Game Section */
+
 #dyslexia-game .game-content, #dyscalculia-game .game-content {
     max-width: 800px;
     margin: 0 auto;

@@ -1,3 +1,4 @@
+// Scroll with arrows 
 document.addEventListener("DOMContentLoaded", () => {
   const sections = document.querySelectorAll(".section");
   const arrows = document.querySelectorAll(".scroll-arrow");
@@ -134,7 +135,7 @@ document.addEventListener("DOMContentLoaded", () => {
   setInterval(() => drawRandomShapes(10), 1000);
 });
 
-// Typoglycemia effect on canvas
+// Dyslexic effect on canvas
 const canvas = document.getElementById("dyslexiaCanvas");
 const ctx = canvas.getContext("2d");
 const intervalTime = 200;
@@ -171,7 +172,7 @@ function drawScrambledText() {
   const scrambledLines = scrambleTextLines();
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.font = "34px Montserrat";
-  ctx.fillStyle = "#ff7f50";
+  ctx.fillStyle = "#FFFFFFFF";
   ctx.textAlign = "left";
   ctx.textBaseline = "middle";
 
