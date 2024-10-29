@@ -1,223 +1,272 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-
 
 body {
-    background-color: #2f3542;
-    color: #fff;
-    font-family: "Montserrat", sans-serif;
-    scroll-behavior: smooth;
+  background-color: #2f3542;
+  color: #fff;
+  font-family: "Montserrat", sans-serif;
+  scroll-behavior: smooth;
 }
-
 
 .section {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding: 20px;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
 }
 
-
-.dislexia-content, .dyscalculia-content {
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-    max-width: 1200px;
-    width: 100%;
-    margin: 20px;
-    flex-wrap: wrap;
+.dislexia-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  width: 100%;
+  margin: 20px;
 }
 
-.dislexia-text, .dyscalculia-text {
-    flex: 1;
-    padding-right: 20px;
-    text-align: left;
+.dislexia-text {
+  flex: 1;
+  padding-right: 20px;
+  text-align: left;
 }
 
-.dislexia-canvas, .dyscalculia-canvas {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 500px;
-    max-width: 400px;
+.dislexia-canvas {
+  flex: 1; /* Mantém o canvas na metade direita */
+  display: flex;
+  justify-content: center; /* Centraliza horizontalmente */
+  align-items: center; /* Centraliza verticalmente */
 }
 
-canvas {
-    max-width: 100%;
-    height: auto;
+.dislexia-canvas canvas {
+  width: 80%; /* Ajuste conforme o tamanho desejado dentro da metade direita */
+  height: auto; /* Mantém a proporção da altura */
+  max-width: 100%; /* Limita a largura máxima para não ultrapassar a área */
+}
+
+.dyscalculia-content {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  max-width: 1200px;
+  width: 100%;
+  margin: 20px;
+  flex-wrap: wrap;
+}
+
+.dyscalculia-text {
+  flex: 1;
+  padding-right: 20px;
+  text-align: left;
+}
+
+.dyscalculia-canvas {
+  width: 800px; /* Largura desejada */
+  height: 400px; /* Altura desejada */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @media (max-width: 768px) {
-    .dislexia-content, .dyscalculia-content {
-        flex-direction: column;
-    }
+  .dislexia-content,
+  .dyscalculia-content {
+    flex-direction: column;
+  }
 
-    .dislexia-text, .dyscalculia-text {
-        padding-right: 0;
-        margin-right: 0px;
-    }
+  .dislexia-text,
+  .dyscalculia-text {
+    padding-right: 0;
+    margin-right: 0px;
+  }
 
-    .dislexia-canvas, .dyscalculia-canvas {
-        margin-top: 20px;
-    }
+  .dislexia-canvas,
+  .dyscalculia-canvas {
+    margin-top: 20px;
+  }
 }
 
-#dislexia h2, #dyscalculia h2 {
-    font-size: 48px;
-    margin-bottom: 20px;
+#dislexia h2,
+#dyscalculia h2 {
+  font-size: 48px;
+  margin-bottom: 20px;
 }
 
-#dislexia p, #dyscalculia p {
-    max-width: 600px;
-    font-size: 24px;
+#dislexia p,
+#dyscalculia p {
+  max-width: 600px;
+  font-size: 24px;
 }
-
 
 .animated-text {
-    font-size: 34px;
-    font-weight: 600;
-    min-width: 280px;
+  font-size: 34px;
+  font-weight: 600;
+  min-width: 280px;
 }
 
-
 .scroll-arrow {
-    position: absolute;
-    font-size: 48px;
-    color: #ff7f50;
-    text-decoration: none;
-    animation: bounce 2s infinite;
-    cursor: pointer;
+  position: absolute;
+  font-size: 48px;
+  color: #ff7f50;
+  text-decoration: none;
+  animation: bounce 2s infinite;
+  cursor: pointer;
 }
 
 .scroll-arrow.next {
-    bottom: 20px;
+  bottom: 20px;
 }
 
 .scroll-arrow.previous {
-    top: 20px;
+  top: 20px;
 }
 
 @keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {
-        transform: translateY(0);
-    }
-    40% {
-        transform: translateY(-10px);
-    }
-    60% {
-        transform: translateY(-5px);
-    }
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
 }
 
-
 @keyframes slideInFromBottom {
-    0% {
-        transform: translateY(100%);
-        opacity: 0;
-    }
-    100% {
-        transform: translateY(0);
-        opacity: 1;
-    }
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 @keyframes slideInFromTop {
-    0% {
-        transform: translateY(-100%);
-        opacity: 0;
-    }
-    100% {
-        transform: translateY(0);
-        opacity: 1;
-    }
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 .section.active {
-    animation-duration: 0.5s; 
-    animation-fill-mode: forwards; 
-    animation-timing-function: ease-in-out;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in-out;
 }
 
 .section.slide-in-bottom {
-    animation-name: slideInFromBottom;
+  animation-name: slideInFromBottom;
 }
 
 .section.slide-in-top {
-    animation-name: slideInFromTop;
+  animation-name: slideInFromTop;
 }
 
 .animated-text span {
-    position: relative;
+  position: relative;
 }
 
 .animated-text span::before {
-    content: "Youtuber";
-    color: #ff7f50;
-    animation: words 20s infinite;
+  content: "Youtuber";
+  color: #ff7f50;
+  animation: words 20s infinite;
 }
 
 .animated-text span::after {
-    content: "";
-    position: absolute;
-    width: calc(100% + 8px);
-    height: 100%;
-    background-color: #2f3542;
-    border-left: 2px solid #ff7f50;
-    right: -8px;
-    animation: cursor .8s infinite, typing 20s steps(14) infinite;
+  content: "";
+  position: absolute;
+  width: calc(100% + 8px);
+  height: 100%;
+  background-color: #2f3542;
+  border-left: 2px solid #ff7f50;
+  right: -8px;
+  animation: cursor 0.8s infinite, typing 20s steps(14) infinite;
 }
 
 @keyframes cursor {
-    to {
-        border-left: 2px solid #ff7f5000;
-    }
+  to {
+    border-left: 2px solid #ff7f5000;
+  }
 }
 
 @keyframes words {
-    0%, 20% {
-        content: "aixelsyD dna ailuclacsyD?";
-    }
-    21%, 40% {
-        content: "liauaclyDsc adn xeaisyDl?";
-    }
-    41%, 60% {
-        content: "aixeDysl nad ailuclDysca?";
-    }
-    61%, 80% {
-        content: "aiDyslex and ailDyscalcu?";
-    }
-    81%, 100% {
-        content: "Dyslexia and Dyscalculia?";
-    }
+  0%,
+  20% {
+    content: "aixelsyD dna ailuclacsyD?";
+  }
+  21%,
+  40% {
+    content: "liauaclyDsc adn xeaisyDl?";
+  }
+  41%,
+  60% {
+    content: "aixeDysl nad ailuclDysca?";
+  }
+  61%,
+  80% {
+    content: "aiDyslex and ailDyscalcu?";
+  }
+  81%,
+  100% {
+    content: "Dyslexia and Dyscalculia?";
+  }
 }
 
 @keyframes typing {
-    10%, 15%, 30%, 35%, 50%, 55%, 70%, 75%, 90%, 95% {
-        width: 0;
-    }
-    5%, 20%, 25%, 40%, 45%, 60%, 65%, 80%, 85% {
-        width: calc(100% + 8px);
-    }
+  10%,
+  15%,
+  30%,
+  35%,
+  50%,
+  55%,
+  70%,
+  75%,
+  90%,
+  95% {
+    width: 0;
+  }
+  5%,
+  20%,
+  25%,
+  40%,
+  45%,
+  60%,
+  65%,
+  80%,
+  85% {
+    width: calc(100% + 8px);
+  }
 }
 
-
-#dyslexia-game .game-content, #dyscalculia-game .game-content {
-    max-width: 800px;
-    margin: 0 auto;
-    text-align: center;
+#dyslexia-game .game-content,
+#dyscalculia-game .game-content {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
 }
 
-#dyslexia-game h2, #dyscalculia-game h2 {
-    font-size: 48px;
-    color: #ff7f50;
+#dyslexia-game h2,
+#dyscalculia-game h2 {
+  font-size: 48px;
+  color: #ff7f50;
 }
 
-#dyslexia-game p, #dyscalculia-game p {
-    font-size: 24px;
+#dyslexia-game p,
+#dyscalculia-game p {
+  font-size: 24px;
 }

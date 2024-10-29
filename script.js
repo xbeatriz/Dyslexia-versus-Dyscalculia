@@ -1,4 +1,3 @@
-// Scroll with arrows 
 document.addEventListener("DOMContentLoaded", () => {
   const sections = document.querySelectorAll(".section");
   const arrows = document.querySelectorAll(".scroll-arrow");
@@ -36,7 +35,6 @@ document.addEventListener("DOMContentLoaded", () => {
     );
   }
 
-  // Inicializa visibilidade
   hideAllSections();
   showSection(document.getElementById("title"), "next");
 
@@ -46,8 +44,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const targetId = arrow.getAttribute("href").substring(1);
       const targetSection = document.getElementById(targetId);
-
-      // Determina direção com base na ordem das secções
       const currentIdx = sectionOrder.indexOf(previousSectionId);
       const targetIdx = sectionOrder.indexOf(targetId);
       const direction = targetIdx > currentIdx ? "next" : "previous";
@@ -83,7 +79,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const shapesCanvas = document.getElementById("shapesCanvas");
   const ctx = shapesCanvas.getContext("2d");
 
-  // Função para gerar uma cor aleatória
   function getRandomColor() {
     const letters = "0123456789ABCDEF";
     let color = "#";
@@ -93,9 +88,8 @@ document.addEventListener("DOMContentLoaded", () => {
     return color;
   }
 
-  // Função para desenhar uma forma aleatória
   function drawRandomShape() {
-    const shapeType = Math.floor(Math.random() * 3); // 0: Círculo, 1: Quadrado, 2: Triângulo
+    const shapeType = Math.floor(Math.random() * 3);
     const x = Math.random() * shapesCanvas.width;
     const y = Math.random() * shapesCanvas.height;
     const size = Math.random() * 50 + 20;
@@ -104,15 +98,12 @@ document.addEventListener("DOMContentLoaded", () => {
     ctx.fillStyle = color;
 
     if (shapeType === 0) {
-      // Círculo
       ctx.beginPath();
       ctx.arc(x, y, size / 2, 0, Math.PI * 2);
       ctx.fill();
     } else if (shapeType === 1) {
-      // Quadrado
       ctx.fillRect(x, y, size, size);
     } else if (shapeType === 2) {
-      // Triângulo
       ctx.beginPath();
       ctx.moveTo(x, y);
       ctx.lineTo(x + size, y);
@@ -122,22 +113,23 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Função para desenhar várias formas aleatórias
   function drawRandomShapes(count) {
-    ctx.clearRect(0, 0, shapesCanvas.width, shapesCanvas.height); // Limpa o canvas
+    ctx.clearRect(0, 0, shapesCanvas.width, shapesCanvas.height);
     for (let i = 0; i < count; i++) {
       drawRandomShape();
     }
   }
 
-  // Desenhar 10 formas aleatórias inicialmente e repetir a cada segundo
   drawRandomShapes(10);
   setInterval(() => drawRandomShapes(10), 1000);
 });
 
-// Dyslexic effect on canvas
+//Dyslexia
+
 const canvas = document.getElementById("dyslexiaCanvas");
 const ctx = canvas.getContext("2d");
+canvas.width = 2500;
+canvas.height = 600;
 const intervalTime = 200;
 let scrambleInterval;
 
@@ -170,14 +162,22 @@ function scrambleTextLines() {
 
 function drawScrambledText() {
   const scrambledLines = scrambleTextLines();
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.font = "34px Montserrat";
-  ctx.fillStyle = "#FFFFFFFF";
+  //!NOT WORKING - borda ao redor do canva
+  // Adiciona uma borda ao redor do canvas
+  ctx.lineWidth = 4;
+  ctx.strokeStyle = "#FFFFFF"; // Cor da borda (stroke)
+  ctx.strokeRect(0, 0, canvas.width, canvas.height);
+
+  ctx.fillStyle = "#000000"; // Cor de fundo do canvas
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  ctx.font = "75px Montserrat"; // Tamanho da fonte
+  ctx.fillStyle = "#FFFFFF"; // Cor do texto
   ctx.textAlign = "left";
   ctx.textBaseline = "middle";
 
   scrambledLines.forEach((line, index) => {
-    ctx.fillText(line, 10, index * 30 + 20);
+    ctx.fillText(line, 10, index * 80 + 60);
   });
 }
 
