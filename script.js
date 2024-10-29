@@ -75,10 +75,18 @@ document.addEventListener("DOMContentLoaded", () => {
   updateArrowVisibility("title");
 });
 
+//Dyscalcluia canva
+
 document.addEventListener("DOMContentLoaded", () => {
   const shapesCanvas = document.getElementById("shapesCanvas");
+  const shapesCanvas2 = document.getElementById("shapesCanvas2");
   const ctx = shapesCanvas.getContext("2d");
+  const ctx2 = shapesCanvas2.getContext("2d");
 
+  let currentCanvas = 0;
+  const canvases = [shapesCanvas, shapesCanvas2];
+
+  //First canva
   function getRandomColor() {
     const letters = "0123456789ABCDEF";
     let color = "#";
@@ -88,40 +96,116 @@ document.addEventListener("DOMContentLoaded", () => {
     return color;
   }
 
-  function drawRandomShape() {
+  function drawRandomShape(context) {
     const shapeType = Math.floor(Math.random() * 3);
     const x = Math.random() * shapesCanvas.width;
     const y = Math.random() * shapesCanvas.height;
     const size = Math.random() * 50 + 20;
     const color = getRandomColor();
 
-    ctx.fillStyle = color;
+    context.fillStyle = color;
 
     if (shapeType === 0) {
-      ctx.beginPath();
-      ctx.arc(x, y, size / 2, 0, Math.PI * 2);
-      ctx.fill();
+      context.beginPath();
+      context.arc(x, y, size / 2, 0, Math.PI * 2);
+      context.fill();
     } else if (shapeType === 1) {
-      ctx.fillRect(x, y, size, size);
+      context.fillRect(x, y, size, size);
     } else if (shapeType === 2) {
-      ctx.beginPath();
-      ctx.moveTo(x, y);
-      ctx.lineTo(x + size, y);
-      ctx.lineTo(x + size / 2, y - size);
-      ctx.closePath();
-      ctx.fill();
+      context.beginPath();
+      context.moveTo(x, y);
+      context.lineTo(x + size, y);
+      context.lineTo(x + size / 2, y - size);
+      context.closePath();
+      context.fill();
     }
   }
 
-  function drawRandomShapes(count) {
-    ctx.clearRect(0, 0, shapesCanvas.width, shapesCanvas.height);
+  function drawRandomShapes(context, count) {
+    context.clearRect(0, 0, shapesCanvas.width, shapesCanvas.height);
     for (let i = 0; i < count; i++) {
-      drawRandomShape();
+      drawRandomShape(context);
     }
   }
 
-  drawRandomShapes(10);
-  setInterval(() => drawRandomShapes(10), 1000);
+  // First canvas: Random shapes
+  drawRandomShapes(ctx, 10);
+  setInterval(() => drawRandomShapes(ctx, 10), 1000);
+
+  // Second canvas: Confused calculations
+  function drawConfusedCalculations() {
+    ctx2.clearRect(0, 0, shapesCanvas2.width, shapesCanvas2.height);
+    ctx2.fillStyle = "white";
+    ctx2.fillRect(0, 0, shapesCanvas2.width, shapesCanvas2.height);
+
+    const operations = ["+", "-", "x", "÷"];
+    const fontSize = 30;
+    ctx2.font = `${fontSize}px Arial`;
+
+    for (let i = 0; i < 5; i++) {
+      const x = 50 + (i % 2) * 400;
+      const y = 100 + Math.floor(i / 2) * 150;
+
+      const num1 = Math.floor(Math.random() * 100);
+      const num2 = Math.floor(Math.random() * 100);
+      const operation =
+        operations[Math.floor(Math.random() * operations.length)];
+      const result = Math.floor(Math.random() * 200) - 100; // Random result, possibly incorrect
+
+      // Draw the calculation
+      ctx2.fillStyle = "black";
+      ctx2.fillText(`${num1} ${operation} ${num2} = ${result}`, x, y);
+
+      // Add confused elements
+      addConfusedElements(ctx2, x, y, fontSize);
+    }
+  }
+
+  function addConfusedElements(ctx, x, y, fontSize) {
+    // Add mirrored numbers
+    ctx.save();
+    ctx.translate(x + 250, y);
+    ctx.scale(-1, 1);
+    ctx.fillText(Math.floor(Math.random() * 10), 0, 0);
+    ctx.restore();
+
+    // Add rotated numbers
+    ctx.save();
+    ctx.translate(x + 280, y);
+    ctx.rotate(Math.PI / 4);
+    ctx.fillText(Math.floor(Math.random() * 10), 0, 0);
+    ctx.restore();
+
+    // Add blurred numbers
+    ctx.save();
+    ctx.shadowColor = "rgba(0, 0, 0, 0.5)";
+    ctx.shadowBlur = 5;
+    ctx.fillText(Math.floor(Math.random() * 10), x + 310, y);
+    ctx.restore();
+
+    // Add faded numbers
+    ctx.fillStyle = "rgba(0, 0, 0, 0.3)";
+    ctx.fillText(Math.floor(Math.random() * 10), x + 340, y);
+  }
+
+  // First canvas: Random shapes (keep your existing code)
+  drawRandomShapes(ctx, 10);
+  setInterval(() => drawRandomShapes(ctx, 10), 1000);
+
+  // Second canvas: Confused calculations
+  drawConfusedCalculations();
+  setInterval(drawConfusedCalculations, 3000);
+
+  // Carousel functionality
+  window.moveCarousel = function (direction) {
+    canvases[currentCanvas].style.display = "none";
+    currentCanvas =
+      (currentCanvas + direction + canvases.length) % canvases.length;
+    canvases[currentCanvas].style.display = "block";
+  };
+
+  // Initialize carousel
+  canvases[1].style.display = "none";
 });
 
 //Dyslexia

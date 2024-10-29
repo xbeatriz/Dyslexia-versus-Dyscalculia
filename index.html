@@ -62,13 +62,26 @@
             understand numbers...
           </p>
         </div>
-        <canvas id="shapesCanvas" width="800" height="400"></canvas>
+        <div class="dyscalculia-carousel">
+          <div class="carousel-container">
+            <canvas id="shapesCanvas" width="800" height="400"></canvas>
+            <canvas
+              id="shapesCanvas2"
+              width="800"
+              height="400"
+              style="display: none"
+            ></canvas>
+          </div>
+          <button class="carousel-button prev" onclick="moveCarousel(-1)">
+            &#10094;
+          </button>
+          <button class="carousel-button next" onclick="moveCarousel(1)">
+            &#10095;
+          </button>
+        </div>
       </div>
-      <!--<button id="startDyscalculiaGame" class="start-button">Iniciar Jogo de Discalculia</button>-->
       <a href="#dyslexia-game" class="scroll-arrow previous">&#8593;</a>
-      <!-- Previous arrow -->
       <a href="#dyscalculia-game" class="scroll-arrow next">&#8595;</a>
-      <!-- Next arrow -->
     </section>
 
     <!-- Dyscalculia Game Section -->
