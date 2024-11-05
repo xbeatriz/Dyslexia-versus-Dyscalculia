@@ -212,15 +212,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
 const canvas = document.getElementById("dyslexiaCanvas");
 const ctx = canvas.getContext("2d");
-canvas.width = 2500;
-canvas.height = 600;
+//canvas.width = 1000;
+//canvas.height = 700;
+
+
 const intervalTime = 200;
 let scrambleInterval;
 
 const textLines = [
   "Dyslexia",
-  "Friends who have dyslexia described to me how they experience reading...",
-  "I remembered reading about typoglycemia...",
+  "Friends who have dyslexia described to me how they experience reading ...",
+  "I remembered reading about typoglycemia ...",
   "Dyslexia is characterized by difficulty with learning to read fluently",
   "and with accurate comprehension.",
 ];
@@ -248,20 +250,20 @@ function drawScrambledText() {
   const scrambledLines = scrambleTextLines();
   //!NOT WORKING - borda ao redor do canva
   // Adiciona uma borda ao redor do canvas
-  ctx.lineWidth = 4;
+  ctx.lineWidth = 10;
   ctx.strokeStyle = "#FFFFFF"; // Cor da borda (stroke)
   ctx.strokeRect(0, 0, canvas.width, canvas.height);
 
-  ctx.fillStyle = "#000000"; // Cor de fundo do canvas
+  ctx.fillStyle = "#ff7f50"; // Cor de fundo do canvas
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  ctx.font = "75px Montserrat"; // Tamanho da fonte
-  ctx.fillStyle = "#FFFFFF"; // Cor do texto
+  ctx.font = "24px Montserrat"; // Tamanho da fonte
+  ctx.fillStyle = "#FFFFFFFF"; // Cor do texto
   ctx.textAlign = "left";
   ctx.textBaseline = "middle";
 
   scrambledLines.forEach((line, index) => {
-    ctx.fillText(line, 10, index * 80 + 60);
+    ctx.fillText(line, 10, index * 100 + 60);
   });
 }
 

@@ -26,7 +26,8 @@ body {
   align-items: center;
   max-width: 1200px;
   width: 100%;
-  margin: 20px;
+  margin: 20px auto; /* Centraliza o conteúdo */
+  gap: 20px; /* Espaço entre as colunas */
 }
 
 .dislexia-text {
@@ -36,17 +37,30 @@ body {
 }
 
 .dislexia-canvas {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ 
+}
+
+.dislexia-canvas canvas {
+  width: 100%;
+  height: 100%;
+ 
+}
+
+
+
+
+.dislexia-canvas {
   flex: 1; /* Mantém o canvas na metade direita */
   display: flex;
   justify-content: center; /* Centraliza horizontalmente */
   align-items: center; /* Centraliza verticalmente */
 }
 
-.dislexia-canvas canvas {
-  width: 80%; /* Ajuste conforme o tamanho desejado dentro da metade direita */
-  height: auto; /* Mantém a proporção da altura */
-  max-width: 100%; /* Limita a largura máxima para não ultrapassar a área */
-}
+
 
 .dyscalculia-content {
   display: flex;
@@ -120,16 +134,7 @@ body {
 }
 
 @media (max-width: 768px) {
-  .dislexia-content,
-  .dyscalculia-content {
-    flex-direction: column;
-  }
 
-  .dislexia-text,
-  .dyscalculia-text {
-    padding-right: 0;
-    margin-right: 0px;
-  }
 
   .dyscalculia-carousel {
     width: 100%;
