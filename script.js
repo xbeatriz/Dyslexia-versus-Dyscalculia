@@ -212,8 +212,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 const canvas = document.getElementById("dyslexiaCanvas");
 const ctx = canvas.getContext("2d");
-//canvas.width = 1000;
-//canvas.height = 700;
+console.log(canvas.parentElement.getBoundingClientRect());
+canvas.width = canvas.parentElement.getBoundingClientRect().width;
+canvas.height = canvas.parentElement.getBoundingClientRect().height;
 
 //função para definir o tamanho da fonte
 function getFontSize() {
@@ -225,11 +226,9 @@ let scrambleInterval;
 
 const textLines = [
   "Dyslexia",
-  "Friends who have dyslexia described to me",
-  "how they experience reading ...",
+  "Friends who have dyslexia described to me how they experience reading ...",
   "I remembered reading about typoglycemia ...",
-  "Dyslexia is characterized by difficulty with",
-  "learning to read fluently",
+  "Dyslexia is characterized by difficulty with learning to read fluently",
   "and with accurate comprehension.",
 ];
 
