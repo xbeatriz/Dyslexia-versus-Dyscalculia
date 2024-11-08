@@ -215,15 +215,21 @@ const ctx = canvas.getContext("2d");
 //canvas.width = 1000;
 //canvas.height = 700;
 
+//função para definir o tamanho da fonte
+function getFontSize() {
+  return Math.max(16, canvas.height / 20); 
+}
 
 const intervalTime = 200;
 let scrambleInterval;
 
 const textLines = [
   "Dyslexia",
-  "Friends who have dyslexia described to me how they experience reading ...",
+  "Friends who have dyslexia described to me",
+  "how they experience reading ...",
   "I remembered reading about typoglycemia ...",
-  "Dyslexia is characterized by difficulty with learning to read fluently",
+  "Dyslexia is characterized by difficulty with",
+  "learning to read fluently",
   "and with accurate comprehension.",
 ];
 
@@ -257,14 +263,106 @@ function drawScrambledText() {
   ctx.fillStyle = "#ff7f50"; // Cor de fundo do canvas
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  ctx.font = "24px Montserrat"; // Tamanho da fonte
-  ctx.fillStyle = "#FFFFFFFF"; // Cor do texto
+  const fontSize = getFontSize(); // Usa a função para definir o tamanho da fonte
+  ctx.font = `${fontSize}px Montserrat`;
+  ctx.fillStyle = "#FFFFFF"; // Cor do texto
   ctx.textAlign = "left";
-  ctx.textBaseline = "middle";
+  ctx.textBaseline = "top";
+
+  // Calcula o espaçamento entre as linhas com base na altura do canvas
+  const lineSpacing = Math.min((canvas.height - 20) / scrambledLines.length, fontSize + 10);
 
   scrambledLines.forEach((line, index) => {
-    ctx.fillText(line, 10, index * 100 + 60);
+    ctx.fillText(line, 10, index * lineSpacing + 10); // Ajusta o espaçamento entre linhas
   });
 }
 
 scrambleInterval = setInterval(drawScrambledText, intervalTime);
+
+const words = [
+  "education",
+  "learning",
+  "difficulty",
+  "understand",
+  "comprehension",
+  "memory",
+  "focus",
+  "attention",
+  "communication",
+  "development"
+];
+const canvasgamex = document.getElementById("scrambleCanvas");
+const ctxx = canvasgamex.getContext("2d");
+const guessInput = document.getElementById("guessInput");
+const feedbackMessage = document.getElementById("feedbackMessage");
+
+let selectedWord;
+let scrambledWord;
+let scrambleIntervalG;
+
+// Função para escolher uma palavra aleatória e embaralhá-la
+function pickAndScrambleWord() {
+  let newWord;
+  do {
+    newWord = words[Math.floor(Math.random() * words.length)];
+  } while (newWord === selectedWord); // Garante que a nova palavra seja diferente
+
+  selectedWord = newWord;
+  scrambledWord = selectedWord;
+  drawScrambledWord(scrambledWord); // Inicializar com a palavra selecionada
+
+if (scrambleIntervalG) clearInterval(scrambleIntervalG); // Limpa qualquer intervalo anterior
+  scrambleIntervalG = setInterval(() => {
+    scrambledWord = scrambleWord(selectedWord); // Reembaralha continuamente
+    drawScrambledWord(scrambledWord); // Atualiza o desenho com a nova palavra embaralhada
+  }, 1200); // Intervalo de 100ms (pode ser ajustado)
+}
+
+// Função para embaralhar a palavra
+function scrambleWord(word) {
+  if (word.length < 4) return word;
+  let middle = word.slice(1, -1).split("");
+  for (let i = middle.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [middle[i], middle[j]] = [middle[j], middle[i]];
+  }
+  return word[0] + middle.join("") + word[word.length - 1];
+}
+
+// Função para desenhar a palavra embaralhada no canvas
+function drawScrambledWord(word) {
+  ctxx.clearRect(0, 0, canvasgamex.width, canvasgamex.height);
+  ctxx.font = "30px Arial";
+  ctxx.fillStyle = "#000";
+  ctxx.textAlign = "center";
+  ctxx.textBaseline = "middle";
+  ctxx.fillText(word, canvasgamex.width / 2, canvasgamex.height / 2);
+}
+
+//canvas para guardar a resposta do jogador
+function drawCorrectWordOnSecondCanvas(word) {
+  ctxSecond.clearRect(0, 0, secondCanvas.width, secondCanvas.height); // Limpa o segundo canvas
+  ctxSecond.font = "30px Arial";
+  ctxSecond.fillStyle = "#008000"; // Cor para o texto correto
+  ctxSecond.textAlign = "center";
+  ctxSecond.textBaseline = "middle";
+  ctxSecond.fillText(word, secondCanvas.width / 2, secondCanvas.height / 2); // Desenha no centro do canvas
+  secondCanvas.style.display = "block"; // Torna o segundo canvas visível
+}
+
+// Verificar a resposta do jogador
+document.getElementById("submitGuess").addEventListener("click", () => {
+  const guess = guessInput.value.toLowerCase();
+  if (guess === selectedWord.toLowerCase()) {
+    feedbackMessage.textContent = "Correct! Well done!";
+    feedbackMessage.style.color = "green";
+    pickAndScrambleWord(); // Escolher uma nova palavra
+  } else {
+    feedbackMessage.textContent = "Try again!";
+    feedbackMessage.style.color = "red";
+  }
+  guessInput.value = ""; // Limpar o campo de input
+});
+
+// Inicia o jogo com uma palavra aleatória
+pickAndScrambleWord();
