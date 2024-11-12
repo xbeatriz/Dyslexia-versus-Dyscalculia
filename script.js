@@ -218,7 +218,7 @@ canvas.height = canvas.parentElement.getBoundingClientRect().height;
 
 //função para definir o tamanho da fonte
 function getFontSize() {
-  return Math.max(16, canvas.height / 20); 
+  return Math.max(24, canvas.height / 20); 
 }
 
 const intervalTime = 200;

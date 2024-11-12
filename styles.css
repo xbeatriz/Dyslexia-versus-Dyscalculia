@@ -22,18 +22,19 @@ body {
 
 .dislexia-content {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  max-width: 1200px;
+  justify-content: flex-start; /* Alinha horizontalmente à esquerda */
+  align-items: center; /* Alinha verticalmente à parte superior */
   width: 100%;
-  margin: 20px auto; /* Centraliza o conteúdo */
-  gap: 20px; /* Espaço entre as colunas */
+  margin: 24px auto; /* Centraliza o conteúdo na página */
+  gap: 20px; /* Espaço entre os itens */
 }
+
 
 .dislexia-text {
   flex: 1;
   padding-right: 20px;
   text-align: left;
+  align-items: left;
 }
 
 .dislexia-canvas {
@@ -42,14 +43,6 @@ body {
   justify-content: center;
   align-items: center;
  
-}
-
-
-.dislexia-canvas {
-  flex: 1; /* Mantém o canvas na metade direita */
-  display: flex;
-  justify-content: center; /* Centraliza horizontalmente */
-  align-items: center; /* Centraliza verticalmente */
 }
 
 /*jogo */
@@ -160,8 +153,19 @@ body {
 
 #dislexia p,
 #dyscalculia p {
-  max-width: 600px;
-  font-size: 11px;
+  line-height: 1.6;
+  font-size: 20px;
+}
+
+
+ul{
+  margin: 24px;
+}
+
+li {
+  font-size: 20px;
+    line-height: 1.5;
+    margin: 8px;
 }
 
 .animated-text {
@@ -333,9 +337,16 @@ body {
   font-size: 24px;
 }
 
-
-p {
-  font-size: 20px;
-  line-height: 1.6;
-  max-width: 600px;
-}
+/* p {
+  animation: 5s slidein;
+  }
+  @keyframes slidein {
+  from {
+  margin-right: 100%;
+  width: 400%;
+  }
+  to {
+  margin-right: 0%;
+  width: 100%;
+  }
+} */
