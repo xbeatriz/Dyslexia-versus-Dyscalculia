@@ -285,16 +285,76 @@ li {
   font-size: 24px;
 }
 
-/* p {
-  animation: 5s slidein;
-  }
-  @keyframes slidein {
-  from {
-  margin-right: 100%;
-  width: 400%;
-  }
-  to {
-  margin-right: 0%;
+
+
+/* STYLES FOR THE DYSCALCULIA GAME SECTION */
+#dyscalculiaGame-container {
   width: 100%;
-  }
-} */
+  display: flex;
+  height: 90%;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+#left-panel {
+  width: 40%;
+  padding: 20px;
+}
+
+#left-panel h1 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+#left-panel p {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+#right-panel {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+#gameCanvas {
+  border: 1px solid white;
+  margin-bottom: 20px;
+  background-color: #ff7f50;;
+}
+
+#buttons-container {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.buttonDyscalculia {
+  font-size: 18px;
+  padding: 10px 20px;
+  margin: 0;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+}
+
+#correct {
+  background-color: #4caf50;
+}
+
+#correct:hover {
+  background-color: #45a049;
+}
+
+#incorrect {
+  background-color: #f44336;
+}
+
+#incorrect:hover {
+  background-color: #e53935;
+}

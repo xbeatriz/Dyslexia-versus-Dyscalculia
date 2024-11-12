@@ -144,19 +144,39 @@
 
     <!-- Dyscalculia Game Section -->
     <section id="dyscalculia-game" class="section hidden">
-      <div class="gamet-content">
-        <div>
-        <h2>Dyscalculia Game</h2>
-        <p>
-          Welcome to the Dyscalculia Game!
-          <br> 
-          Here you'll experience reading challenges similar to those faced by individuals with dyscalculia.
-          <br>
-          Hope you can have a litle fun with this experience!
-        </p>
+      <div id="dyscalculiaGame-container">
+        <!-- Painel esquerdo: Explicação -->
+        <div id="left-panel">
+            <h1>Bem-vindo ao Jogo de Cálculos!</h1>
+            <p>
+                Teste suas habilidades matemáticas neste jogo divertido e desafiador. 
+                O objetivo é simples: você verá uma equação no meio da tela, e sua tarefa será decidir se a resposta está correta ou não.
+            </p>
+            <p>
+                Cada vez que acertar, você ganha pontos. Se errar, não se preocupe, você pode tentar novamente!
+            </p>
+            <p>
+                Instruções:
+                <ul>
+                    <li>Pressione o botão <strong>Correto</strong> se a equação estiver certa.</li>
+                    <li>Pressione o botão <strong>Incorreto</strong> se a equação estiver errada.</li>
+                </ul>
+            </p>
+            <p>
+                Tente atingir a maior pontuação possível. Boa sorte!
+            </p>
         </div>
-        <div></div>
-      </div>
+
+        <!-- Painel direito: Jogo -->
+        <div id="right-panel">
+            <canvas id="gameCanvas"></canvas>
+            <!-- Contêiner para os botões -->
+            <div id="buttons-container">
+                <button class="buttonDyscalculia" id="correct">Correto</button>
+                <button class="buttonDyscalculia" id="incorrect">Incorreto</button>
+            </div>
+        </div>
+    </div>
       <a href="#dyscalculia" class="scroll-arrow previous">&#8593;</a>
       <!-- Previous arrow -->
     </section>

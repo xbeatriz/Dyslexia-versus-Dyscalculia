@@ -365,3 +365,194 @@ document.getElementById("submitGuess").addEventListener("click", () => {
 
 // Inicia o jogo com uma palavra aleatória
 pickAndScrambleWord();
+
+
+
+// Dyscalculia jogo
+
+const canvas4 = document.getElementById('gameCanvas');
+const ctx4 = canvas4.getContext('2d');
+canvas4.width = 500;
+canvas4.height = 300;
+
+// Variáveis do jogo
+let currentEquation = '';
+let isCorrect = false;
+let score = 0;
+let questionCount = 0;
+let particles = [];
+let fallingNumbers = [];
+
+// Configuração para números caindo
+const fallingNumbersCount = 50;
+
+// Operações possíveis
+const operations = ['+', '-', '*', '/'];
+
+// Gera números aleatórios para o fundo
+function createFallingNumbers() {
+    for (let i = 0; i < fallingNumbersCount; i++) {
+        fallingNumbers.push({
+            x: Math.random() * canvas4.width,
+            y: Math.random() * canvas4.height,
+            speedY: Math.random() * 2 + 1,
+            size: Math.random() * 24 + 12,
+            number: Math.floor(Math.random() * 10),
+            alpha: Math.random() * 0.5 + 0.5,
+        });
+    }
+}
+
+// Atualiza a posição dos números caindo
+function updateFallingNumbers() {
+    fallingNumbers.forEach((num) => {
+        num.y += num.speedY;
+        if (num.y > canvas4.height) {
+            num.y = -num.size;
+            num.x = Math.random() * canvas4.width;
+            num.number = Math.floor(Math.random() * 10);
+        }
+    });
+}
+
+// Desenha os números a cair no fundo
+function drawFallingNumbers() {
+    fallingNumbers.forEach((num) => {
+        ctx4.font = `${num.size}px Arial`;
+        ctx4.fillStyle = `rgba(255, 255, 255, ${num.alpha})`;
+        ctx4.fillText(num.number, num.x, num.y);
+    });
+}
+
+// Gera uma nova equação
+function generateEquation() {
+    const num1 = Math.floor(Math.random() * 10) + 1;
+    const num2 = Math.floor(Math.random() * 10) + 1;
+    const operation = operations[Math.floor(Math.random() * operations.length)];
+
+    let realAnswer;
+    let fakeAnswer;
+
+    switch (operation) {
+        case '+':
+            realAnswer = num1 + num2;
+            break;
+        case '-':
+            realAnswer = num1 - num2;
+            break;
+        case '*':
+            realAnswer = num1 * num2;
+            break;
+        case '/':
+            realAnswer = parseFloat((num1 / num2).toFixed(2)); // Limita a precisão
+            break;
+    }
+
+    fakeAnswer = realAnswer + (Math.random() < 0.5 ? 0 : (Math.random() < 0.5 ? 1 : -1));
+    if (operation === '/') fakeAnswer = parseFloat((fakeAnswer).toFixed(2)); // Garante precisão para divisões
+
+    currentEquation = `${num1} ${operation} ${num2} = ${fakeAnswer}`;
+    isCorrect = (realAnswer === fakeAnswer);
+}
+
+// Renderiza a equação no canvas
+function renderEquation() {
+    ctx4.font = '36px Montserrat';
+    ctx4.fillStyle = 'white';
+    ctx4.textAlign = 'center';
+    ctx4.fillText(currentEquation, canvas4.width / 2, canvas4.height / 2);
+}
+
+// Renderiza a pontuação
+function renderScore() {
+    ctx4.font = '24px Montserrat';
+    ctx4.fillStyle = 'black';
+    ctx4.textAlign = 'left';
+    ctx4.fillText(`Pontuação: ${score}`, 10, 30);
+    ctx4.fillText(`Perguntas: ${questionCount}/20`, 10, 50);
+}
+
+// Cria partículas para animação
+function createParticles(color) {
+    for (let i = 0; i < 50; i++) {
+        particles.push({
+            x: canvas4.width / 2,
+            y: canvas4.height / 2,
+            size: Math.random() * 5 + 2,
+            speedX: Math.random() * 4 - 2,
+            speedY: Math.random() * 4 - 2,
+            color: color,
+            alpha: 1
+        });
+    }
+}
+
+// Atualiza e desenha as partículas
+function updateParticles() {
+    particles.forEach((particle, index) => {
+        particle.x += particle.speedX;
+        particle.y += particle.speedY;
+        particle.alpha -= 0.02;
+        if (particle.alpha <= 0) {
+            particles.splice(index, 1);
+        }
+    });
+
+    particles.forEach((particle) => {
+        ctx4.beginPath();
+        ctx4.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+        ctx4.fillStyle = `rgba(${particle.color},${particle.alpha})`;
+        ctx4.fill();
+    });
+}
+
+// Avalia a resposta do jogador
+function evaluateAnswer(playerChoice) {
+    if (playerChoice === isCorrect) {
+        score++;
+        createParticles('0, 255, 0'); // Verde
+    } else {
+        createParticles('255, 0, 0'); // Vermelho
+    }
+
+    questionCount++;
+    if (questionCount < 20) {
+        generateEquation();
+    } else {
+        endGame();
+    }
+}
+
+// Finaliza o jogo
+function endGame() {
+    ctx4.clearRect(0, 0, canvas4.width, canvas4.height);
+    ctx4.font = '24px';
+    ctx4.fillStyle = 'white';
+    ctx4.textAlign = 'center';
+    ctx4.fillText(`Fim do jogo! Sua pontuação: ${score}/20`, canvas4.width / 2, canvas4.height / 2);
+}
+
+// Animação do jogo
+function animate() {
+    ctx4.clearRect(0, 0, canvas4.width, canvas4.height);
+
+    // Fundo com números caindo
+    drawFallingNumbers();
+    updateFallingNumbers();
+
+    // Renderiza a equação, partículas e pontuação
+    renderEquation();
+    renderScore();
+    updateParticles();
+
+    requestAnimationFrame(animate);
+}
+
+// Configura os botões
+document.getElementById('correct').addEventListener('click', () => evaluateAnswer(true));
+document.getElementById('incorrect').addEventListener('click', () => evaluateAnswer(false));
+
+// Inicializa o jogo
+generateEquation();
+createFallingNumbers();
+animate();
