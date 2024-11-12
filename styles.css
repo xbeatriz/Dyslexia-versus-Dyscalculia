@@ -299,7 +299,7 @@ li {
 }
 
 #left-panel {
-  width: 40%;
+  width: 50%;
   padding: 20px;
 }
 
@@ -315,7 +315,7 @@ li {
 
 
 #right-panel {
-  width: 60%;
+  width: 50%;
   display: flex;
   flex-direction: column;
   align-items: center;
