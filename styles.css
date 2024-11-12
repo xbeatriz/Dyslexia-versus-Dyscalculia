@@ -31,6 +31,7 @@ body {
 
 
 .dislexia-text {
+  width: 50%;
   flex: 1;
   padding-right: 20px;
   text-align: left;
@@ -38,6 +39,7 @@ body {
 }
 
 .dislexia-canvas {
+  width: 50%;
   flex: 1;
   display: flex;
   justify-content: center;
@@ -63,87 +65,33 @@ body {
 
 .dyscalculia-content {
   display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  max-width: 1200px;
+  justify-content: flex-start; /* Alinha horizontalmente à esquerda */
+  align-items: center; /* Alinha verticalmente à parte superior */
   width: 100%;
-  margin: 20px;
-  flex-wrap: wrap;
+  margin: 24px auto; /* Centraliza o conteúdo na página */
+  gap: 20px; /* Espaço entre os itens */
 }
 
 .dyscalculia-text {
+  width: 50%;
   flex: 1;
   padding-right: 20px;
   text-align: left;
+  align-items: left;
 }
 
-.dyscalculia-carousel {
-  width: 800px;
-  height: 400px;
-  position: relative;
+
+.dyscalculia-canvas {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column; /* Disposição vertical */
+  gap: 20px; /* Espaçamento entre os canvas */
 }
 
-.carousel-container {
-  width: 100%;
-  height: 100%;
-  position: relative;
+.canvas-container canvas {
+  border: 1px solid #ccc; /* Adiciona uma borda opcional ao canvas */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra para estética */
 }
 
-.carousel-container canvas {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-.carousel-button {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: rgba(0, 0, 0, 0.5);
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  cursor: pointer;
-  font-size: 18px;
-  z-index: 10;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: background-color 0.3s ease;
-}
-
-.carousel-button:hover {
-  background-color: rgba(0, 0, 0, 0.8);
-}
-
-.carousel-button.prev {
-  left: 10px;
-}
-
-.carousel-button.next {
-  right: 10px;
-}
-
-@media (max-width: 768px) {
-
-
-  .dyscalculia-carousel {
-    width: 100%;
-    margin-top: 20px;
-  }
-
-  .carousel-container {
-    width: 100%;
-  }
-}
 
 #dislexia h2,
 #dyscalculia h2 {

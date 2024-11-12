@@ -40,7 +40,6 @@
       </h3>
       <ul>
         <li> <strong>Slow Reading: </strong>Taking longer to read and understand text compared to peers.</li>
-        <li><strong>Word Decoding: </strong>Difficulty breaking down words into individual sounds and blending them together</li>
         <li><strong>Skipping Words or Lines: </strong>Losing their place in text, skipping over words, or re-reading the same line.</li>
         <li><strong>Misreading Words: </strong>Confusing similar-looking words like "form" and "from" or "was" and "saw."</li>
       </ul>
@@ -56,12 +55,13 @@
       <ul>
         <li><strong>Spelling Errors: </strong>Struggling to spell words correctly, often writing them phonetically (e.g., “defanition” instead of “definition”).</li>
         <li><strong>Letter Reversals: </strong>Up letters like "b" and "d" or "p" and "q," especially in early development.</li>
-        <li><strong>Messy Handwriting: </strong>With spacing and letter formation, leading to illegible handwriting. </li>
         <li><strong>Sentence Structure: </strong>Struggling to organize thoughts clearly in writing or mixing up word order.</li>
       </ul>
     </div>
     <div class="dislexia-canvas">
       <canvas id="dyslexiaCanvas"></canvas>
+      <canvas id="dyslexiaCanvas2"></canvas>
+      <canvas id="dyslexiaCanvas3"></canvas>
     </div>
   </div>
   <a href="#title" class="scroll-arrow previous">&#8593;</a>
@@ -73,8 +73,11 @@
       <div class="gamet-content">
         <h2>Dyslexia Game</h2>
         <p>
-          Welcome to the Dyslexia Game! Here you'll experience reading
-          challenges similar to those faced by individuals with dyslexia.
+          Welcome to the Dyslexia Game!
+          <br>
+          Here you'll experience reading challenges similar to those faced by individuals with dyslexia.
+          <br>
+          Hope you can have a litle fun with this experience! 
         </p>
       </div>
       <div class="game-content">
@@ -97,28 +100,42 @@
     <section id="dyscalculia" class="section">
       <div class="dyscalculia-content">
         <div class="dyscalculia-text">
-          <h2>Dyscalculia</h2>
+          <h2>What is Dyscalculia?</h2>
           <p>
-            Dyscalculia is a learning difficulty that affects the ability to
-            understand numbers...
+            Dyscalculia is a learning difference that affects a person's 
+            ability to understand and work with numbers. Often referred to 
+            as "math dyslexia," it impacts number-related skills like arithmetic, 
+            understanding numerical concepts, and performing calculations. 
+            Dyscalculia is not related to intelligence but to how the brain processes 
+            numerical and mathematical information. It can vary in severity, with some 
+            people facing challenges with basic number sense while others struggle with more advanced math tasks.
           </p>
+          <p>People with dyscalculia may experience challenges in various areas, including 
+            understanding numbers, performing arithmetic, and applying math to everyday life. 
+            Here are some examples of struggles they might face:
+          </p>
+          <br>
+          <h3>Understanding Numbers and Basic Concepts</h3>
+          <ul>
+            <li><strong>Recognizing Patterns: </strong>Trouble identifying numerical patterns, such as sequences or relationships between numbers (e.g., 2, 4, 6, 8).</li>
+            <li><strong>Difficulty with Number Sense: </strong>Struggling to understand the quantity represented by a number (e.g., not realizing "5" means five items).</li>
+          </ul>
+          <h3>Performing Arithmetic</h3>
+          <ul>
+            <li><strong>Trouble with Basic Operations: </strong>Difficulty performing addition, subtraction, multiplication, or division, even with practice.</li>
+            <li><strong>Carrying Over or Borrowing: </strong>Struggling to carry numbers in addition or borrow in subtraction</li>
+          </ul>
+          <h3>Applying Math to Everyday Life</h3>
+          <ul>
+            <li><strong>Handling Money: </strong>Trouble calculating change, budgeting, or understanding the value of coins and bills.</li>
+            <li><strong>Estimating: </strong>Inability to approximate costs, distances, or amounts (e.g., estimating how much paint is needed for a wall).</li>
+          </ul>
         </div>
-        <div class="dyscalculia-carousel">
-          <div class="carousel-container">
+        <div class="dyscalculia-canvas">
+          <div class="canvas-container">
             <canvas id="shapesCanvas" width="800" height="400"></canvas>
-            <canvas
-              id="shapesCanvas2"
-              width="800"
-              height="400"
-              style="display: none"
-            ></canvas>
+            <canvas id="shapesCanvas2" width="800" height="400"></canvas>
           </div>
-          <button class="carousel-button prev" onclick="moveCarousel(-1)">
-            &#10094;
-          </button>
-          <button class="carousel-button next" onclick="moveCarousel(1)">
-            &#10095;
-          </button>
         </div>
       </div>
       <a href="#dyslexia-game" class="scroll-arrow previous">&#8593;</a>
@@ -128,11 +145,17 @@
     <!-- Dyscalculia Game Section -->
     <section id="dyscalculia-game" class="section hidden">
       <div class="gamet-content">
+        <div>
         <h2>Dyscalculia Game</h2>
         <p>
-          Welcome to the Dyscalculia Game! Here you'll experience challenges
-          related to number comprehension.
+          Welcome to the Dyscalculia Game!
+          <br> 
+          Here you'll experience reading challenges similar to those faced by individuals with dyscalculia.
+          <br>
+          Hope you can have a litle fun with this experience!
         </p>
+        </div>
+        <div></div>
       </div>
       <a href="#dyscalculia" class="scroll-arrow previous">&#8593;</a>
       <!-- Previous arrow -->
