@@ -210,15 +210,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
 //Dyslexia
 
-const canvas = document.getElementById("dyslexiaCanvas");
-const ctx = canvas.getContext("2d");
-console.log(canvas.parentElement.getBoundingClientRect());
-canvas.width = canvas.parentElement.getBoundingClientRect().width;
-canvas.height = canvas.parentElement.getBoundingClientRect().height;
+const canvas5 = document.getElementById("dyslexiaCanvas");
+const ctx5 = canvas5.getContext("2d");
+console.log(canvas5.parentElement.getBoundingClientRect());
+canvas5.width = canvas5.parentElement.getBoundingClientRect().width;
+canvas5.height = canvas5.parentElement.getBoundingClientRect().height;
 
 //função para definir o tamanho da fonte
 function getFontSize() {
-  return Math.max(24, canvas.height / 20); 
+  return Math.max(24, canvas5.height / 20); 
 }
 
 const intervalTime = 200;
@@ -253,26 +253,21 @@ function scrambleTextLines() {
 
 function drawScrambledText() {
   const scrambledLines = scrambleTextLines();
-  //!NOT WORKING - borda ao redor do canva
-  // Adiciona uma borda ao redor do canvas
-  ctx.lineWidth = 10;
-  ctx.strokeStyle = "#FFFFFF"; // Cor da borda (stroke)
-  ctx.strokeRect(0, 0, canvas.width, canvas.height);
 
-  ctx.fillStyle = "#ff7f50"; // Cor de fundo do canvas
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx5.fillStyle = "#ff7f50"; // Cor de fundo do canvas
+  ctx5.fillRect(0, 0, canvas5.width, canvas5.height);
 
   const fontSize = getFontSize(); // Usa a função para definir o tamanho da fonte
-  ctx.font = `${fontSize}px Montserrat`;
-  ctx.fillStyle = "#FFFFFF"; // Cor do texto
-  ctx.textAlign = "left";
-  ctx.textBaseline = "top";
+  ctx5.font = `${fontSize}px Montserrat`;
+  ctx5.fillStyle = "#FFFFFF"; // Cor do texto
+  ctx5.textAlign = "left";
+  ctx5.textBaseline = "top";
 
   // Calcula o espaçamento entre as linhas com base na altura do canvas
-  const lineSpacing = Math.min((canvas.height - 20) / scrambledLines.length, fontSize + 10);
+  const lineSpacing = Math.min((canvas5.height - 20) / scrambledLines.length, fontSize + 10);
 
   scrambledLines.forEach((line, index) => {
-    ctx.fillText(line, 10, index * lineSpacing + 10); // Ajusta o espaçamento entre linhas
+    ctx5.fillText(line, 10, index * lineSpacing + 10); // Ajusta o espaçamento entre linhas
   });
 }
 
