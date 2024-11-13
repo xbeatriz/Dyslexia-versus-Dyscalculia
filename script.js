@@ -75,154 +75,25 @@ document.addEventListener("DOMContentLoaded", () => {
   updateArrowVisibility("title");
 });
 
-//Dyscalcluia canva
 
-document.addEventListener("DOMContentLoaded", () => {
-  const shapesCanvas = document.getElementById("shapesCanvas");
-  const shapesCanvas2 = document.getElementById("shapesCanvas2");
-  const ctx = shapesCanvas.getContext("2d");
-  const ctx2 = shapesCanvas2.getContext("2d");
-
-  let currentCanvas = 0;
-  const canvases = [shapesCanvas, shapesCanvas2];
-
-  //First canva
-  function getRandomColor() {
-    const letters = "0123456789ABCDEF";
-    let color = "#";
-    for (let i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-  }
-
-  function drawRandomShape(context) {
-    const shapeType = Math.floor(Math.random() * 3);
-    const x = Math.random() * shapesCanvas.width;
-    const y = Math.random() * shapesCanvas.height;
-    const size = Math.random() * 50 + 20;
-    const color = getRandomColor();
-
-    context.fillStyle = color;
-
-    if (shapeType === 0) {
-      context.beginPath();
-      context.arc(x, y, size / 2, 0, Math.PI * 2);
-      context.fill();
-    } else if (shapeType === 1) {
-      context.fillRect(x, y, size, size);
-    } else if (shapeType === 2) {
-      context.beginPath();
-      context.moveTo(x, y);
-      context.lineTo(x + size, y);
-      context.lineTo(x + size / 2, y - size);
-      context.closePath();
-      context.fill();
-    }
-  }
-
-  function drawRandomShapes(context, count) {
-    context.clearRect(0, 0, shapesCanvas.width, shapesCanvas.height);
-    for (let i = 0; i < count; i++) {
-      drawRandomShape(context);
-    }
-  }
-
-  // First canvas: Random shapes
-  drawRandomShapes(ctx, 10);
-  setInterval(() => drawRandomShapes(ctx, 10), 1000);
-
-  // Second canvas: Confused calculations
-  function drawConfusedCalculations() {
-    ctx2.clearRect(0, 0, shapesCanvas2.width, shapesCanvas2.height);
-    ctx2.fillStyle = "white";
-    ctx2.fillRect(0, 0, shapesCanvas2.width, shapesCanvas2.height);
-
-    const operations = ["+", "-", "x", "÷"];
-    const fontSize = 30;
-    ctx2.font = `${fontSize}px Arial`;
-
-    for (let i = 0; i < 5; i++) {
-      const x = 50 + (i % 2) * 400;
-      const y = 100 + Math.floor(i / 2) * 150;
-
-      const num1 = Math.floor(Math.random() * 100);
-      const num2 = Math.floor(Math.random() * 100);
-      const operation =
-        operations[Math.floor(Math.random() * operations.length)];
-      const result = Math.floor(Math.random() * 200) - 100; // Random result, possibly incorrect
-
-      // Draw the calculation
-      ctx2.fillStyle = "black";
-      ctx2.fillText(`${num1} ${operation} ${num2} = ${result}`, x, y);
-
-      // Add confused elements
-      addConfusedElements(ctx2, x, y, fontSize);
-    }
-  }
-
-  function addConfusedElements(ctx, x, y, fontSize) {
-    // Add mirrored numbers
-    ctx.save();
-    ctx.translate(x + 250, y);
-    ctx.scale(-1, 1);
-    ctx.fillText(Math.floor(Math.random() * 10), 0, 0);
-    ctx.restore();
-
-    // Add rotated numbers
-    ctx.save();
-    ctx.translate(x + 280, y);
-    ctx.rotate(Math.PI / 4);
-    ctx.fillText(Math.floor(Math.random() * 10), 0, 0);
-    ctx.restore();
-
-    // Add blurred numbers
-    ctx.save();
-    ctx.shadowColor = "rgba(0, 0, 0, 0.5)";
-    ctx.shadowBlur = 5;
-    ctx.fillText(Math.floor(Math.random() * 10), x + 310, y);
-    ctx.restore();
-
-    // Add faded numbers
-    ctx.fillStyle = "rgba(0, 0, 0, 0.3)";
-    ctx.fillText(Math.floor(Math.random() * 10), x + 340, y);
-  }
-
-  // First canvas: Random shapes (keep your existing code)
-  drawRandomShapes(ctx, 10);
-  setInterval(() => drawRandomShapes(ctx, 10), 1000);
-
-  // Second canvas: Confused calculations
-  drawConfusedCalculations();
-  setInterval(drawConfusedCalculations, 3000);
-
-  // Carousel functionality
-  window.moveCarousel = function (direction) {
-    canvases[currentCanvas].style.display = "none";
-    currentCanvas =
-      (currentCanvas + direction + canvases.length) % canvases.length;
-    canvases[currentCanvas].style.display = "block";
-  };
-
-  // Initialize carousel
-  canvases[1].style.display = "none";
-});
-
+//
+//
+//
 //Dyslexia canvas
 // Defina a cor comum para todos os canvas
 const commonFillColor = "#FF5733"; // Exemplo de cor
 
 // Seleciona todos os canvas do painel direito
-const canvasIds = ["dyslexiaCanvas", "focusCanvas", "tasksCanvas"];
-const canvases = canvasIds.map((id) => document.getElementById(id));
+const canvasIds1 = ["dyslexiaCanvas", "focusCanvas", "tasksCanvas"];
+const canvases1 = canvasIds1.map((id) => document.getElementById(id));
 
 // Ajusta as dimensões de cada canvas com base no container pai
 function resizeCanvases() {
-  const parent = canvases[0].parentElement.getBoundingClientRect();
+  const parent1 = canvases1[0].parentElement.getBoundingClientRect();
 
-  canvases.forEach((canvas) => {
-    canvas.width = parent.width; // Largura igual à do pai
-    canvas.height = (parent.height - (canvases.length - 1) * 24) / canvases.length; // Divide a altura igualmente, considerando o espaçamento
+  canvases1.forEach((canvas) => {
+    canvas.width = parent1.width; // Largura igual à do pai
+    canvas.height = (parent1.height - (canvases1.length - 1) * 24) / canvases1.length; // Divide a altura igualmente, considerando o espaçamento
   });
 }
 
@@ -369,11 +240,16 @@ function drawTasksCanvas(canvas3) {
 }
 
 // Inicializa cada canvas com suas respectivas funções
-drawScrambledTextCanvas(canvases[0]); // Primeiro canvas
-drawFocusTextCanvas(canvases[1]); // Segundo canvas
-drawTasksCanvas(canvases[2]); // Terceiro canvas
+drawScrambledTextCanvas(canvases1[0]); // Primeiro canvas
+drawFocusTextCanvas(canvases1[1]); // Segundo canvas
+drawTasksCanvas(canvases1[2]); // Terceiro canvas
 
 
+
+//
+//
+// DYSLEXIA GAME
+//
 const words = [
   "education",
   "learning",
@@ -464,8 +340,66 @@ pickAndScrambleWord();
 
 
 
-// Dyscalculia jogo
+//
+//
+//DYSCALCULIA CANVAS
 
+// Seleciona todos os canvas do painel direito
+const canvasIds2 = ["confusedForms", "numbersAndChange", "numbersAndForms"];
+const canvases2 = canvasIds2.map((id) => document.getElementById(id));
+
+// Ajusta as dimensões de cada canvas com base no container pai
+function resizeCanvases2() {
+  const parent2 = canvases2[0].parentElement.getBoundingClientRect();
+
+  canvases2.forEach((canvas) => {
+    canvas.width = parent2.width; // Largura igual à do pai
+    canvas.height = (parent2.height - (canvases2.length - 1) * 24) / canvases2.length; // Divide a altura igualmente, considerando o espaçamento
+  
+  // Define a cor de fundo de cada canvas
+  const ctx = canvas.getContext("2d");
+  ctx.fillStyle = commonFillColor;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  
+  });
+}
+
+// Inicializa as dimensões e vincula ao redimensionamento da janela
+resizeCanvases2();
+window.addEventListener("resize", resizeCanvases2);
+
+//
+// 1º CANVAS: CONFUSED FORMS
+//
+
+
+
+//
+// 2º CANVAS: NUMBERS AND BILLS
+//
+
+
+
+
+//
+// 3º CANVAS: NUMBERS AND FORMS
+//
+
+
+// Inicializa cada canvas com suas respectivas funções
+drawConfusedForms(canvases2[0]); // Primeiro canvas
+drawNumbersAndChange(canvases2[1]); // Segundo canvas
+drawNumbersAndForms(canvases2[2]); // Terceiro canvas
+
+
+
+
+
+
+//
+//
+//
+// DYSCALCULIA GAME
 const canvas4 = document.getElementById('gameCanvas');
 const ctx4 = canvas4.getContext('2d');
 canvas4.width = 500;
