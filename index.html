@@ -18,8 +18,8 @@
 
     <!-- Dyslexia Section -->
 <section id="dislexia" class="section">
-  <div class="dislexia-content">
-    <div class="dislexia-text">
+  <div class="container">
+    <div class="dislexia-text" id="left-panel">
       <h2>What is Dyslexia?</h2>
       <p>
         Dyslexia is a learning difference that affects how people read, spell, 
@@ -58,10 +58,10 @@
         <li><strong>Sentence Structure: </strong>Struggling to organize thoughts clearly in writing or mixing up word order.</li>
       </ul>
     </div>
-    <div class="dislexia-canvas">
+    <div class="dislexia-canvas" id="right-panel">
       <canvas id="dyslexiaCanvas"></canvas>
-      <canvas id="dyslexiaCanvas2"></canvas>
-      <canvas id="dyslexiaCanvas3"></canvas>
+      <canvas id="focusCanvas"></canvas>
+      <canvas id="tasksCanvas"></canvas>
     </div>
   </div>
   <a href="#title" class="scroll-arrow previous">&#8593;</a>
@@ -144,7 +144,7 @@
 
     <!-- Dyscalculia Game Section -->
     <section id="dyscalculia-game" class="section hidden">
-      <div id="dyscalculiaGame-container">
+      <div id="container">
         <!-- Painel esquerdo: Explicação -->
         <div id="left-panel">
             <h1>Bem-vindo ao Jogo de Cálculos!</h1>
