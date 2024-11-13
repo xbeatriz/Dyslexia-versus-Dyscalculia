@@ -544,23 +544,23 @@ canvas7.width = 500;
 canvas7.height = 300;
 
 // Variáveis do jogo
-let currentEquation = '';
-let isCorrect = false;
-let score = 0;
-let questionCount = 0;
-let particles = [];
-let fallingNumbers = [];
+let currentEquation7 = '';
+let isCorrect7 = false;
+let score7 = 0;
+let questionCount7 = 0;
+let particles7 = [];
+let fallingNumbers7 = [];
 
 // Configuração para números caindo
-const fallingNumbersCount = 50;
+const fallingNumbersCount7 = 50;
 
 // Operações possíveis
-const operations = ['+', '-', '*', '/'];
+const operations7 = ['+', '-', '*', '/'];
 
 // Gera números aleatórios para o fundo
-function createFallingNumbers() {
-    for (let i = 0; i < fallingNumbersCount; i++) {
-        fallingNumbers.push({
+function createFallingNumbers7() {
+    for (let i = 0; i < fallingNumbersCount7; i++) {
+        fallingNumbers7.push({
             x: Math.random() * canvas7.width,
             y: Math.random() * canvas7.height,
             speedY: Math.random() * 2 + 1,
@@ -572,8 +572,8 @@ function createFallingNumbers() {
 }
 
 // Atualiza a posição dos números caindo
-function updateFallingNumbers() {
-    fallingNumbers.forEach((num) => {
+function updateFallingNumbers7() {
+    fallingNumbers7.forEach((num) => {
         num.y += num.speedY;
         if (num.y > canvas7.height) {
             num.y = -num.size;
@@ -584,66 +584,66 @@ function updateFallingNumbers() {
 }
 
 // Desenha os números a cair no fundo
-function drawFallingNumbers() {
-    fallingNumbers.forEach((num) => {
-        ctx7.font = `${num.size}px Arial`;
+function drawFallingNumbers7() {
+    fallingNumbers7.forEach((num) => {
+        ctx7.font = `${num.size}px Montserrat`;
         ctx7.fillStyle = `rgba(255, 255, 255, ${num.alpha})`;
         ctx7.fillText(num.number, num.x, num.y);
     });
 }
 
 // Gera uma nova equação
-function generateEquation() {
+function generateEquation7() {
     const num1 = Math.floor(Math.random() * 10) + 1;
     const num2 = Math.floor(Math.random() * 10) + 1;
-    const operation = operations[Math.floor(Math.random() * operations.length)];
+    const operation = operations7[Math.floor(Math.random() * operations7.length)];
 
-    let realAnswer;
-    let fakeAnswer;
+    let realAnswer7;
+    let fakeAnswer7;
 
     switch (operation) {
         case '+':
-            realAnswer = num1 + num2;
+            realAnswer7 = num1 + num2;
             break;
         case '-':
-            realAnswer = num1 - num2;
+            realAnswer7 = num1 - num2;
             break;
         case '*':
-            realAnswer = num1 * num2;
+            realAnswer7 = num1 * num2;
             break;
         case '/':
-            realAnswer = parseFloat((num1 / num2).toFixed(2)); // Limita a precisão
+            realAnswer7 = parseFloat((num1 / num2).toFixed(2)); // Limita a precisão
             break;
     }
 
-    fakeAnswer = realAnswer + (Math.random() < 0.5 ? 0 : (Math.random() < 0.5 ? 1 : -1));
-    if (operation === '/') fakeAnswer = parseFloat((fakeAnswer).toFixed(2)); // Garante precisão para divisões
+    fakeAnswer7 = realAnswer7 + (Math.random() < 0.5 ? 0 : (Math.random() < 0.5 ? 1 : -1));
+    if (operation === '/') fakeAnswer7 = parseFloat((fakeAnswer7).toFixed(2)); // Garante precisão para divisões
 
-    currentEquation = `${num1} ${operation} ${num2} = ${fakeAnswer}`;
-    isCorrect = (realAnswer === fakeAnswer);
+    currentEquation7 = `${num1} ${operation} ${num2} = ${fakeAnswer7}`;
+    isCorrect7 = (realAnswer7 === fakeAnswer7);
 }
 
 // Renderiza a equação no canvas
-function renderEquation() {
+function renderEquation7() {
     ctx7.font = '36px Montserrat';
     ctx7.fillStyle = 'white';
     ctx7.textAlign = 'center';
-    ctx7.fillText(currentEquation, canvas7.width / 2, canvas7.height / 2);
+    ctx7.fillText(currentEquation7, canvas7.width / 2, canvas7.height / 2);
 }
 
 // Renderiza a pontuação
-function renderScore() {
+function renderScore7() {
     ctx7.font = '24px Montserrat';
     ctx7.fillStyle = 'black';
     ctx7.textAlign = 'left';
-    ctx7.fillText(`Pontuação: ${score}`, 10, 30);
-    ctx7.fillText(`Perguntas: ${questionCount}/20`, 10, 50);
+    ctx7.fillText(`Pontuação: ${score7}`, 10, 30);
+    ctx7.fillText(`Perguntas: ${questionCount7}/20`, 10, 50);
 }
 
 // Cria partículas para animação
-function createParticles(color) {
+function createParticles7(color) {
     for (let i = 0; i < 50; i++) {
-        particles.push({
+        particles7.push({
             x: canvas7.width / 2,
             y: canvas7.height / 2,
             size: Math.random() * 5 + 2,
@@ -656,17 +656,17 @@ function createParticles(color) {
 }
 
 // Atualiza e desenha as partículas
-function updateParticles() {
-    particles.forEach((particle, index) => {
+function updateParticles7() {
+    particles7.forEach((particle, index) => {
         particle.x += particle.speedX;
         particle.y += particle.speedY;
         particle.alpha -= 0.02;
         if (particle.alpha <= 0) {
-            particles.splice(index, 1);
+            particles7.splice(index, 1);
         }
     });
 
-    particles.forEach((particle) => {
+    particles7.forEach((particle) => {
         ctx7.beginPath();
         ctx7.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
         ctx7.fillStyle = `rgba(${particle.color},${particle.alpha})`;
@@ -675,29 +675,29 @@ function updateParticles() {
 }
 
 // Avalia a resposta do jogador
-function evaluateAnswer(playerChoice) {
-    if (playerChoice === isCorrect) {
-        score++;
-        createParticles('0, 255, 0'); // Verde
+function evaluateAnswer7(playerChoice) {
+    if (playerChoice === isCorrect7) {
+        score7++;
+        createParticles7('0, 255, 0'); // Verde
     } else {
-        createParticles('255, 0, 0'); // Vermelho
+        createParticles7('255, 0, 0'); // Vermelho
     }
 
-    questionCount++;
-    if (questionCount < 20) {
-        generateEquation();
+    questionCount7++;
+    if (questionCount7 < 20) {
+        generateEquation7();
     } else {
-        endGame();
+        endGame7();
     }
 }
 
 // Finaliza o jogo
-function endGame() {
+function endGame7() {
     ctx7.clearRect(0, 0, canvas7.width, canvas7.height);
     ctx7.font = '24px';
     ctx7.fillStyle = 'white';
     ctx7.textAlign = 'center';
-    ctx7.fillText(`Fim do jogo! Sua pontuação: ${score}/20`, canvas7.width / 2, canvas7.height / 2);
+    ctx7.fillText(`Fim do jogo! Sua pontuação: ${score7}/20`, canvas7.width / 2, canvas7.height / 2);
 }
 
 // Animação do jogo
@@ -705,25 +705,25 @@ function animate7() {
     ctx7.clearRect(0, 0, canvas7.width, canvas7.height);
 
     // Fundo com números caindo
-    drawFallingNumbers();
-    updateFallingNumbers();
+    drawFallingNumbers7();
+    updateFallingNumbers7();
 
     // Renderiza a equação, partículas e pontuação
-    renderEquation();
-    renderScore();
-    updateParticles();
+    renderEquation7();
+    renderScore7();
+    updateParticles7();
 
     requestAnimationFrame(animate7);
 }
 
 // Configura os botões
-document.getElementById('correct').addEventListener('click', () => evaluateAnswer(true));
-document.getElementById('incorrect').addEventListener('click', () => evaluateAnswer(false));
+document.getElementById('correct').addEventListener('click', () => evaluateAnswer7(true));
+document.getElementById('incorrect').addEventListener('click', () => evaluateAnswer7(false));
 
 // Inicializa o jogo
 document.addEventListener('DOMContentLoaded', () => {
   // Seu código aqui
-  generateEquation();
-  createFallingNumbers();
+  generateEquation7();
+  createFallingNumbers7();
   animate7();
 });
