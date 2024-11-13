@@ -373,10 +373,87 @@ window.addEventListener("resize", resizeCanvases2);
 //
 
 
+function drawConfusedForms(canvas) {
+  const ctx = canvas.getContext("2d");
+  const shapes = []; // Array para armazenar as formas
+
+  // Gera uma cor aleatória em formato hexadecimal
+  function getRandomColor() {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
+
+  // Função para criar uma nova forma com propriedades aleatórias
+  function createShape() {
+    const shapeTypes = ["circle", "square", "triangle"];
+    const type = shapeTypes[Math.floor(Math.random() * shapeTypes.length)];
+    return {
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      size: Math.random() * 40 + 40, // Tamanhos variando entre 40 e 80
+      dx: (Math.random() - 0.5) * 12, // Aumentando a velocidade para variar entre -6 e 6
+      dy: (Math.random() - 0.5) * 12, // Aumentando a velocidade para variar entre -6 e 6
+      type: type,
+      color: getRandomColor() // Cor aleatória para cada forma
+    };
+  }
+
+  // Cria várias formas iniciais
+  for (let i = 0; i < 10; i++) {
+    shapes.push(createShape());
+  }
+
+  // Função para desenhar uma forma no contexto
+  function drawShape(shape) {
+    ctx.beginPath();
+    if (shape.type === "circle") {
+      ctx.arc(shape.x, shape.y, shape.size / 2, 0, Math.PI * 2);
+    } else if (shape.type === "square") {
+      ctx.rect(shape.x - shape.size / 2, shape.y - shape.size / 2, shape.size, shape.size);
+    } else if (shape.type === "triangle") {
+      ctx.moveTo(shape.x, shape.y - shape.size / 2);
+      ctx.lineTo(shape.x - shape.size / 2, shape.y + shape.size / 2);
+      ctx.lineTo(shape.x + shape.size / 2, shape.y + shape.size / 2);
+      ctx.closePath();
+    }
+    ctx.fillStyle = shape.color; // Cor única para cada forma
+    ctx.fill();
+  }
+
+  // Função de animação para mover as formas
+  function animate() {
+    // Limpa o canvas e redefine o fundo
+    ctx.fillStyle = commonFillColor;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Atualiza e desenha cada forma
+    shapes.forEach((shape) => {
+      shape.x += shape.dx;
+      shape.y += shape.dy;
+
+      // Inverte a direção se a forma atingir as bordas do canvas
+      if (shape.x < 0 || shape.x > canvas.width) shape.dx *= -1;
+      if (shape.y < 0 || shape.y > canvas.height) shape.dy *= -1;
+
+      drawShape(shape);
+    });
+
+    // Requisita o próximo quadro de animação
+    requestAnimationFrame(animate);
+  }
+
+  animate(); // Inicia a animação
+}
 
 //
 // 2º CANVAS: NUMBERS AND BILLS
 //
+
+
 
 
 
