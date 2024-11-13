@@ -208,70 +208,171 @@ document.addEventListener("DOMContentLoaded", () => {
   canvases[1].style.display = "none";
 });
 
-//Dyslexia
+//Dyslexia canvas
+// Defina a cor comum para todos os canvas
+const commonFillColor = "#FF5733"; // Exemplo de cor
 
-const canvas5 = document.getElementById("dyslexiaCanvas");
-const ctx5 = canvas5.getContext("2d");
-console.log(canvas5.parentElement.getBoundingClientRect());
-canvas5.width = canvas5.parentElement.getBoundingClientRect().width;
-canvas5.height = canvas5.parentElement.getBoundingClientRect().height;
+// Seleciona todos os canvas do painel direito
+const canvasIds = ["dyslexiaCanvas", "focusCanvas", "tasksCanvas"];
+const canvases = canvasIds.map((id) => document.getElementById(id));
 
-//função para definir o tamanho da fonte
-function getFontSize() {
-  return Math.max(24, canvas5.height / 20); 
-}
+// Ajusta as dimensões de cada canvas com base no container pai
+function resizeCanvases() {
+  const parent = canvases[0].parentElement.getBoundingClientRect();
 
-const intervalTime = 200;
-let scrambleInterval;
-
-const textLines = [
-  "Dyslexia",
-  "Friends who have dyslexia described to me how they experience reading ...",
-  "I remembered reading about typoglycemia ...",
-  "Dyslexia is characterized by difficulty with learning to read fluently",
-  "and with accurate comprehension.",
-];
-
-function scrambleWord(word) {
-  if (word.length < 4) return word;
-  let middle = word.slice(1, -1).split("");
-  for (let i = middle.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [middle[i], middle[j]] = [middle[j], middle[i]];
-  }
-  return word[0] + middle.join("") + word[word.length - 1];
-}
-
-function scrambleTextLines() {
-  return textLines.map((line) =>
-    line
-      .split(" ")
-      .map((word) => (Math.random() < 0.3 ? scrambleWord(word) : word))
-      .join(" ")
-  );
-}
-
-function drawScrambledText() {
-  const scrambledLines = scrambleTextLines();
-
-  ctx5.fillStyle = "#ff7f50"; // Cor de fundo do canvas
-  ctx5.fillRect(0, 0, canvas5.width, canvas5.height);
-
-  const fontSize = getFontSize(); // Usa a função para definir o tamanho da fonte
-  ctx5.font = `${fontSize}px Montserrat`;
-  ctx5.fillStyle = "#FFFFFF"; // Cor do texto
-  ctx5.textAlign = "left";
-  ctx5.textBaseline = "top";
-
-  // Calcula o espaçamento entre as linhas com base na altura do canvas
-  const lineSpacing = Math.min((canvas5.height - 20) / scrambledLines.length, fontSize + 10);
-
-  scrambledLines.forEach((line, index) => {
-    ctx5.fillText(line, 10, index * lineSpacing + 10); // Ajusta o espaçamento entre linhas
+  canvases.forEach((canvas) => {
+    canvas.width = parent.width; // Largura igual à do pai
+    canvas.height = (parent.height - (canvases.length - 1) * 24) / canvases.length; // Divide a altura igualmente, considerando o espaçamento
   });
 }
 
-scrambleInterval = setInterval(drawScrambledText, intervalTime);
+// Inicializa as dimensões e vincula ao redimensionamento da janela
+resizeCanvases();
+window.addEventListener("resize", resizeCanvases);
+
+//
+// 1º CANVAS: TEXTO EMBARALHADO
+//
+function drawScrambledTextCanvas(canvas1) {
+  const ctx1 = canvas1.getContext("2d");
+
+  const textLines = [
+    "Dyslexia",
+    "Friends who have dyslexia described to me how they experience reading...",
+    "I remembered reading about typoglycemia...",
+  ];
+
+  function scrambleWord(word) {
+    if (word.length < 4) return word;
+    let middle = word.slice(1, -1).split("");
+    for (let i = middle.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [middle[i], middle[j]] = [middle[j], middle[i]];
+    }
+    return word[0] + middle.join("") + word[word.length - 1];
+  }
+
+  function scrambleTextLines() {
+    return textLines.map((line) =>
+      line
+        .split(" ")
+        .map((word) => (Math.random() < 0.3 ? scrambleWord(word) : word))
+        .join(" ")
+    );
+  }
+
+  function draw() {
+    const scrambledLines = scrambleTextLines();
+    ctx1.fillStyle = commonFillColor; // Usando a cor definida para o fundo
+    ctx1.fillRect(0, 0, canvas1.width, canvas1.height); // Preenche o fundo com a cor
+
+    const fontSize = Math.max(24, canvas1.height / 10);
+    ctx1.font = `${fontSize}px Montserrat`;
+    ctx1.fillStyle = "#FFFFFF"; // Cor do texto
+    ctx1.textAlign = "left";
+    ctx1.textBaseline = "top";
+
+    const lineSpacing = Math.min((canvas1.height - 20) / scrambledLines.length, fontSize + 10);
+
+    scrambledLines.forEach((line, index) => {
+      ctx1.fillText(line, 10, index * lineSpacing + 10);
+    });
+  }
+
+  setInterval(draw, 200);
+}
+
+
+//
+// 2º CANVAS: TEXTO COM DESFOQUE
+//
+function drawFocusTextCanvas(canvas2) {
+  const ctx2 = canvas2.getContext("2d");
+  const text1 = "Sometimes people with dyslexia are not capable of reading things";
+  const text2 = "because dyslexia it's not just about writing,";
+  const text3 = "that also modifies your physical.";
+  
+  let blurRadius = 20;
+  let increasing = false; // Controla o estado do loop
+
+  function draw() {
+    ctx2.clearRect(0, 0, canvas2.width, canvas2.height); // Limpa o canvas a cada iteração
+
+    ctx2.fillStyle = commonFillColor; // Usando a cor definida para o fundo
+    ctx2.fillRect(0, 0, canvas2.width, canvas2.height); // Preenche o fundo com a cor
+
+    const fontSize = Math.max(24, canvas2.height / 5);
+    ctx2.font = `${fontSize}px Montserrat`;
+    ctx2.fillStyle = "#FFFFFF"; // Cor do texto
+    ctx2.textAlign = "left"; // Alinha o texto à esquerda
+    ctx2.textBaseline = "middle";
+
+    ctx2.filter = `blur(${blurRadius}px)`;
+    // Desenha o texto em três linhas, com alinhamento à esquerda
+    const lineHeight = fontSize * 1.2; // Espaçamento entre as linhas
+    const leftMargin = 20; // Margem esquerda para o texto não ficar colado na borda
+    ctx2.fillText(text1, leftMargin, canvas2.height / 2 - lineHeight); // Primeira linha
+    ctx2.fillText(text2, leftMargin, canvas2.height / 2); // Segunda linha
+    ctx2.fillText(text3, leftMargin, canvas2.height / 2 + lineHeight); // Terceira linha
+    ctx2.filter = "none";
+
+    if (increasing) {
+      blurRadius += 0.5;
+      if (blurRadius >= 20) increasing = false; // Inverta para diminuir
+    } else {
+      blurRadius -= 0.5;
+      if (blurRadius <= 0) increasing = true; // Inverta para aumentar
+    }
+  }
+
+  setInterval(draw, 100);
+}
+
+
+
+//
+// 3º CANVAS: LISTA DE TAREFAS DESORDENANDO
+//
+function drawTasksCanvas(canvas3) {
+  const ctx3 = canvas3.getContext("2d");
+  const tasks = ["Task 1: Read book", "Task 2: Practice coding", "Task 3: Take a walk"];
+  const positions = tasks.map((_, i) => i * 50 + 50); // Posições iniciais para cada linha
+
+  function shufflePositions() {
+    positions.forEach((_, i) => {
+      positions[i] += Math.random() < 0.5 ? -5 : 5; // Move para cima ou para baixo
+      if (positions[i] < 30) positions[i] = 30; // Limita a posição mínima
+      if (positions[i] > canvas3.height - 30) positions[i] = canvas3.height - 30; // Limita a posição máxima
+    });
+  }
+
+  function draw() {
+    ctx3.clearRect(0, 0, canvas3.width, canvas3.height); // Limpa o canvas a cada iteração
+
+    ctx3.fillStyle = commonFillColor; // Usando a cor definida para o fundo
+    ctx3.fillRect(0, 0, canvas3.width, canvas3.height); // Preenche o fundo com a cor
+
+    const fontSize = Math.max(24, canvas3.height / 15);
+    ctx3.font = `${fontSize}px Montserrat`;
+    ctx3.fillStyle = "#FFFFFF"; // Cor do texto
+    ctx3.textAlign = "left";
+    ctx3.textBaseline = "middle";
+
+    tasks.forEach((task, i) => {
+      ctx3.fillText(task, 10, positions[i]);
+    });
+
+    shufflePositions();
+  }
+
+  setInterval(draw, 200);
+}
+
+// Inicializa cada canvas com suas respectivas funções
+drawScrambledTextCanvas(canvases[0]); // Primeiro canvas
+drawFocusTextCanvas(canvases[1]); // Segundo canvas
+drawTasksCanvas(canvases[2]); // Terceiro canvas
+
 
 const words = [
   "education",

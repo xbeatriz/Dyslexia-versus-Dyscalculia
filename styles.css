@@ -1,5 +1,5 @@
 * {
-  margin: 0;
+  margin: 0; 
   padding: 0;
   box-sizing: border-box;
 }
@@ -20,34 +20,51 @@ body {
   padding: 20px;
 }
 
-.dislexia-content {
-  display: flex;
-  justify-content: flex-start; /* Alinha horizontalmente à esquerda */
-  align-items: center; /* Alinha verticalmente à parte superior */
+/* Container principal */
+.container {
+  display: flex; /* Organiza o layout em colunas lado a lado */
   width: 100%;
-  margin: 24px auto; /* Centraliza o conteúdo na página */
-  gap: 20px; /* Espaço entre os itens */
+  height: 90vh; /* Ajusta a altura do container */
+  border-radius: 10px;
+  overflow: hidden;
 }
 
+/* Painel esquerdo */
+#left-panel {
+  width: 50%; /* Ocupa metade do espaço horizontal */
+  padding: 20px;
+  overflow-y: auto; /* Adiciona rolagem, se necessário */
+}
 
-.dislexia-text {
+#left-panel h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+#left-panel p, #left-panel ul {
+  font-size: 16px;
+  line-height: 1.6;
+}
+#right-panel {
   width: 50%;
-  flex: 1;
-  padding-right: 20px;
-  text-align: left;
-  align-items: left;
+  display: flex;
+  flex-direction: column; /* Organiza os canvas em coluna */
+  height: 100%; /* Ocupa toda a altura do painel direito */
+  gap: 24px; /* Espaçamento de 24px entre os canvas */
+  padding: 24px; /* Padding ao redor */
+  box-sizing: border-box; /* Inclui padding nas dimensões totais */
+  align-items: center;
+  justify-content: center;
 }
 
-.dislexia-canvas {
-  width: 50%; /* 50% da largura da página */
-  height: 100vh; /* ocupa toda a altura da janela */
-  display: flex;
-  flex-direction: column; /* alinha os canvases verticalmente */
-  justify-content: center; /* centraliza os canvases na vertical */
-  align-items: center; /* centraliza os canvases na horizontal */
-  position: absolute; /* posiciona a div */
-  right: 0; /* garante que a div fique à direita */
+
+canvas {
+  width: 100%; /* Ocupa 100% da largura disponível */
+  display: block; /* Remove margens e padding extras */
+  border: 1px solid #ccc; /* Apenas para debug, pode ser removido */
 }
+
+
 
 /*jogo */
 .canvas-container {
@@ -289,29 +306,12 @@ li {
 
 
 
+
 /* STYLES FOR THE DYSCALCULIA GAME SECTION */
-#dyscalculiaGame-container {
-  width: 100%;
-  display: flex;
-  height: 90%;
-  border-radius: 10px;
-  overflow: hidden;
-}
 
-#left-panel {
-  width: 50%;
-  padding: 20px;
-}
 
-#left-panel h1 {
-  font-size: 42px;
-  margin-bottom: 10px;
-}
 
-#left-panel p {
-  font-size: 20px;
-  line-height: 1.6;
-}
+
 
 
 #right-panel {
