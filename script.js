@@ -524,6 +524,141 @@ function drawNumbersAndChange(canvas) {
 //
 
 
+function drawNumbersAndForms(canvas6) {
+  const ctx6 = canvas6.getContext("2d");
+
+  const clockRadius = 50; // Raio dos relógios grandes
+  const smallClockRadius = 30; // Raio dos relógios pequenos
+
+  const clocks = [
+    { x: 100, y: 100, dx: 2, dy: 1, radius: clockRadius, time: new Date(2024, 0, 1, 2, 0, 0) },
+    { x: 300, y: 150, dx: -1.5, dy: 2, radius: clockRadius, time: new Date(2024, 0, 1, 4, 15, 0) },
+    { x: 500, y: 200, dx: 1, dy: -1.5, radius: clockRadius, time: new Date(2024, 0, 1, 8, 30, 0) },
+    { x: 700, y: 250, dx: -2, dy: 1, radius: clockRadius, time: new Date(2024, 0, 1, 11, 45, 0) }
+  ];
+
+  // Adiciona relógios pequenos, garantindo que eles fiquem dentro dos limites
+  for (let i = 0; i < 3; i++) {
+    const smallClock = {
+      x: Math.random() * (canvas6.width - smallClockRadius * 2) + smallClockRadius,
+      y: Math.random() * (canvas6.height - smallClockRadius * 2) + smallClockRadius,
+      dx: (Math.random() - 0.5) * 4,
+      dy: (Math.random() - 0.5) * 4,
+      radius: smallClockRadius,
+      time: new Date(2024, 0, 1, Math.floor(Math.random() * 12), Math.floor(Math.random() * 60), 0)
+    };
+    clocks.push(smallClock);
+  }
+
+  function drawClock(ctx6, x, y, radius, time) {
+    ctx6.beginPath();
+    ctx6.arc(x, y, radius, 0, Math.PI * 2);
+    ctx6.fillStyle = '#fff';
+    ctx6.fill();
+    ctx6.lineWidth = 2;
+    ctx6.strokeStyle = '#000';
+    ctx6.stroke();
+    ctx6.closePath();
+
+    for (let i = 1; i <= 12; i++) {
+      const angle = (Math.PI / 6) * i - Math.PI / 2;
+      const numX = x + Math.cos(angle) * (radius - 15);
+      const numY = y + Math.sin(angle) * (radius - 15);
+      ctx6.font = `${radius * 0.2}px Arial`;
+      ctx6.fillStyle = '#000';
+      ctx6.textAlign = 'center';
+      ctx6.textBaseline = 'middle';
+      ctx6.fillText(i, numX, numY);
+    }
+
+    const hours = time.getHours() % 12;
+    const minutes = time.getMinutes();
+    const seconds = time.getSeconds();
+
+    const hourAngle = (Math.PI / 6) * hours + (Math.PI / 360) * minutes;
+    drawHand(ctx6, x, y, hourAngle, radius * 0.5, 6);
+
+    const minuteAngle = (Math.PI / 30) * minutes + (Math.PI / 1800) * seconds;
+    drawHand(ctx6, x, y, minuteAngle, radius * 0.7, 4);
+
+    const secondAngle = (Math.PI / 30) * seconds;
+    drawHand(ctx6, x, y, secondAngle, radius * 0.9, 2, 'red');
+  }
+
+  function drawHand(ctx6, x, y, angle, length, width, color = '#000') {
+    ctx6.beginPath();
+    ctx6.moveTo(x, y);
+    ctx6.lineTo(
+      x + Math.cos(angle - Math.PI / 2) * length,
+      y + Math.sin(angle - Math.PI / 2) * length
+    );
+    ctx6.lineWidth = width;
+    ctx6.strokeStyle = color;
+    ctx6.stroke();
+    ctx6.closePath();
+  }
+
+  function isColliding(clock1, clock2) {
+    const dx = clock1.x - clock2.x;
+    const dy = clock1.y - clock2.y;
+    const distance = Math.sqrt(dx * dx + dy * dy);
+    return distance < clock1.radius + clock2.radius;
+  }
+
+  function resolveCollision(clock1, clock2) {
+    const dx = clock1.x - clock2.x;
+    const dy = clock1.y - clock2.y;
+    const distance = Math.sqrt(dx * dx + dy * dy);
+
+    if (distance === 0) return; // Evita divisão por zero
+
+    // Reposiciona os relógios para evitar sobreposição
+    const overlap = (clock1.radius + clock2.radius - distance) / 2;
+    const correctionX = (dx / distance) * overlap;
+    const correctionY = (dy / distance) * overlap;
+
+    clock1.x += correctionX;
+    clock1.y += correctionY;
+    clock2.x -= correctionX;
+    clock2.y -= correctionY;
+
+    // Inverte as velocidades
+    [clock1.dx, clock2.dx] = [clock2.dx, clock1.dx];
+    [clock1.dy, clock2.dy] = [clock2.dy, clock1.dy];
+  }
+
+  function updateClocks() {
+    ctx6.fillStyle = commonFillColor;
+    ctx6.fillRect(0, 0, canvas6.width, canvas6.height);
+
+    clocks.forEach((clock, index) => {
+      clock.x += clock.dx;
+      clock.y += clock.dy;
+
+      if (clock.x + clock.radius > canvas6.width || clock.x - clock.radius < 0) {
+        clock.dx *= -1;
+      }
+      if (clock.y + clock.radius > canvas6.height || clock.y - clock.radius < 0) {
+        clock.dy *= -1;
+      }
+
+      clocks.forEach((otherClock, otherIndex) => {
+        if (index !== otherIndex && isColliding(clock, otherClock)) {
+          resolveCollision(clock, otherClock);
+        }
+      });
+
+      clock.time.setSeconds(clock.time.getSeconds() + 1);
+      drawClock(ctx6, clock.x, clock.y, clock.radius, clock.time);
+    });
+
+    requestAnimationFrame(updateClocks);
+  }
+
+  updateClocks();
+}
+
+
 // Inicializa cada canvas com suas respectivas funções
 drawConfusedForms(canvases2[0]); // Primeiro canvas
 drawNumbersAndChange(canvases2[1]); // Segundo canvas
