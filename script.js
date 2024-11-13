@@ -453,135 +453,71 @@ function drawConfusedForms(canvas) {
 // 2º CANVAS: NUMBERS AND BILLS
 //
 
+
 function drawNumbersAndChange(canvas) {
   const ctx = canvas.getContext("2d");
 
-  // Define a fonte Montserrat para os cálculos
-  ctx.font = "20px 'Montserrat', sans-serif";
-  ctx.fillStyle = "#ffffff"; // Cor branca para os textos
-
-  // Lista de cálculos incorretos
-  const calculosErrados = [
-    { num1: 5, operator: "+", num2: 3, result: 11 },
-    { num1: 12, operator: "-", num2: 4, result: 5 },
-    { num1: 7, operator: "x", num2: 3, result: 25 },
-    { num1: 9, operator: "÷", num2: 3, result: 4 },
-    { num1: 6, operator: "+", num2: 7, result: 10 },
-    { num1: 15, operator: "-", num2: 9, result: 3 },
-    { num1: 8, operator: "x", num2: 5, result: 30 },
-    { num1: 20, operator: "÷", num2: 4, result: 7 },
-    { num1: 3, operator: "+", num2: 9, result: 15 },
-    { num1: 10, operator: "-", num2: 2, result: 6 },
-    { num1: 4, operator: "x", num2: 4, result: 20 },
-    { num1: 18, operator: "÷", num2: 6, result: 5 },
-  ];
-
-  // Função para desenhar os cálculos
-  function drawCalculations() {
-    const numCalculationsPerLine = 4; // 4 cálculos por linha
-    const padding = 20; // Espaçamento entre os cálculos
-    const startX = 50; // Posição inicial X para o primeiro cálculo
-    const startY = 50; // Posição inicial Y para a primeira linha
-
-    // Desenha os cálculos no canvas
-    calculosErrados.forEach((calc, index) => {
-      const row = Math.floor(index / numCalculationsPerLine); // Define em qual linha o cálculo estará
-      const col = index % numCalculationsPerLine; // Define em qual coluna o cálculo estará
-
-      const x = startX + col * (200 + padding); // Largura de cada cálculo (200px + padding entre eles)
-      const y = startY + row * (30 + padding); // Altura entre as linhas (30px + padding)
-
-      const text = `${calc.num1} ${calc.operator} ${calc.num2} = ${calc.result}`;
-      ctx.fillText(text, x, y);
-
-      // Adiciona os efeitos confusos ao cálculo
-      addConfusedElements(ctx, x, y, 20); // Adiciona elementos confusos com tamanho de fonte 20
-    });
-  }
-
-  // Função para adicionar elementos confusos
   function addConfusedElements(ctx, x, y, fontSize) {
-    // Números espelhados
     ctx.save();
     ctx.translate(x + 250, y);
-    ctx.scale(-1, 1); // Espelha na direção X
+    ctx.scale(-1, 1);
     ctx.fillText(Math.floor(Math.random() * 10), 0, 0);
     ctx.restore();
 
-    // Números rotacionados
     ctx.save();
     ctx.translate(x + 280, y);
-    ctx.rotate(Math.PI / 4); // Rotaciona em 45 graus
+    ctx.rotate(Math.PI / 4);
     ctx.fillText(Math.floor(Math.random() * 10), 0, 0);
     ctx.restore();
 
-    // Números borrados
     ctx.save();
     ctx.shadowColor = "rgba(0, 0, 0, 0.5)";
     ctx.shadowBlur = 5;
     ctx.fillText(Math.floor(Math.random() * 10), x + 310, y);
     ctx.restore();
 
-    // Números esmaecidos
-    ctx.fillStyle = "rgba(0, 0, 0, 0.3)";
+    ctx.fillStyle = "rgba(255, 255, 255, 0.3)";
     ctx.fillText(Math.floor(Math.random() * 10), x + 340, y);
   }
 
-  // Função de animação para desenhar os cálculos
-  function animate() {
-    // Limpa o canvas e redefine o fundo
+  function drawCalculations() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = commonFillColor;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Redesenha os cálculos
-    drawCalculations();
+    const operations = ["+", "-", "x", "÷"];
+    const fontSize = 30;
+    ctx.font = `${fontSize}px Arial`;
 
-    // Requisita o próximo quadro de animação
-    requestAnimationFrame(animate);
+    for (let i = 0; i < 5; i++) {
+      const x1 = 50; // Posição X do primeiro cálculo em cada linha
+      const x2 = 550; // Aumenta o espaçamento entre os dois cálculos na linha
+      const y = 80 + i * 100; // Espaçamento vertical entre as linhas
+
+      // Cálculo 1
+      const num1a = Math.floor(Math.random() * 100);
+      const num2a = Math.floor(Math.random() * 100);
+      const operation1 = operations[Math.floor(Math.random() * operations.length)];
+      const result1 = Math.floor(Math.random() * 200) - 100;
+      ctx.fillStyle = "#FFFFFF"; // Cor do texto branco
+      ctx.fillText(`${num1a} ${operation1} ${num2a} = ${result1}`, x1, y);
+
+      // Cálculo 2
+      const num1b = Math.floor(Math.random() * 100);
+      const num2b = Math.floor(Math.random() * 100);
+      const operation2 = operations[Math.floor(Math.random() * operations.length)];
+      const result2 = Math.floor(Math.random() * 200) - 100;
+      ctx.fillText(`${num1b} ${operation2} ${num2b} = ${result2}`, x2, y);
+
+      // Adiciona elementos confusos para ambos os cálculos
+      addConfusedElements(ctx, x1, y, fontSize);
+      addConfusedElements(ctx, x2, y, fontSize);
+    }
   }
 
-  animate(); // Inicia a animação
-
-  // Controle de troca dos números
-  setInterval(() => {
-    swapNumbers(); // Troca os números a cada 2 segundos (ajuste de frequência)
-  }, 2000); // Troca os números a cada 2 segundos
+  drawCalculations();
+  setInterval(drawCalculations, 3000);
 }
-
-// Função para trocar os números de posição nos cálculos
-function swapNumbers() {
-  const calculosErrados = [
-    { num1: 5, operator: "+", num2: 3, result: 11 },
-    { num1: 12, operator: "-", num2: 4, result: 5 },
-    { num1: 7, operator: "x", num2: 3, result: 25 },
-    { num1: 9, operator: "÷", num2: 3, result: 4 },
-    { num1: 6, operator: "+", num2: 7, result: 10 },
-    { num1: 15, operator: "-", num2: 9, result: 3 },
-    { num1: 8, operator: "x", num2: 5, result: 30 },
-    { num1: 20, operator: "÷", num2: 4, result: 7 },
-    { num1: 3, operator: "+", num2: 9, result: 15 },
-    { num1: 10, operator: "-", num2: 2, result: 6 },
-    { num1: 4, operator: "x", num2: 4, result: 20 },
-    { num1: 18, operator: "÷", num2: 6, result: 5 },
-  ];
-
-  calculosErrados.forEach(calc => {
-    const correctResult = calc.operator === "+" ? calc.num1 + calc.num2 :
-      calc.operator === "-" ? calc.num1 - calc.num2 :
-      calc.operator === "x" ? calc.num1 * calc.num2 :
-      calc.operator === "÷" ? calc.num1 / calc.num2 : calc.result;
-
-    // Embaralha os números
-    const numbers = [calc.num1, calc.num2, calc.result];
-    const shuffledNumbers = [...numbers].sort(() => Math.random() - 0.5); // Embaralha os números
-
-    // Atribui os números embaralhados de volta
-    calc.num1 = shuffledNumbers[0];
-    calc.num2 = shuffledNumbers[1];
-    calc.result = shuffledNumbers[2] === calc.result ? correctResult : shuffledNumbers[2];
-  });
-}
-
 
 //
 // 3º CANVAS: NUMBERS AND FORMS
