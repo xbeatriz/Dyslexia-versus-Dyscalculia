@@ -828,12 +828,18 @@ function evaluateAnswer7(playerChoice) {
 
 // Finaliza o jogo
 function endGame7() {
-    ctx7.clearRect(0, 0, canvas7.width, canvas7.height);
-    ctx7.font = '24px';
-    ctx7.fillStyle = 'white';
-    ctx7.textAlign = 'center';
-    ctx7.fillText(`Fim do jogo! Sua pontuação: ${score7}/20`, canvas7.width / 2, canvas7.height / 2);
+  ctx7.clearRect(0, 0, canvas7.width, canvas7.height);
+  ctx7.font = '24px';
+  ctx7.fillStyle = 'white';
+  ctx7.textAlign = 'center';
+  ctx7.fillText(`Fim do jogo! Sua pontuação: ${score7}/20`, canvas7.width / 2, canvas7.height / 2);
+
+  // Desativa os botões
+  document.getElementById('correct').disabled = true;
+  document.getElementById('incorrect').disabled = true;
 }
+
+
 
 // Animação do jogo
 function animate7() {
