@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
 //
 //
 //Dyslexia canvas
-// Defina a cor comum para todos os canvas
+//cor comum para todos os canvas
 const commonFillColor = "#A6A09DFF"; // Exemplo de cor
 
 // Seleciona todos os canvas do painel direito
@@ -93,7 +93,7 @@ function resizeCanvases() {
   canvases1.forEach((canvas) => {
     canvas.width = parent1.width; // Largura igual à do pai
     canvas.height =
-      (parent1.height - (canvases1.length - 1) * 24) / canvases1.length; // Divide a altura igualmente, considerando o espaçamento
+      (parent1.height - (canvases1.length - 1) * 24) / canvases1.length; // Divide a altura igualmente
   });
 }
 
@@ -134,12 +134,12 @@ function drawScrambledTextCanvas(canvas1) {
 
   function draw() {
     const scrambledLines = scrambleTextLines();
-    ctx1.fillStyle = commonFillColor; // Usando a cor definida para o fundo
+    ctx1.fillStyle = commonFillColor;
     ctx1.fillRect(0, 0, canvas1.width, canvas1.height); // Preenche o fundo com a cor
 
     const fontSize = Math.max(24, canvas1.height / 10);
     ctx1.font = `${fontSize}px Montserrat`;
-    ctx1.fillStyle = "#FFFFFF"; // Cor do texto
+    ctx1.fillStyle = "#FFFFFF"; 
     ctx1.textAlign = "left";
     ctx1.textBaseline = "top";
 
@@ -172,19 +172,19 @@ function drawFocusTextCanvas(canvas2) {
   function draw() {
     ctx2.clearRect(0, 0, canvas2.width, canvas2.height); // Limpa o canvas a cada iteração
 
-    ctx2.fillStyle = commonFillColor; // Usando a cor definida para o fundo
-    ctx2.fillRect(0, 0, canvas2.width, canvas2.height); // Preenche o fundo com a cor
+    ctx2.fillStyle = commonFillColor; 
+    ctx2.fillRect(0, 0, canvas2.width, canvas2.height); 
 
     const fontSize = Math.max(24, canvas2.height / 5);
     ctx2.font = `${fontSize}px Montserrat`;
-    ctx2.fillStyle = "#FFFFFF"; // Cor do texto
-    ctx2.textAlign = "left"; // Alinha o texto à esquerda
+    ctx2.fillStyle = "#FFFFFF"; 
+    ctx2.textAlign = "left"; 
     ctx2.textBaseline = "middle";
 
     ctx2.filter = `blur(${blurRadius}px)`;
-    // Desenha o texto em três linhas, com alinhamento à esquerda
-    const lineHeight = fontSize * 1.2; // Espaçamento entre as linhas
-    const leftMargin = 20; // Margem esquerda para o texto não ficar colado na borda
+   
+    const lineHeight = fontSize * 1.2; 
+    const leftMargin = 20; 
     ctx2.fillText(text1, leftMargin, canvas2.height / 2 - lineHeight); // Primeira linha
     ctx2.fillText(text2, leftMargin, canvas2.height / 2); // Segunda linha
     ctx2.fillText(text3, leftMargin, canvas2.height / 2 + lineHeight); // Terceira linha
@@ -192,10 +192,10 @@ function drawFocusTextCanvas(canvas2) {
 
     if (increasing) {
       blurRadius += 0.5;
-      if (blurRadius >= 20) increasing = false; // Inverta para diminuir
+      if (blurRadius >= 20) increasing = false; 
     } else {
       blurRadius -= 0.5;
-      if (blurRadius <= 0) increasing = true; // Inverta para aumentar
+      if (blurRadius <= 0) increasing = true; 
     }
   }
 
@@ -216,22 +216,22 @@ function drawTasksCanvas(canvas3) {
 
   function shufflePositions() {
     positions.forEach((_, i) => {
-      positions[i] += Math.random() < 0.5 ? -5 : 5; // Move para cima ou para baixo
-      if (positions[i] < 30) positions[i] = 30; // Limita a posição mínima
+      positions[i] += Math.random() < 0.5 ? -5 : 5; 
+      if (positions[i] < 30) positions[i] = 30; 
       if (positions[i] > canvas3.height - 30)
-        positions[i] = canvas3.height - 30; // Limita a posição máxima
+        positions[i] = canvas3.height - 30; 
     });
   }
 
   function draw() {
     ctx3.clearRect(0, 0, canvas3.width, canvas3.height); // Limpa o canvas a cada iteração
 
-    ctx3.fillStyle = commonFillColor; // Usando a cor definida para o fundo
-    ctx3.fillRect(0, 0, canvas3.width, canvas3.height); // Preenche o fundo com a cor
+    ctx3.fillStyle = commonFillColor; 
+    ctx3.fillRect(0, 0, canvas3.width, canvas3.height); 
 
     const fontSize = Math.max(24, canvas3.height / 15);
     ctx3.font = `${fontSize}px Montserrat`;
-    ctx3.fillStyle = "#FFFFFF"; // Cor do texto
+    ctx3.fillStyle = "#FFFFFF"; 
     ctx3.textAlign = "left";
     ctx3.textBaseline = "middle";
 
@@ -245,7 +245,7 @@ function drawTasksCanvas(canvas3) {
   setInterval(draw, 200);
 }
 
-// Inicializa cada canvas com suas respectivas funções
+// Inicializa cada canvas
 drawScrambledTextCanvas(canvases1[0]); // Primeiro canvas
 drawFocusTextCanvas(canvases1[1]); // Segundo canvas
 drawTasksCanvas(canvases1[2]); // Terceiro canvas
@@ -280,17 +280,17 @@ function pickAndScrambleWord() {
   let newWord;
   do {
     newWord = words[Math.floor(Math.random() * words.length)];
-  } while (newWord === selectedWord); // Garante que a nova palavra seja diferente
+  } while (newWord === selectedWord); 
 
   selectedWord = newWord;
   scrambledWord = selectedWord;
-  drawScrambledWord(scrambledWord); // Inicializar com a palavra selecionada
+  drawScrambledWord(scrambledWord); 
 
   if (scrambleIntervalG) clearInterval(scrambleIntervalG); // Limpa qualquer intervalo anterior
   scrambleIntervalG = setInterval(() => {
     scrambledWord = scrambleWord(selectedWord); // Reembaralha continuamente
     drawScrambledWord(scrambledWord); // Atualiza o desenho com a nova palavra embaralhada
-  }, 1200); // Intervalo de 100ms (pode ser ajustado)
+  }, 1200); // Intervalo de 100ms 
 }
 
 // Função para embaralhar a palavra
@@ -318,7 +318,7 @@ function drawScrambledWord(word) {
 function drawCorrectWordOnSecondCanvas(word) {
   ctxSecond.clearRect(0, 0, secondCanvas.width, secondCanvas.height); // Limpa o segundo canvas
   ctxSecond.font = "30px Arial";
-  ctxSecond.fillStyle = "#008000"; // Cor para o texto correto
+  ctxSecond.fillStyle = "#008000"; 
   ctxSecond.textAlign = "center";
   ctxSecond.textBaseline = "middle";
   ctxSecond.fillText(word, secondCanvas.width / 2, secondCanvas.height / 2); // Desenha no centro do canvas
@@ -339,7 +339,7 @@ document.getElementById("submitGuess").addEventListener("click", () => {
   guessInput.value = ""; // Limpar o campo de input
 });
 
-// Inicia o jogo com uma palavra aleatória
+// Inicia o jogo 
 pickAndScrambleWord();
 
 //
@@ -357,7 +357,7 @@ function resizeCanvases2() {
   canvases2.forEach((canvas) => {
     canvas.width = parent2.width; // Largura igual à do pai
     canvas.height =
-      (parent2.height - (canvases2.length - 1) * 24) / canvases2.length; // Divide a altura igualmente, considerando o espaçamento
+      (parent2.height - (canvases2.length - 1) * 24) / canvases2.length; // Divide a altura igualmente
 
     // Define a cor de fundo de cada canvas
     const ctx = canvas.getContext("2d");
@@ -376,9 +376,9 @@ window.addEventListener("resize", resizeCanvases2);
 
 function drawConfusedForms(canvas) {
   const ctx = canvas.getContext("2d");
-  const shapes = []; // Array para armazenar as formas
+  const shapes = []; 
 
-  // Gera uma cor aleatória em formato hexadecimal
+  // Gerar uma cor aleatória em formato hexadecimal
   function getRandomColor() {
     const letters = "0123456789ABCDEF";
     let color = "#";
@@ -396,14 +396,14 @@ function drawConfusedForms(canvas) {
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
       size: Math.random() * 40 + 40, // Tamanhos variando entre 40 e 80
-      dx: (Math.random() - 0.5) * 12, // Aumentando a velocidade para variar entre -6 e 6
-      dy: (Math.random() - 0.5) * 12, // Aumentando a velocidade para variar entre -6 e 6
+      dx: (Math.random() - 0.5) * 12, 
+      dy: (Math.random() - 0.5) * 12, 
       type: type,
       color: getRandomColor(), // Cor aleatória para cada forma
     };
   }
 
-  // Cria várias formas iniciais
+  // Criar várias formas iniciais
   for (let i = 0; i < 10; i++) {
     shapes.push(createShape());
   }
@@ -495,7 +495,7 @@ function drawNumbersAndChange(canvas) {
     ctx.font = `${fontSize}px Arial`;
 
     for (let i = 0; i < 5; i++) {
-      const x1 = 50; // Posição X do primeiro cálculo em cada linha
+      const x1 = 50; 
       const x2 = 550; // Aumenta o espaçamento entre os dois cálculos na linha
       const y = 80 + i * 100; // Espaçamento vertical entre as linhas
 
@@ -505,7 +505,7 @@ function drawNumbersAndChange(canvas) {
       const operation1 =
         operations[Math.floor(Math.random() * operations.length)];
       const result1 = Math.floor(Math.random() * 200) - 100;
-      ctx.fillStyle = "#FFFFFF"; // Cor do texto branco
+      ctx.fillStyle = "#FFFFFF"; 
       ctx.fillText(`${num1a} ${operation1} ${num2a} = ${result1}`, x1, y);
 
       // Cálculo 2
@@ -571,7 +571,7 @@ function drawNumbersAndForms(canvas6) {
     },
   ];
 
-  // Adiciona relógios pequenos, garantindo que eles fiquem dentro dos limites
+  // Adiciona relógios pequenos
   for (let i = 0; i < 3; i++) {
     const smallClock = {
       x:
@@ -655,9 +655,9 @@ function drawNumbersAndForms(canvas6) {
     const dy = clock1.y - clock2.y;
     const distance = Math.sqrt(dx * dx + dy * dy);
 
-    if (distance === 0) return; // Evita divisão por zero
+    if (distance === 0) return; // Evitar divisão por zero
 
-    // Reposiciona os relógios para evitar sobreposição
+    // Reposicionar os relógios para evitar sobreposição
     const overlap = (clock1.radius + clock2.radius - distance) / 2;
     const correctionX = (dx / distance) * overlap;
     const correctionY = (dy / distance) * overlap;
@@ -667,7 +667,7 @@ function drawNumbersAndForms(canvas6) {
     clock2.x -= correctionX;
     clock2.y -= correctionY;
 
-    // Inverte as velocidades
+    // Inverter as velocidades
     [clock1.dx, clock2.dx] = [clock2.dx, clock1.dx];
     [clock1.dy, clock2.dy] = [clock2.dy, clock1.dy];
   }
@@ -709,7 +709,7 @@ function drawNumbersAndForms(canvas6) {
   updateClocks();
 }
 
-// Inicializa cada canvas com suas respectivas funções
+// Inicializa cada canvas 
 drawConfusedForms(canvases2[0]); // Primeiro canvas
 drawNumbersAndChange(canvases2[1]); // Segundo canvas
 drawNumbersAndForms(canvases2[2]); // Terceiro canvas
@@ -731,13 +731,13 @@ let questionCount7 = 0;
 let particles7 = [];
 let fallingNumbers7 = [];
 
-// Configuração para números caindo
+// Configuração para números a chover
 const fallingNumbersCount7 = 50;
 
 // Operações possíveis
 const operations7 = ["+", "-", "*", "/"];
 
-// Gera números aleatórios para o fundo
+// Gerar números aleatórios para o fundo
 function createFallingNumbers7() {
   for (let i = 0; i < fallingNumbersCount7; i++) {
     fallingNumbers7.push({
@@ -751,7 +751,7 @@ function createFallingNumbers7() {
   }
 }
 
-// Atualiza a posição dos números caindo
+// Atualizar a posição dos números 
 function updateFallingNumbers7() {
   fallingNumbers7.forEach((num) => {
     num.y += num.speedY;
@@ -763,7 +763,7 @@ function updateFallingNumbers7() {
   });
 }
 
-// Desenha os números a cair no fundo
+// Desenhar os números a cair no fundo
 function drawFallingNumbers7() {
   fallingNumbers7.forEach((num) => {
     ctx7.font = `${num.size}px Montserrat`;
@@ -772,7 +772,7 @@ function drawFallingNumbers7() {
   });
 }
 
-// Gera uma nova equação
+// Gerar uma nova equação
 function generateEquation7() {
   const num1 = Math.floor(Math.random() * 10) + 1;
   const num2 = Math.floor(Math.random() * 10) + 1;
@@ -804,7 +804,7 @@ function generateEquation7() {
   isCorrect7 = realAnswer7 === fakeAnswer7;
 }
 
-// Renderiza a equação no canvas
+// Renderizar a equação no canvas
 function renderEquation7() {
   ctx7.font = "36px Montserrat";
   ctx7.fillStyle = "white";
@@ -812,7 +812,7 @@ function renderEquation7() {
   ctx7.fillText(currentEquation7, canvas7.width / 2, canvas7.height / 2);
 }
 
-// Renderiza a pontuação
+// Renderizar a pontuação
 function renderScore7() {
   ctx7.font = "24px Montserrat";
   ctx7.fillStyle = "black";
@@ -821,7 +821,7 @@ function renderScore7() {
   ctx7.fillText(`Perguntas: ${questionCount7}/20`, 10, 50);
 }
 
-// Cria partículas para animação
+// Criar partículas para animação
 function createParticles7(color) {
   for (let i = 0; i < 50; i++) {
     particles7.push({
@@ -836,7 +836,7 @@ function createParticles7(color) {
   }
 }
 
-// Atualiza e desenha as partículas
+// Atualizar e desenhar as partículas
 function updateParticles7() {
   particles7.forEach((particle, index) => {
     particle.x += particle.speedX;
@@ -855,7 +855,7 @@ function updateParticles7() {
   });
 }
 
-// Avalia a resposta do jogador
+// Avaliar a resposta do jogador
 function evaluateAnswer7(playerChoice) {
   if (playerChoice === isCorrect7) {
     score7++;
@@ -872,7 +872,7 @@ function evaluateAnswer7(playerChoice) {
   }
 }
 
-// Finaliza o jogo
+// Finalizar o jogo
 function endGame7() {
   ctx7.clearRect(0, 0, canvas7.width, canvas7.height);
   ctx7.font = "24px";
@@ -884,7 +884,7 @@ function endGame7() {
     canvas7.height / 2
   );
 
-  // Desativa os botões
+  // Desativar os botões
   document.getElementById("correct").disabled = true;
   document.getElementById("incorrect").disabled = true;
 }
@@ -893,11 +893,11 @@ function endGame7() {
 function animate7() {
   ctx7.clearRect(0, 0, canvas7.width, canvas7.height);
 
-  // Fundo com números caindo
+  // Fundo com números 
   drawFallingNumbers7();
   updateFallingNumbers7();
 
-  // Renderiza a equação, partículas e pontuação
+  // Renderizar a equação, partículas e pontuação
   renderEquation7();
   renderScore7();
   updateParticles7();
@@ -915,7 +915,7 @@ document
 
 // Inicializa o jogo
 document.addEventListener("DOMContentLoaded", () => {
-  // Seu código aqui
+
   generateEquation7();
   createFallingNumbers7();
   animate7();
