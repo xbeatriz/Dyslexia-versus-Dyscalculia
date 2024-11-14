@@ -1,5 +1,5 @@
 * {
-  margin: 0; 
+  margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
@@ -41,7 +41,8 @@ body {
   margin-bottom: 10px;
 }
 
-#left-panel p, #left-panel ul {
+#left-panel p,
+#left-panel ul {
   font-size: 16px;
   line-height: 1.6;
 }
@@ -56,7 +57,6 @@ body {
   align-items: center;
   justify-content: center;
 }
-
 
 #game-container {
   width: 100%;
@@ -81,8 +81,7 @@ body {
   font-weight: bold;
 }
 
-
-ul{
+ul {
   margin: 20px;
 }
 
@@ -261,14 +260,11 @@ li {
   font-size: 20px;
 }
 
-
-
-
 /* STYLES FOR THE DYSCALCULIA GAME SECTION */
 #gameCanvas {
   border: 1px solid white;
   margin-bottom: 20px;
-  background-color: #ff7f50;;
+  background-color: #a6a09dff;
 }
 
 #buttons-container {

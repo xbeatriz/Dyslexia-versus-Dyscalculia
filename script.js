@@ -75,13 +75,12 @@ document.addEventListener("DOMContentLoaded", () => {
   updateArrowVisibility("title");
 });
 
-
 //
 //
 //
 //Dyslexia canvas
 // Defina a cor comum para todos os canvas
-const commonFillColor = "#FF5733"; // Exemplo de cor
+const commonFillColor = "#A6A09DFF"; // Exemplo de cor
 
 // Seleciona todos os canvas do painel direito
 const canvasIds1 = ["dyslexiaCanvas", "focusCanvas", "tasksCanvas"];
@@ -93,7 +92,8 @@ function resizeCanvases() {
 
   canvases1.forEach((canvas) => {
     canvas.width = parent1.width; // Largura igual à do pai
-    canvas.height = (parent1.height - (canvases1.length - 1) * 24) / canvases1.length; // Divide a altura igualmente, considerando o espaçamento
+    canvas.height =
+      (parent1.height - (canvases1.length - 1) * 24) / canvases1.length; // Divide a altura igualmente, considerando o espaçamento
   });
 }
 
@@ -143,7 +143,10 @@ function drawScrambledTextCanvas(canvas1) {
     ctx1.textAlign = "left";
     ctx1.textBaseline = "top";
 
-    const lineSpacing = Math.min((canvas1.height - 20) / scrambledLines.length, fontSize + 10);
+    const lineSpacing = Math.min(
+      (canvas1.height - 20) / scrambledLines.length,
+      fontSize + 10
+    );
 
     scrambledLines.forEach((line, index) => {
       ctx1.fillText(line, 10, index * lineSpacing + 10);
@@ -153,16 +156,16 @@ function drawScrambledTextCanvas(canvas1) {
   setInterval(draw, 200);
 }
 
-
 //
 // 2º CANVAS: TEXTO COM DESFOQUE
 //
 function drawFocusTextCanvas(canvas2) {
   const ctx2 = canvas2.getContext("2d");
-  const text1 = "Sometimes people with dyslexia are not capable of reading things";
+  const text1 =
+    "Sometimes people with dyslexia are not capable of reading things";
   const text2 = "because dyslexia it's not just about writing,";
   const text3 = "that also modifies your physical.";
-  
+
   let blurRadius = 20;
   let increasing = false; // Controla o estado do loop
 
@@ -199,21 +202,24 @@ function drawFocusTextCanvas(canvas2) {
   setInterval(draw, 100);
 }
 
-
-
 //
 // 3º CANVAS: LISTA DE TAREFAS DESORDENANDO
 //
 function drawTasksCanvas(canvas3) {
   const ctx3 = canvas3.getContext("2d");
-  const tasks = ["Task 1: Read book", "Task 2: Practice coding", "Task 3: Take a walk"];
+  const tasks = [
+    "Task 1: Read book",
+    "Task 2: Practice coding",
+    "Task 3: Take a walk",
+  ];
   const positions = tasks.map((_, i) => i * 50 + 50); // Posições iniciais para cada linha
 
   function shufflePositions() {
     positions.forEach((_, i) => {
       positions[i] += Math.random() < 0.5 ? -5 : 5; // Move para cima ou para baixo
       if (positions[i] < 30) positions[i] = 30; // Limita a posição mínima
-      if (positions[i] > canvas3.height - 30) positions[i] = canvas3.height - 30; // Limita a posição máxima
+      if (positions[i] > canvas3.height - 30)
+        positions[i] = canvas3.height - 30; // Limita a posição máxima
     });
   }
 
@@ -244,8 +250,6 @@ drawScrambledTextCanvas(canvases1[0]); // Primeiro canvas
 drawFocusTextCanvas(canvases1[1]); // Segundo canvas
 drawTasksCanvas(canvases1[2]); // Terceiro canvas
 
-
-
 //
 //
 // DYSLEXIA GAME
@@ -260,7 +264,7 @@ const words = [
   "focus",
   "attention",
   "communication",
-  "development"
+  "development",
 ];
 const canvasgamex = document.getElementById("scrambleCanvas");
 const ctxx = canvasgamex.getContext("2d");
@@ -282,7 +286,7 @@ function pickAndScrambleWord() {
   scrambledWord = selectedWord;
   drawScrambledWord(scrambledWord); // Inicializar com a palavra selecionada
 
-if (scrambleIntervalG) clearInterval(scrambleIntervalG); // Limpa qualquer intervalo anterior
+  if (scrambleIntervalG) clearInterval(scrambleIntervalG); // Limpa qualquer intervalo anterior
   scrambleIntervalG = setInterval(() => {
     scrambledWord = scrambleWord(selectedWord); // Reembaralha continuamente
     drawScrambledWord(scrambledWord); // Atualiza o desenho com a nova palavra embaralhada
@@ -338,8 +342,6 @@ document.getElementById("submitGuess").addEventListener("click", () => {
 // Inicia o jogo com uma palavra aleatória
 pickAndScrambleWord();
 
-
-
 //
 //
 //DYSCALCULIA CANVAS
@@ -354,13 +356,13 @@ function resizeCanvases2() {
 
   canvases2.forEach((canvas) => {
     canvas.width = parent2.width; // Largura igual à do pai
-    canvas.height = (parent2.height - (canvases2.length - 1) * 24) / canvases2.length; // Divide a altura igualmente, considerando o espaçamento
-  
-  // Define a cor de fundo de cada canvas
-  const ctx = canvas.getContext("2d");
-  ctx.fillStyle = commonFillColor;
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-  
+    canvas.height =
+      (parent2.height - (canvases2.length - 1) * 24) / canvases2.length; // Divide a altura igualmente, considerando o espaçamento
+
+    // Define a cor de fundo de cada canvas
+    const ctx = canvas.getContext("2d");
+    ctx.fillStyle = commonFillColor;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
   });
 }
 
@@ -372,15 +374,14 @@ window.addEventListener("resize", resizeCanvases2);
 // 1º CANVAS: CONFUSED FORMS
 //
 
-
 function drawConfusedForms(canvas) {
   const ctx = canvas.getContext("2d");
   const shapes = []; // Array para armazenar as formas
 
   // Gera uma cor aleatória em formato hexadecimal
   function getRandomColor() {
-    const letters = '0123456789ABCDEF';
-    let color = '#';
+    const letters = "0123456789ABCDEF";
+    let color = "#";
     for (let i = 0; i < 6; i++) {
       color += letters[Math.floor(Math.random() * 16)];
     }
@@ -398,7 +399,7 @@ function drawConfusedForms(canvas) {
       dx: (Math.random() - 0.5) * 12, // Aumentando a velocidade para variar entre -6 e 6
       dy: (Math.random() - 0.5) * 12, // Aumentando a velocidade para variar entre -6 e 6
       type: type,
-      color: getRandomColor() // Cor aleatória para cada forma
+      color: getRandomColor(), // Cor aleatória para cada forma
     };
   }
 
@@ -413,7 +414,12 @@ function drawConfusedForms(canvas) {
     if (shape.type === "circle") {
       ctx.arc(shape.x, shape.y, shape.size / 2, 0, Math.PI * 2);
     } else if (shape.type === "square") {
-      ctx.rect(shape.x - shape.size / 2, shape.y - shape.size / 2, shape.size, shape.size);
+      ctx.rect(
+        shape.x - shape.size / 2,
+        shape.y - shape.size / 2,
+        shape.size,
+        shape.size
+      );
     } else if (shape.type === "triangle") {
       ctx.moveTo(shape.x, shape.y - shape.size / 2);
       ctx.lineTo(shape.x - shape.size / 2, shape.y + shape.size / 2);
@@ -452,7 +458,6 @@ function drawConfusedForms(canvas) {
 //
 // 2º CANVAS: NUMBERS AND BILLS
 //
-
 
 function drawNumbersAndChange(canvas) {
   const ctx = canvas.getContext("2d");
@@ -497,7 +502,8 @@ function drawNumbersAndChange(canvas) {
       // Cálculo 1
       const num1a = Math.floor(Math.random() * 100);
       const num2a = Math.floor(Math.random() * 100);
-      const operation1 = operations[Math.floor(Math.random() * operations.length)];
+      const operation1 =
+        operations[Math.floor(Math.random() * operations.length)];
       const result1 = Math.floor(Math.random() * 200) - 100;
       ctx.fillStyle = "#FFFFFF"; // Cor do texto branco
       ctx.fillText(`${num1a} ${operation1} ${num2a} = ${result1}`, x1, y);
@@ -505,7 +511,8 @@ function drawNumbersAndChange(canvas) {
       // Cálculo 2
       const num1b = Math.floor(Math.random() * 100);
       const num2b = Math.floor(Math.random() * 100);
-      const operation2 = operations[Math.floor(Math.random() * operations.length)];
+      const operation2 =
+        operations[Math.floor(Math.random() * operations.length)];
       const result2 = Math.floor(Math.random() * 200) - 100;
       ctx.fillText(`${num1b} ${operation2} ${num2b} = ${result2}`, x2, y);
 
@@ -523,7 +530,6 @@ function drawNumbersAndChange(canvas) {
 // 3º CANVAS: NUMBERS AND FORMS
 //
 
-
 function drawNumbersAndForms(canvas6) {
   const ctx6 = canvas6.getContext("2d");
 
@@ -531,21 +537,60 @@ function drawNumbersAndForms(canvas6) {
   const smallClockRadius = 30; // Raio dos relógios pequenos
 
   const clocks = [
-    { x: 100, y: 100, dx: 2, dy: 1, radius: clockRadius, time: new Date(2024, 0, 1, 2, 0, 0) },
-    { x: 300, y: 150, dx: -1.5, dy: 2, radius: clockRadius, time: new Date(2024, 0, 1, 4, 15, 0) },
-    { x: 500, y: 200, dx: 1, dy: -1.5, radius: clockRadius, time: new Date(2024, 0, 1, 8, 30, 0) },
-    { x: 700, y: 250, dx: -2, dy: 1, radius: clockRadius, time: new Date(2024, 0, 1, 11, 45, 0) }
+    {
+      x: 100,
+      y: 100,
+      dx: 2,
+      dy: 1,
+      radius: clockRadius,
+      time: new Date(2024, 0, 1, 2, 0, 0),
+    },
+    {
+      x: 300,
+      y: 150,
+      dx: -1.5,
+      dy: 2,
+      radius: clockRadius,
+      time: new Date(2024, 0, 1, 4, 15, 0),
+    },
+    {
+      x: 500,
+      y: 200,
+      dx: 1,
+      dy: -1.5,
+      radius: clockRadius,
+      time: new Date(2024, 0, 1, 8, 30, 0),
+    },
+    {
+      x: 700,
+      y: 250,
+      dx: -2,
+      dy: 1,
+      radius: clockRadius,
+      time: new Date(2024, 0, 1, 11, 45, 0),
+    },
   ];
 
   // Adiciona relógios pequenos, garantindo que eles fiquem dentro dos limites
   for (let i = 0; i < 3; i++) {
     const smallClock = {
-      x: Math.random() * (canvas6.width - smallClockRadius * 2) + smallClockRadius,
-      y: Math.random() * (canvas6.height - smallClockRadius * 2) + smallClockRadius,
+      x:
+        Math.random() * (canvas6.width - smallClockRadius * 2) +
+        smallClockRadius,
+      y:
+        Math.random() * (canvas6.height - smallClockRadius * 2) +
+        smallClockRadius,
       dx: (Math.random() - 0.5) * 4,
       dy: (Math.random() - 0.5) * 4,
       radius: smallClockRadius,
-      time: new Date(2024, 0, 1, Math.floor(Math.random() * 12), Math.floor(Math.random() * 60), 0)
+      time: new Date(
+        2024,
+        0,
+        1,
+        Math.floor(Math.random() * 12),
+        Math.floor(Math.random() * 60),
+        0
+      ),
     };
     clocks.push(smallClock);
   }
@@ -553,10 +598,10 @@ function drawNumbersAndForms(canvas6) {
   function drawClock(ctx6, x, y, radius, time) {
     ctx6.beginPath();
     ctx6.arc(x, y, radius, 0, Math.PI * 2);
-    ctx6.fillStyle = '#fff';
+    ctx6.fillStyle = "#fff";
     ctx6.fill();
     ctx6.lineWidth = 2;
-    ctx6.strokeStyle = '#000';
+    ctx6.strokeStyle = "#000";
     ctx6.stroke();
     ctx6.closePath();
 
@@ -565,9 +610,9 @@ function drawNumbersAndForms(canvas6) {
       const numX = x + Math.cos(angle) * (radius - 15);
       const numY = y + Math.sin(angle) * (radius - 15);
       ctx6.font = `${radius * 0.2}px Arial`;
-      ctx6.fillStyle = '#000';
-      ctx6.textAlign = 'center';
-      ctx6.textBaseline = 'middle';
+      ctx6.fillStyle = "#000";
+      ctx6.textAlign = "center";
+      ctx6.textBaseline = "middle";
       ctx6.fillText(i, numX, numY);
     }
 
@@ -582,10 +627,10 @@ function drawNumbersAndForms(canvas6) {
     drawHand(ctx6, x, y, minuteAngle, radius * 0.7, 4);
 
     const secondAngle = (Math.PI / 30) * seconds;
-    drawHand(ctx6, x, y, secondAngle, radius * 0.9, 2, 'red');
+    drawHand(ctx6, x, y, secondAngle, radius * 0.9, 2, "red");
   }
 
-  function drawHand(ctx6, x, y, angle, length, width, color = '#000') {
+  function drawHand(ctx6, x, y, angle, length, width, color = "#000") {
     ctx6.beginPath();
     ctx6.moveTo(x, y);
     ctx6.lineTo(
@@ -635,10 +680,16 @@ function drawNumbersAndForms(canvas6) {
       clock.x += clock.dx;
       clock.y += clock.dy;
 
-      if (clock.x + clock.radius > canvas6.width || clock.x - clock.radius < 0) {
+      if (
+        clock.x + clock.radius > canvas6.width ||
+        clock.x - clock.radius < 0
+      ) {
         clock.dx *= -1;
       }
-      if (clock.y + clock.radius > canvas6.height || clock.y - clock.radius < 0) {
+      if (
+        clock.y + clock.radius > canvas6.height ||
+        clock.y - clock.radius < 0
+      ) {
         clock.dy *= -1;
       }
 
@@ -658,28 +709,22 @@ function drawNumbersAndForms(canvas6) {
   updateClocks();
 }
 
-
 // Inicializa cada canvas com suas respectivas funções
 drawConfusedForms(canvases2[0]); // Primeiro canvas
 drawNumbersAndChange(canvases2[1]); // Segundo canvas
 drawNumbersAndForms(canvases2[2]); // Terceiro canvas
 
-
-
-
-
-
 //
 //
 //
 // DYSCALCULIA GAME
-const canvas7 = document.getElementById('gameCanvas');
-const ctx7 = canvas7.getContext('2d');
+const canvas7 = document.getElementById("gameCanvas");
+const ctx7 = canvas7.getContext("2d");
 canvas7.width = 500;
 canvas7.height = 300;
 
 // Variáveis do jogo
-let currentEquation7 = '';
+let currentEquation7 = "";
 let isCorrect7 = false;
 let score7 = 0;
 let questionCount7 = 0;
@@ -690,179 +735,186 @@ let fallingNumbers7 = [];
 const fallingNumbersCount7 = 50;
 
 // Operações possíveis
-const operations7 = ['+', '-', '*', '/'];
+const operations7 = ["+", "-", "*", "/"];
 
 // Gera números aleatórios para o fundo
 function createFallingNumbers7() {
-    for (let i = 0; i < fallingNumbersCount7; i++) {
-        fallingNumbers7.push({
-            x: Math.random() * canvas7.width,
-            y: Math.random() * canvas7.height,
-            speedY: Math.random() * 2 + 1,
-            size: Math.random() * 24 + 12,
-            number: Math.floor(Math.random() * 10),
-            alpha: Math.random() * 0.5 + 0.5,
-        });
-    }
+  for (let i = 0; i < fallingNumbersCount7; i++) {
+    fallingNumbers7.push({
+      x: Math.random() * canvas7.width,
+      y: Math.random() * canvas7.height,
+      speedY: Math.random() * 2 + 1,
+      size: Math.random() * 24 + 12,
+      number: Math.floor(Math.random() * 10),
+      alpha: Math.random() * 0.5 + 0.5,
+    });
+  }
 }
 
 // Atualiza a posição dos números caindo
 function updateFallingNumbers7() {
-    fallingNumbers7.forEach((num) => {
-        num.y += num.speedY;
-        if (num.y > canvas7.height) {
-            num.y = -num.size;
-            num.x = Math.random() * canvas7.width;
-            num.number = Math.floor(Math.random() * 10);
-        }
-    });
+  fallingNumbers7.forEach((num) => {
+    num.y += num.speedY;
+    if (num.y > canvas7.height) {
+      num.y = -num.size;
+      num.x = Math.random() * canvas7.width;
+      num.number = Math.floor(Math.random() * 10);
+    }
+  });
 }
 
 // Desenha os números a cair no fundo
 function drawFallingNumbers7() {
-    fallingNumbers7.forEach((num) => {
-        ctx7.font = `${num.size}px Montserrat`;
-        ctx7.fillStyle = `rgba(255, 255, 255, ${num.alpha})`;
-        ctx7.fillText(num.number, num.x, num.y);
-    });
+  fallingNumbers7.forEach((num) => {
+    ctx7.font = `${num.size}px Montserrat`;
+    ctx7.fillStyle = `rgba(255, 255, 255, ${num.alpha})`;
+    ctx7.fillText(num.number, num.x, num.y);
+  });
 }
 
 // Gera uma nova equação
 function generateEquation7() {
-    const num1 = Math.floor(Math.random() * 10) + 1;
-    const num2 = Math.floor(Math.random() * 10) + 1;
-    const operation = operations7[Math.floor(Math.random() * operations7.length)];
+  const num1 = Math.floor(Math.random() * 10) + 1;
+  const num2 = Math.floor(Math.random() * 10) + 1;
+  const operation = operations7[Math.floor(Math.random() * operations7.length)];
 
-    let realAnswer7;
-    let fakeAnswer7;
+  let realAnswer7;
+  let fakeAnswer7;
 
-    switch (operation) {
-        case '+':
-            realAnswer7 = num1 + num2;
-            break;
-        case '-':
-            realAnswer7 = num1 - num2;
-            break;
-        case '*':
-            realAnswer7 = num1 * num2;
-            break;
-        case '/':
-            realAnswer7 = parseFloat((num1 / num2).toFixed(2)); // Limita a precisão
-            break;
-    }
+  switch (operation) {
+    case "+":
+      realAnswer7 = num1 + num2;
+      break;
+    case "-":
+      realAnswer7 = num1 - num2;
+      break;
+    case "*":
+      realAnswer7 = num1 * num2;
+      break;
+    case "/":
+      realAnswer7 = parseFloat((num1 / num2).toFixed(2)); // Limita a precisão
+      break;
+  }
 
-    fakeAnswer7 = realAnswer7 + (Math.random() < 0.5 ? 0 : (Math.random() < 0.5 ? 1 : -1));
-    if (operation === '/') fakeAnswer7 = parseFloat((fakeAnswer7).toFixed(2)); // Garante precisão para divisões
+  fakeAnswer7 =
+    realAnswer7 + (Math.random() < 0.5 ? 0 : Math.random() < 0.5 ? 1 : -1);
+  if (operation === "/") fakeAnswer7 = parseFloat(fakeAnswer7.toFixed(2)); // Garante precisão para divisões
 
-    currentEquation7 = `${num1} ${operation} ${num2} = ${fakeAnswer7}`;
-    isCorrect7 = (realAnswer7 === fakeAnswer7);
+  currentEquation7 = `${num1} ${operation} ${num2} = ${fakeAnswer7}`;
+  isCorrect7 = realAnswer7 === fakeAnswer7;
 }
 
 // Renderiza a equação no canvas
 function renderEquation7() {
-    ctx7.font = '36px Montserrat';
-    ctx7.fillStyle = 'white';
-    ctx7.textAlign = 'center';
-    ctx7.fillText(currentEquation7, canvas7.width / 2, canvas7.height / 2);
+  ctx7.font = "36px Montserrat";
+  ctx7.fillStyle = "white";
+  ctx7.textAlign = "center";
+  ctx7.fillText(currentEquation7, canvas7.width / 2, canvas7.height / 2);
 }
 
 // Renderiza a pontuação
 function renderScore7() {
-    ctx7.font = '24px Montserrat';
-    ctx7.fillStyle = 'black';
-    ctx7.textAlign = 'left';
-    ctx7.fillText(`Pontuação: ${score7}`, 10, 30);
-    ctx7.fillText(`Perguntas: ${questionCount7}/20`, 10, 50);
+  ctx7.font = "24px Montserrat";
+  ctx7.fillStyle = "black";
+  ctx7.textAlign = "left";
+  ctx7.fillText(`Pontuação: ${score7}`, 10, 30);
+  ctx7.fillText(`Perguntas: ${questionCount7}/20`, 10, 50);
 }
 
 // Cria partículas para animação
 function createParticles7(color) {
-    for (let i = 0; i < 50; i++) {
-        particles7.push({
-            x: canvas7.width / 2,
-            y: canvas7.height / 2,
-            size: Math.random() * 5 + 2,
-            speedX: Math.random() * 4 - 2,
-            speedY: Math.random() * 4 - 2,
-            color: color,
-            alpha: 1
-        });
-    }
+  for (let i = 0; i < 50; i++) {
+    particles7.push({
+      x: canvas7.width / 2,
+      y: canvas7.height / 2,
+      size: Math.random() * 5 + 2,
+      speedX: Math.random() * 4 - 2,
+      speedY: Math.random() * 4 - 2,
+      color: color,
+      alpha: 1,
+    });
+  }
 }
 
 // Atualiza e desenha as partículas
 function updateParticles7() {
-    particles7.forEach((particle, index) => {
-        particle.x += particle.speedX;
-        particle.y += particle.speedY;
-        particle.alpha -= 0.02;
-        if (particle.alpha <= 0) {
-            particles7.splice(index, 1);
-        }
-    });
+  particles7.forEach((particle, index) => {
+    particle.x += particle.speedX;
+    particle.y += particle.speedY;
+    particle.alpha -= 0.02;
+    if (particle.alpha <= 0) {
+      particles7.splice(index, 1);
+    }
+  });
 
-    particles7.forEach((particle) => {
-        ctx7.beginPath();
-        ctx7.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-        ctx7.fillStyle = `rgba(${particle.color},${particle.alpha})`;
-        ctx7.fill();
-    });
+  particles7.forEach((particle) => {
+    ctx7.beginPath();
+    ctx7.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+    ctx7.fillStyle = `rgba(${particle.color},${particle.alpha})`;
+    ctx7.fill();
+  });
 }
 
 // Avalia a resposta do jogador
 function evaluateAnswer7(playerChoice) {
-    if (playerChoice === isCorrect7) {
-        score7++;
-        createParticles7('0, 255, 0'); // Verde
-    } else {
-        createParticles7('255, 0, 0'); // Vermelho
-    }
+  if (playerChoice === isCorrect7) {
+    score7++;
+    createParticles7("0, 255, 0"); // Verde
+  } else {
+    createParticles7("255, 0, 0"); // Vermelho
+  }
 
-    questionCount7++;
-    if (questionCount7 < 20) {
-        generateEquation7();
-    } else {
-        endGame7();
-    }
+  questionCount7++;
+  if (questionCount7 < 20) {
+    generateEquation7();
+  } else {
+    endGame7();
+  }
 }
 
 // Finaliza o jogo
 function endGame7() {
   ctx7.clearRect(0, 0, canvas7.width, canvas7.height);
-  ctx7.font = '24px';
-  ctx7.fillStyle = 'white';
-  ctx7.textAlign = 'center';
-  ctx7.fillText(`Fim do jogo! Sua pontuação: ${score7}/20`, canvas7.width / 2, canvas7.height / 2);
+  ctx7.font = "24px";
+  ctx7.fillStyle = "white";
+  ctx7.textAlign = "center";
+  ctx7.fillText(
+    `Fim do jogo! Sua pontuação: ${score7}/20`,
+    canvas7.width / 2,
+    canvas7.height / 2
+  );
 
   // Desativa os botões
-  document.getElementById('correct').disabled = true;
-  document.getElementById('incorrect').disabled = true;
+  document.getElementById("correct").disabled = true;
+  document.getElementById("incorrect").disabled = true;
 }
-
-
 
 // Animação do jogo
 function animate7() {
-    ctx7.clearRect(0, 0, canvas7.width, canvas7.height);
+  ctx7.clearRect(0, 0, canvas7.width, canvas7.height);
 
-    // Fundo com números caindo
-    drawFallingNumbers7();
-    updateFallingNumbers7();
+  // Fundo com números caindo
+  drawFallingNumbers7();
+  updateFallingNumbers7();
 
-    // Renderiza a equação, partículas e pontuação
-    renderEquation7();
-    renderScore7();
-    updateParticles7();
+  // Renderiza a equação, partículas e pontuação
+  renderEquation7();
+  renderScore7();
+  updateParticles7();
 
-    requestAnimationFrame(animate7);
+  requestAnimationFrame(animate7);
 }
 
 // Configura os botões
-document.getElementById('correct').addEventListener('click', () => evaluateAnswer7(true));
-document.getElementById('incorrect').addEventListener('click', () => evaluateAnswer7(false));
+document
+  .getElementById("correct")
+  .addEventListener("click", () => evaluateAnswer7(true));
+document
+  .getElementById("incorrect")
+  .addEventListener("click", () => evaluateAnswer7(false));
 
 // Inicializa o jogo
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
   // Seu código aqui
   generateEquation7();
   createFallingNumbers7();
