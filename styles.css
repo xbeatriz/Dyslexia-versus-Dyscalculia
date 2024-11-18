@@ -1,3 +1,11 @@
+/*
+///
+///
+GLOBAL STYLES
+///
+///
+*/
+
 * {
   margin: 0;
   padding: 0;
@@ -20,20 +28,18 @@ body {
   padding: 20px;
 }
 
-/* Container principal */
 .container {
-  display: flex; /* Organiza o layout em colunas lado a lado */
+  display: flex;
   width: 100%;
-  height: 90vh; /* Ajusta a altura do container */
+  height: 90vh;
   border-radius: 10px;
   overflow: hidden;
 }
 
-/* Painel esquerdo */
 #left-panel {
-  width: 50%; /* Ocupa metade do espaço horizontal */
+  width: 50%;
   padding: 20px;
-  overflow-y: auto; /* Adiciona rolagem, se necessário */
+  overflow-y: auto;
 }
 
 #left-panel h2 {
@@ -49,11 +55,11 @@ body {
 #right-panel {
   width: 50%;
   display: flex;
-  flex-direction: column; /* Organiza os canvas em coluna */
-  height: 100%; /* Ocupa toda a altura do painel direito */
-  gap: 24px; /* Espaçamento de 24px entre os canvas */
-  padding: 24px; /* Padding ao redor */
-  box-sizing: border-box; /* Inclui padding nas dimensões totais */
+  flex-direction: column;
+  height: 100%;
+  gap: 24px;
+  padding: 24px;
+  box-sizing: border-box;
   align-items: center;
   justify-content: center;
 }
@@ -63,22 +69,6 @@ body {
   display: flex;
   height: 90%;
   overflow: hidden;
-}
-
-/*jogo */
-.canvas-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-/*jogo */
-#scrambleCanvas {
-  border: 2px solid #000;
-}
-/*jogo */
-#feedbackMessage {
-  margin-top: 10px;
-  font-weight: bold;
 }
 
 ul {
@@ -91,11 +81,13 @@ li {
   margin: 8px;
 }
 
-.animated-text {
-  font-size: 32px;
-  font-weight: 600;
-  min-width: 280px;
-}
+/*
+///
+///
+SCROLL - FLOW
+///
+///
+*/
 
 .scroll-arrow {
   position: absolute;
@@ -166,12 +158,26 @@ li {
   animation-name: slideInFromTop;
 }
 
+/*
+///
+///
+ANIMATED TEXT
+///
+///
+*/
+
+.animated-text {
+  font-size: 32px;
+  font-weight: 600;
+  min-width: 280px;
+}
+
 .animated-text span {
   position: relative;
 }
 
 .animated-text span::before {
-  content: "Youtuber";
+  content: "Dyslexia and Dyscalculia";
   color: #ff7f50;
   animation: words 20s infinite;
 }
@@ -242,25 +248,14 @@ li {
   }
 }
 
-#dyslexia-game .gamet-content,
-#dyscalculia-game .game-content {
-  max-width: 800px;
-  margin: 0 auto;
-  text-align: center;
-}
+/* 
+///
+///
+STYLES FOR THE DYSCALCULIA GAME SECTION
+///
+///
+*/
 
-#dyslexia-game h2,
-#dyscalculia-game h2 {
-  font-size: 48px;
-  color: #ff7f50;
-}
-
-#dyslexia-game p,
-#dyscalculia-game p {
-  font-size: 16px;
-}
-
-/* STYLES FOR THE DYSCALCULIA GAME SECTION */
 #gameCanvas {
   border: 1px solid white;
   margin-bottom: 20px;
@@ -300,62 +295,72 @@ li {
   background-color: #e53935;
 }
 
-
 /*
-DYSLEXIA GAME CSS
-STYLES
-CSS
+///
+///
+DYSLEXIA GAME 
+///
+///
 */
+
 #dyslexiaGameCanvas {
   border: 2px solid black;
   background-color: #f9f9f9;
 }
 
 #resetButton {
-  padding: 12px 24px; /* Slightly larger padding for better click area */
-  font-size: 18px; /* Increased font size for readability */
-  font-weight: 600; /* Added boldness for emphasis */
-  background-color: #ff4d4d; /* A soft red color for a clear call-to-action */
-  color: #fff; /* White text for contrast */
-  border: none; /* Remove default border */
-  border-radius: 8px; /* Rounded corners for a modern look */
-  cursor: pointer; /* Cursor to indicate clickability */
-  transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transition on hover */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  padding: 12px 24px;
+  font-size: 18px;
+  font-weight: 600;
+  background-color: #ff7f50;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 #resetButton:hover {
-  background-color: #ff3333; /* Darker red on hover */
-  transform: translateY(-2px); /* Slight lift effect */
+  background-color: #f0612d;
+  transform: translateY(-2px);
 }
 
 #resetButton:active {
-  background-color: #e60000; /* Even darker red when clicked */
-  transform: translateY(1px); /* Subtle pressed effect */
+  background-color: #fe4400;
+  transform: translateY(1px);
 }
 
 #resetButton:focus {
-  outline: none; /* Removes outline on focus */
-  box-shadow: 0 0 0 3px rgba(255, 77, 77, 0.6); /* Glow effect to indicate focus */
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 124, 77, 0.6);
 }
 
+#wordList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
 
 #wordList li {
-  margin: 8px 0; /* Increased margin for better spacing */
-  padding: 8px 15px; /* Slightly larger padding for a more balanced feel */
-  border-radius: 6px; /* Slightly more rounded corners */
-  background-color: #f0f0f0; /* Softer background color */
-  color: #444; /* Darker text for better contrast */
-  font-size: 16px; /* Improved readability */
-  transition: all 0.3s ease; /* Smooth transitions for hover effects */
+  margin: 8px 0;
+  padding: 8px 15px;
+  border-radius: 6px;
+  background-color: #f0f0f0;
+  color: #444;
+  font-size: 16px;
+  transition: all 0.3s ease;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 #wordList li:hover {
-  background-color: #e0e0e0; /* Slightly darker on hover */
-  transform: translateY(-2px); /* Subtle lift effect on hover */
+  background-color: #e0e0e0;
+  transform: translateY(-2px);
 }
 
 #wordList li .delete-button {
@@ -368,24 +373,24 @@ CSS
 }
 
 #wordList li .delete-button:hover {
-  color: #f44336; /* Red color for delete button on hover */
+  color: #ff7f50;
 }
 
 #wordList li.discovered {
-  background-color: #4caf50; /* Green background for discovered words */
-  color: white; /* White text for discovered words */
-  font-weight: bold; /* Bold for emphasis */
+  background-color: #ff7f50;
+  color: white;
+  font-weight: bold;
 }
 
 #wordList li.discovered:hover {
-  background-color: #45a049; /* Slightly darker green on hover */
-  transform: none; /* No lift effect for discovered items */
+  background-color: #45a049;
+  transform: none;
 }
 
 #wordList li.discovered .delete-button {
-  color: #fff; /* White delete button on discovered items */
+  color: #fff;
 }
 
 #wordList li.discovered .delete-button:hover {
-  color: #ffeb3b; /* Yellow delete button on hover for discovered words */
+  color: #ff7f50;
 }

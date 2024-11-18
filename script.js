@@ -139,7 +139,7 @@ function drawScrambledTextCanvas(canvas1) {
 
     const fontSize = Math.max(20, canvas1.height / 10);
     ctx1.font = `${fontSize}px Montserrat`;
-    ctx1.fillStyle = "#FFFFFF"; 
+    ctx1.fillStyle = "#FFFFFF";
     ctx1.textAlign = "left";
     ctx1.textBaseline = "top";
 
@@ -172,19 +172,19 @@ function drawFocusTextCanvas(canvas2) {
   function draw() {
     ctx2.clearRect(0, 0, canvas2.width, canvas2.height); // Limpa o canvas a cada iteração
 
-    ctx2.fillStyle = commonFillColor; 
-    ctx2.fillRect(0, 0, canvas2.width, canvas2.height); 
+    ctx2.fillStyle = commonFillColor;
+    ctx2.fillRect(0, 0, canvas2.width, canvas2.height);
 
     const fontSize = Math.max(20, canvas2.height / 5);
     ctx2.font = `${fontSize}px Montserrat`;
-    ctx2.fillStyle = "#FFFFFF"; 
-    ctx2.textAlign = "left"; 
+    ctx2.fillStyle = "#FFFFFF";
+    ctx2.textAlign = "left";
     ctx2.textBaseline = "middle";
 
     ctx2.filter = `blur(${blurRadius}px)`;
-   
-    const lineHeight = fontSize * 1.2; 
-    const leftMargin = 20; 
+
+    const lineHeight = fontSize * 1.2;
+    const leftMargin = 20;
     ctx2.fillText(text1, leftMargin, canvas2.height / 2 - lineHeight); // Primeira linha
     ctx2.fillText(text2, leftMargin, canvas2.height / 2); // Segunda linha
     ctx2.fillText(text3, leftMargin, canvas2.height / 2 + lineHeight); // Terceira linha
@@ -192,10 +192,10 @@ function drawFocusTextCanvas(canvas2) {
 
     if (increasing) {
       blurRadius += 0.5;
-      if (blurRadius >= 20) increasing = false; 
+      if (blurRadius >= 20) increasing = false;
     } else {
       blurRadius -= 0.5;
-      if (blurRadius <= 0) increasing = true; 
+      if (blurRadius <= 0) increasing = true;
     }
   }
 
@@ -216,22 +216,22 @@ function drawTasksCanvas(canvas3) {
 
   function shufflePositions() {
     positions.forEach((_, i) => {
-      positions[i] += Math.random() < 0.5 ? -5 : 5; 
-      if (positions[i] < 30) positions[i] = 30; 
+      positions[i] += Math.random() < 0.5 ? -5 : 5;
+      if (positions[i] < 30) positions[i] = 30;
       if (positions[i] > canvas3.height - 30)
-        positions[i] = canvas3.height - 30; 
+        positions[i] = canvas3.height - 30;
     });
   }
 
   function draw() {
     ctx3.clearRect(0, 0, canvas3.width, canvas3.height); // Limpa o canvas a cada iteração
 
-    ctx3.fillStyle = commonFillColor; 
-    ctx3.fillRect(0, 0, canvas3.width, canvas3.height); 
+    ctx3.fillStyle = commonFillColor;
+    ctx3.fillRect(0, 0, canvas3.width, canvas3.height);
 
     const fontSize = Math.max(20, canvas3.height / 15);
     ctx3.font = `${fontSize}px Montserrat`;
-    ctx3.fillStyle = "#FFFFFF"; 
+    ctx3.fillStyle = "#FFFFFF";
     ctx3.textAlign = "left";
     ctx3.textBaseline = "middle";
 
@@ -255,15 +255,26 @@ drawTasksCanvas(canvases1[2]); // Terceiro canvas
 // DYSLEXIA GAME
 //
 
-const canvas8 = document.getElementById('dyslexiaGameCanvas');
-const ctx8 = canvas8.getContext('2d');
-const resetButton8 = document.getElementById('resetButton');
+const canvas8 = document.getElementById("dyslexiaGameCanvas");
+const ctx8 = canvas8.getContext("2d");
+const resetButton8 = document.getElementById("resetButton");
 
 // Game Settings
 const tileSize8 = 20; // Size of each grid tile
 const rows8 = canvas8.height / tileSize8;
 const cols8 = canvas8.width / tileSize8;
-let predefinedWords8 = ["PICTURE", "HOUSE", "THUNDER", "DIAMOND", "CUPCAKE", "GAME", "DYSLEXIA", "LIGHT", "DYSCALCULIA", "ADVENTURE"]; // Expanded word list
+let predefinedWords8 = [
+  "PICTURE",
+  "HOUSE",
+  "THUNDER",
+  "DIAMOND",
+  "CUPCAKE",
+  "GAME",
+  "DYSLEXIA",
+  "LIGHT",
+  "DYSCALCULIA",
+  "ADVENTURE",
+]; // Expanded word list
 let discoveredWords8 = []; // Discovered words by the player
 let snake8 = [{ x: 0, y: 0 }]; // Snake starting position
 let direction8 = { x: 0, y: 0 }; // Initial direction (stationary)
@@ -276,16 +287,19 @@ let gameRunning8 = false; // Track if the game is running
 function generateGrid8() {
   const alphabet8 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   lettersGrid8 = Array.from({ length: rows8 }, () =>
-      Array.from({ length: cols8 }, () => alphabet8[Math.floor(Math.random() * alphabet8.length)])
+    Array.from(
+      { length: cols8 },
+      () => alphabet8[Math.floor(Math.random() * alphabet8.length)]
+    )
   );
 
   predefinedWords8.forEach((word) => {
-      const startRow8 = Math.floor(Math.random() * rows8);
-      const startCol8 = Math.floor(Math.random() * (cols8 - word.length));
+    const startRow8 = Math.floor(Math.random() * rows8);
+    const startCol8 = Math.floor(Math.random() * (cols8 - word.length));
 
-      for (let i8 = 0; i8 < word.length; i8++) {
-          lettersGrid8[startRow8][startCol8 + i8] = word[i8];
-      }
+    for (let i8 = 0; i8 < word.length; i8++) {
+      lettersGrid8[startRow8][startCol8 + i8] = word[i8];
+    }
   });
 
   console.log("Generated Grid:", lettersGrid8);
@@ -293,51 +307,67 @@ function generateGrid8() {
 
 function drawGrid8() {
   for (let row8 = 0; row8 < rows8; row8++) {
-      for (let col8 = 0; col8 < cols8; col8++) {
-          const tileDiscovered8 = discoveredTiles8.some(
-              (tile) => tile.row === row8 && tile.col === col8
-          );
+    for (let col8 = 0; col8 < cols8; col8++) {
+      const tileDiscovered8 = discoveredTiles8.some(
+        (tile) => tile.row === row8 && tile.col === col8
+      );
 
-          // Apply a gradient effect for the background
-          const tileX = col8 * tileSize8;
-          const tileY = row8 * tileSize8;
-          const tileGradient = ctx8.createLinearGradient(tileX, tileY, tileX + tileSize8, tileY + tileSize8);
-          tileGradient.addColorStop(0, tileDiscovered8 ? "#6c3" : "#f2f2f2");
-          tileGradient.addColorStop(1, tileDiscovered8 ? "#7c4" : "#e6e6e6");
+      // Apply a gradient effect for the background
+      const tileX = col8 * tileSize8;
+      const tileY = row8 * tileSize8;
+      const tileGradient = ctx8.createLinearGradient(
+        tileX,
+        tileY,
+        tileX + tileSize8,
+        tileY + tileSize8
+      );
+      tileGradient.addColorStop(0, tileDiscovered8 ? "#6c3" : "#f2f2f2");
+      tileGradient.addColorStop(1, tileDiscovered8 ? "#7c4" : "#e6e6e6");
 
-          ctx8.fillStyle = tileGradient;
-          ctx8.fillRect(tileX, tileY, tileSize8, tileSize8);
+      ctx8.fillStyle = tileGradient;
+      ctx8.fillRect(tileX, tileY, tileSize8, tileSize8);
 
-          // Stylish border with rounded corners
-          ctx8.strokeStyle = "#ccc";
-          ctx8.lineWidth = 1;
-          ctx8.lineJoin = "round";  // Rounded corners for strokes
-          ctx8.strokeRect(tileX, tileY, tileSize8, tileSize8);
+      // Stylish border with rounded corners
+      ctx8.strokeStyle = "#ccc";
+      ctx8.lineWidth = 1;
+      ctx8.lineJoin = "round"; // Rounded corners for strokes
+      ctx8.strokeRect(tileX, tileY, tileSize8, tileSize8);
 
-          // Improved font and text styling
-          ctx8.fillStyle = tileDiscovered8 ? "#fff" : "#333"; // White text for discovered tiles
-          ctx8.font = "bold 18px 'Montserrat', sans-serif";  // Increased font size for readability
-          ctx8.textAlign = "center";
-          ctx8.textBaseline = "middle";
+      // Improved font and text styling
+      ctx8.fillStyle = tileDiscovered8 ? "#fff" : "#333"; // White text for discovered tiles
+      ctx8.font = "bold 18px 'Montserrat', sans-serif"; // Increased font size for readability
+      ctx8.textAlign = "center";
+      ctx8.textBaseline = "middle";
 
-          // Render the letter centered in the tile
-          ctx8.fillText(lettersGrid8[row8][col8], tileX + tileSize8 / 2, tileY + tileSize8 / 2);
-      }
+      // Render the letter centered in the tile
+      ctx8.fillText(
+        lettersGrid8[row8][col8],
+        tileX + tileSize8 / 2,
+        tileY + tileSize8 / 2
+      );
+    }
   }
 }
 
-
 // Draw the snake
 function drawSnake8() {
-    snake8.forEach((segment8, index8) => {
-        ctx8.fillStyle = index8 === 0 ? "#0c3" : "#3c3"; // Head and body colors
-        ctx8.fillRect(segment8.x * tileSize8, segment8.y * tileSize8, tileSize8, tileSize8);
-    });
+  snake8.forEach((segment8, index8) => {
+    ctx8.fillStyle = index8 === 0 ? "#0c3" : "#3c3"; // Head and body colors
+    ctx8.fillRect(
+      segment8.x * tileSize8,
+      segment8.y * tileSize8,
+      tileSize8,
+      tileSize8
+    );
+  });
 }
 
 // Move the snake
 function moveSnake8() {
-  const head8 = { x: snake8[0].x + direction8.x, y: snake8[0].y + direction8.y };
+  const head8 = {
+    x: snake8[0].x + direction8.x,
+    y: snake8[0].y + direction8.y,
+  };
 
   head8.x = (head8.x + cols8) % cols8;
   head8.y = (head8.y + rows8) % rows8;
@@ -348,7 +378,10 @@ function moveSnake8() {
   currentLetters8.push({ letter: letter8, row: head8.y, col: head8.x });
 
   console.log("Snake Position:", snake8);
-  console.log("Collected Letters:", currentLetters8.map((item) => item.letter).join(""));
+  console.log(
+    "Collected Letters:",
+    currentLetters8.map((item) => item.letter).join("")
+  );
 
   checkForWords8();
 
@@ -361,99 +394,101 @@ function moveSnake8() {
 
 // Check for words in the collected letters
 function checkForWords8() {
-  const lettersString8 = currentLetters8.map(item => item.letter).join("");
+  const lettersString8 = currentLetters8.map((item) => item.letter).join("");
   predefinedWords8.forEach((word8) => {
-      if (!discoveredWords8.includes(word8)) {
-          const wordLength8 = word8.length;
-          // Check for the word in `lettersString8`
-          const forwardIndex8 = lettersString8.indexOf(word8);
-          if (forwardIndex8 !== -1) {
-              console.log(`Discovered Word: "${word8}"`);
-              markWordAsDiscovered8(forwardIndex8, wordLength8, word8, false);
-          }
-          // Check for reversed word
-          const reversedWord8 = word8.split("").reverse().join("");
-          const reversedIndex8 = lettersString8.indexOf(reversedWord8);
-          if (reversedIndex8 !== -1) {
-              console.log(`Discovered Word: "${word8}" in Reverse`);
-              markWordAsDiscovered8(reversedIndex8, wordLength8, word8, true);
-          }
+    if (!discoveredWords8.includes(word8)) {
+      const wordLength8 = word8.length;
+      // Check for the word in `lettersString8`
+      const forwardIndex8 = lettersString8.indexOf(word8);
+      if (forwardIndex8 !== -1) {
+        console.log(`Discovered Word: "${word8}"`);
+        markWordAsDiscovered8(forwardIndex8, wordLength8, word8, false);
       }
+      // Check for reversed word
+      const reversedWord8 = word8.split("").reverse().join("");
+      const reversedIndex8 = lettersString8.indexOf(reversedWord8);
+      if (reversedIndex8 !== -1) {
+        console.log(`Discovered Word: "${word8}" in Reverse`);
+        markWordAsDiscovered8(reversedIndex8, wordLength8, word8, true);
+      }
+    }
   });
 }
 
 // Helper function to mark a word as discovered
 function markWordAsDiscovered8(startIndex8, wordLength8, word8, isReversed8) {
-  console.log(`Marking Word "${word8}" as Discovered. Start Index: ${startIndex8}, Reversed: ${isReversed8}`);
+  console.log(
+    `Marking Word "${word8}" as Discovered. Start Index: ${startIndex8}, Reversed: ${isReversed8}`
+  );
   discoveredWords8.push(word8);
   updateWordList8();
 
   for (let i8 = 0; i8 < wordLength8; i8++) {
-      const index8 = isReversed8
-          ? startIndex8 + (wordLength8 - 1 - i8) // Adjust for reversed order
-          : startIndex8 + i8;
-      const { row: row8, col: col8 } = currentLetters8[index8];
-      discoveredTiles8.push({ row: row8, col: col8 });
+    const index8 = isReversed8
+      ? startIndex8 + (wordLength8 - 1 - i8)
+      : startIndex8 + i8;
+    const { row: row8, col: col8 } = currentLetters8[index8];
+    discoveredTiles8.push({ row: row8, col: col8 });
   }
 
   // Remove only the discovered word's letters from `currentLetters8`
   currentLetters8 = currentLetters8.filter(
-      (_, i8) => i8 < startIndex8 || i8 >= startIndex8 + wordLength8
+    (_, i8) => i8 < startIndex8 || i8 >= startIndex8 + wordLength8
   );
 }
 
 // Update the list of discovered words
 function updateWordList8() {
-    const wordList8 = document.getElementById("wordList");
-    wordList8.innerHTML = ""; // Clear existing list
-    predefinedWords8.forEach((word8) => {
-        const li8 = document.createElement("li");
-        li8.textContent = word8;
-        li8.className = discoveredWords8.includes(word8) ? "discovered" : "";
-        wordList8.appendChild(li8);
-    });
+  const wordList8 = document.getElementById("wordList");
+  wordList8.innerHTML = ""; // Clear existing list
+  predefinedWords8.forEach((word8) => {
+    const li8 = document.createElement("li");
+    li8.textContent = word8;
+    li8.className = discoveredWords8.includes(word8) ? "discovered" : "";
+    wordList8.appendChild(li8);
+  });
 }
 
 // Reset the game
 function resetGame8() {
-    snake8 = [{ x: 0, y: 0 }];
-    direction8 = { x: 0, y: 0 };
-    discoveredWords8 = [];
-    discoveredTiles8 = [];
-    currentLetters8 = [];
-    generateGrid8();
-    updateWordList8();
-    gameRunning8 = true;
+  snake8 = [{ x: 0, y: 0 }];
+  direction8 = { x: 0, y: 0 };
+  discoveredWords8 = [];
+  discoveredTiles8 = [];
+  currentLetters8 = [];
+  generateGrid8();
+  updateWordList8();
+  gameRunning8 = true;
 }
 
 // Handle keyboard input for controlling the snake
 document.addEventListener("keydown", (event8) => {
-    if (!gameRunning8) return;
-    switch (event8.key) {
-        case "ArrowUp":
-            direction8 = { x: 0, y: -1 };
-            break;
-        case "ArrowDown":
-            direction8 = { x: 0, y: 1 };
-            break;
-        case "ArrowLeft":
-            direction8 = { x: -1, y: 0 };
-            break;
-        case "ArrowRight":
-            direction8 = { x: 1, y: 0 };
-            break;
-    }
+  if (!gameRunning8) return;
+  switch (event8.key) {
+    case "ArrowUp":
+      direction8 = { x: 0, y: -1 };
+      break;
+    case "ArrowDown":
+      direction8 = { x: 0, y: 1 };
+      break;
+    case "ArrowLeft":
+      direction8 = { x: -1, y: 0 };
+      break;
+    case "ArrowRight":
+      direction8 = { x: 1, y: 0 };
+      break;
+  }
 });
 
 // Game loop
 function gameLoop8() {
-    if (gameRunning8) {
-        ctx8.clearRect(0, 0, canvas8.width, canvas8.height); // Clear canvas
-        drawGrid8();
-        drawSnake8();
-        moveSnake8();
-    }
-    setTimeout(gameLoop8, 200); // Run the loop every 200ms
+  if (gameRunning8) {
+    ctx8.clearRect(0, 0, canvas8.width, canvas8.height); // Clear canvas
+    drawGrid8();
+    drawSnake8();
+    moveSnake8();
+  }
+  setTimeout(gameLoop8, 200); // Run the loop every 200ms
 }
 
 // Add event listener for reset button
@@ -463,10 +498,6 @@ resetButton8.addEventListener("click", resetGame8);
 generateGrid8();
 updateWordList8();
 gameLoop8();
-
-
-
-
 
 //
 //
@@ -502,7 +533,7 @@ window.addEventListener("resize", resizeCanvases2);
 
 function drawConfusedForms(canvas) {
   const ctx = canvas.getContext("2d");
-  const shapes = []; 
+  const shapes = [];
 
   // Gerar uma cor aleatória em formato hexadecimal
   function getRandomColor() {
@@ -522,8 +553,8 @@ function drawConfusedForms(canvas) {
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
       size: Math.random() * 40 + 40, // Tamanhos variando entre 40 e 80
-      dx: (Math.random() - 0.5) * 12, 
-      dy: (Math.random() - 0.5) * 12, 
+      dx: (Math.random() - 0.5) * 12,
+      dy: (Math.random() - 0.5) * 12,
       type: type,
       color: getRandomColor(), // Cor aleatória para cada forma
     };
@@ -621,7 +652,7 @@ function drawNumbersAndChange(canvas) {
     ctx.font = `${fontSize}px Arial`;
 
     for (let i = 0; i < 5; i++) {
-      const x1 = 50; 
+      const x1 = 50;
       const x2 = 550; // Aumenta o espaçamento entre os dois cálculos na linha
       const y = 80 + i * 100; // Espaçamento vertical entre as linhas
 
@@ -631,7 +662,7 @@ function drawNumbersAndChange(canvas) {
       const operation1 =
         operations[Math.floor(Math.random() * operations.length)];
       const result1 = Math.floor(Math.random() * 200) - 100;
-      ctx.fillStyle = "#FFFFFF"; 
+      ctx.fillStyle = "#FFFFFF";
       ctx.fillText(`${num1a} ${operation1} ${num2a} = ${result1}`, x1, y);
 
       // Cálculo 2
@@ -835,7 +866,7 @@ function drawNumbersAndForms(canvas6) {
   updateClocks();
 }
 
-// Inicializa cada canvas 
+// Inicializa cada canvas
 drawConfusedForms(canvases2[0]); // Primeiro canvas
 drawNumbersAndChange(canvases2[1]); // Segundo canvas
 drawNumbersAndForms(canvases2[2]); // Terceiro canvas
@@ -877,7 +908,7 @@ function createFallingNumbers7() {
   }
 }
 
-// Atualizar a posição dos números 
+// Atualizar a posição dos números
 function updateFallingNumbers7() {
   fallingNumbers7.forEach((num) => {
     num.y += num.speedY;
@@ -1019,7 +1050,7 @@ function endGame7() {
 function animate7() {
   ctx7.clearRect(0, 0, canvas7.width, canvas7.height);
 
-  // Fundo com números 
+  // Fundo com números
   drawFallingNumbers7();
   updateFallingNumbers7();
 
@@ -1041,10 +1072,7 @@ document
 
 // Inicializa o jogo
 document.addEventListener("DOMContentLoaded", () => {
-
   generateEquation7();
   createFallingNumbers7();
   animate7();
 });
-
-
