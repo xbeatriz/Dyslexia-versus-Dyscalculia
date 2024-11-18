@@ -91,9 +91,14 @@
           Try to achieve the highest score possible. Good luck!
           </p>
         </div>
-        <div id="right-panel">
-            <canvas width="500" height="300" id="dyslexiaGameCanvas"></canvas>
-        </div>
+        <div class="discalculia-canvas" id="right-panel">
+          <canvas width="500" height="300" id="dyslexiaGameCanvas"></canvas>
+          <button id="resetButton" style="margin-top: 20px;">Start/Reset Game</button>
+          <div id="discoveredWords" style="margin-top: 20px; font-family: Arial, sans-serif;">
+              <h3>Discovered Words:</h3>
+              <ul id="wordList" style="list-style: none; padding: 0;"></ul>
+          </div>
+      </div>
     </div>
       <a href="#dislexia" class="scroll-arrow previous">&#8593;</a>
       <a href="#dyscalculia" class="scroll-arrow next">&#8595;</a>

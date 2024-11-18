@@ -254,93 +254,219 @@ drawTasksCanvas(canvases1[2]); // Terceiro canvas
 //
 // DYSLEXIA GAME
 //
-const words = [
-  "education",
-  "learning",
-  "difficulty",
-  "understand",
-  "comprehension",
-  "memory",
-  "focus",
-  "attention",
-  "communication",
-  "development",
-];
-const canvasgamex = document.getElementById("scrambleCanvas");
-const ctxx = canvasgamex.getContext("2d");
-const guessInput = document.getElementById("guessInput");
-const feedbackMessage = document.getElementById("feedbackMessage");
 
-let selectedWord;
-let scrambledWord;
-let scrambleIntervalG;
+const canvas8 = document.getElementById('dyslexiaGameCanvas');
+const ctx8 = canvas8.getContext('2d');
+const resetButton8 = document.getElementById('resetButton');
 
-// Função para escolher uma palavra aleatória e embaralhá-la
-function pickAndScrambleWord() {
-  let newWord;
-  do {
-    newWord = words[Math.floor(Math.random() * words.length)];
-  } while (newWord === selectedWord); 
+// Game Settings
+const tileSize8 = 20; // Size of each grid tile
+const rows8 = canvas8.height / tileSize8;
+const cols8 = canvas8.width / tileSize8;
+let predefinedWords8 = ["CAT", "DOG", "BIRD", "FISH", "MOUSE", "HORSE", "COW", "LION", "TIGER", "SNAKE"]; // Expanded word list
+let discoveredWords8 = []; // Discovered words by the player
+let snake8 = [{ x: 0, y: 0 }]; // Snake starting position
+let direction8 = { x: 0, y: 0 }; // Initial direction (stationary)
+let currentLetters8 = []; // Letters collected by the snake
+let lettersGrid8 = []; // Grid of letters
+let discoveredTiles8 = []; // Tracks tiles that belong to discovered words
+let gameRunning8 = false; // Track if the game is running
 
-  selectedWord = newWord;
-  scrambledWord = selectedWord;
-  drawScrambledWord(scrambledWord); 
+// Generate Letter Grid with Predefined Words
+function generateGrid8() {
+  const alphabet8 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  lettersGrid8 = Array.from({ length: rows8 }, () =>
+      Array.from({ length: cols8 }, () => alphabet8[Math.floor(Math.random() * alphabet8.length)])
+  );
 
-  if (scrambleIntervalG) clearInterval(scrambleIntervalG); // Limpa qualquer intervalo anterior
-  scrambleIntervalG = setInterval(() => {
-    scrambledWord = scrambleWord(selectedWord); // Reembaralha continuamente
-    drawScrambledWord(scrambledWord); // Atualiza o desenho com a nova palavra embaralhada
-  }, 1200); // Intervalo de 100ms 
+  predefinedWords8.forEach((word) => {
+      const startRow8 = Math.floor(Math.random() * rows8);
+      const startCol8 = Math.floor(Math.random() * (cols8 - word.length));
+
+      for (let i8 = 0; i8 < word.length; i8++) {
+          lettersGrid8[startRow8][startCol8 + i8] = word[i8];
+      }
+  });
+
+  console.log("Generated Grid:", lettersGrid8);
 }
 
-// Função para embaralhar a palavra
-function scrambleWord(word) {
-  if (word.length < 4) return word;
-  let middle = word.slice(1, -1).split("");
-  for (let i = middle.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [middle[i], middle[j]] = [middle[j], middle[i]];
+function drawGrid8() {
+  for (let row8 = 0; row8 < rows8; row8++) {
+      for (let col8 = 0; col8 < cols8; col8++) {
+          const tileDiscovered8 = discoveredTiles8.some(
+              (tile) => tile.row === row8 && tile.col === col8
+          );
+
+          // Apply a gradient effect for the background
+          const tileX = col8 * tileSize8;
+          const tileY = row8 * tileSize8;
+          const tileGradient = ctx8.createLinearGradient(tileX, tileY, tileX + tileSize8, tileY + tileSize8);
+          tileGradient.addColorStop(0, tileDiscovered8 ? "#6c3" : "#f2f2f2");
+          tileGradient.addColorStop(1, tileDiscovered8 ? "#7c4" : "#e6e6e6");
+
+          ctx8.fillStyle = tileGradient;
+          ctx8.fillRect(tileX, tileY, tileSize8, tileSize8);
+
+          // Stylish border with rounded corners
+          ctx8.strokeStyle = "#ccc";
+          ctx8.lineWidth = 1;
+          ctx8.lineJoin = "round";  // Rounded corners for strokes
+          ctx8.strokeRect(tileX, tileY, tileSize8, tileSize8);
+
+          // Improved font and text styling
+          ctx8.fillStyle = tileDiscovered8 ? "#fff" : "#333"; // White text for discovered tiles
+          ctx8.font = "bold 18px 'Montserrat', sans-serif";  // Increased font size for readability
+          ctx8.textAlign = "center";
+          ctx8.textBaseline = "middle";
+
+          // Render the letter centered in the tile
+          ctx8.fillText(lettersGrid8[row8][col8], tileX + tileSize8 / 2, tileY + tileSize8 / 2);
+      }
   }
-  return word[0] + middle.join("") + word[word.length - 1];
 }
 
-// Função para desenhar a palavra embaralhada no canvas
-function drawScrambledWord(word) {
-  ctxx.clearRect(0, 0, canvasgamex.width, canvasgamex.height);
-  ctxx.font = "20px Montserrat";
-  ctxx.fillStyle = "#000";
-  ctxx.textAlign = "center";
-  ctxx.textBaseline = "middle";
-  ctxx.fillText(word, canvasgamex.width / 2, canvasgamex.height / 2);
+
+// Draw the snake
+function drawSnake8() {
+    snake8.forEach((segment8, index8) => {
+        ctx8.fillStyle = index8 === 0 ? "#0c3" : "#3c3"; // Head and body colors
+        ctx8.fillRect(segment8.x * tileSize8, segment8.y * tileSize8, tileSize8, tileSize8);
+    });
 }
 
-//canvas para guardar a resposta do jogador
-function drawCorrectWordOnSecondCanvas(word) {
-  ctxSecond.clearRect(0, 0, secondCanvas.width, secondCanvas.height); // Limpa o segundo canvas
-  ctxSecond.font = "20px Montserrat";
-  ctxSecond.fillStyle = "#008000"; 
-  ctxSecond.textAlign = "center";
-  ctxSecond.textBaseline = "middle";
-  ctxSecond.fillText(word, secondCanvas.width / 2, secondCanvas.height / 2); // Desenha no centro do canvas
-  secondCanvas.style.display = "block"; // Torna o segundo canvas visível
-}
+// Move the snake
+function moveSnake8() {
+  const head8 = { x: snake8[0].x + direction8.x, y: snake8[0].y + direction8.y };
 
-// Verificar a resposta do jogador
-document.getElementById("submitGuess").addEventListener("click", () => {
-  const guess = guessInput.value.toLowerCase();
-  if (guess === selectedWord.toLowerCase()) {
-    feedbackMessage.textContent = "Correct! Well done!";
-    feedbackMessage.style.color = "green";
-    pickAndScrambleWord(); // Escolher uma nova palavra
-  } else {
-    feedbackMessage.textContent = "Try again!";
-    feedbackMessage.style.color = "red";
+  head8.x = (head8.x + cols8) % cols8;
+  head8.y = (head8.y + rows8) % rows8;
+
+  snake8.unshift(head8);
+
+  const letter8 = lettersGrid8[head8.y][head8.x];
+  currentLetters8.push({ letter: letter8, row: head8.y, col: head8.x });
+
+  console.log("Snake Position:", snake8);
+  console.log("Collected Letters:", currentLetters8.map((item) => item.letter).join(""));
+
+  checkForWords8();
+
+  if (currentLetters8.length > rows8 * cols8) {
+    currentLetters8.shift(); // Prevent unbounded growth if necessary
   }
-  guessInput.value = ""; // Limpar o campo de input
+
+  snake8.pop();
+}
+
+// Check for words in the collected letters
+function checkForWords8() {
+  const lettersString8 = currentLetters8.map(item => item.letter).join("");
+  predefinedWords8.forEach((word8) => {
+      if (!discoveredWords8.includes(word8)) {
+          const wordLength8 = word8.length;
+          // Check for the word in `lettersString8`
+          const forwardIndex8 = lettersString8.indexOf(word8);
+          if (forwardIndex8 !== -1) {
+              console.log(`Discovered Word: "${word8}"`);
+              markWordAsDiscovered8(forwardIndex8, wordLength8, word8, false);
+          }
+          // Check for reversed word
+          const reversedWord8 = word8.split("").reverse().join("");
+          const reversedIndex8 = lettersString8.indexOf(reversedWord8);
+          if (reversedIndex8 !== -1) {
+              console.log(`Discovered Word: "${word8}" in Reverse`);
+              markWordAsDiscovered8(reversedIndex8, wordLength8, word8, true);
+          }
+      }
+  });
+}
+
+// Helper function to mark a word as discovered
+function markWordAsDiscovered8(startIndex8, wordLength8, word8, isReversed8) {
+  console.log(`Marking Word "${word8}" as Discovered. Start Index: ${startIndex8}, Reversed: ${isReversed8}`);
+  discoveredWords8.push(word8);
+  updateWordList8();
+
+  for (let i8 = 0; i8 < wordLength8; i8++) {
+      const index8 = isReversed8
+          ? startIndex8 + (wordLength8 - 1 - i8) // Adjust for reversed order
+          : startIndex8 + i8;
+      const { row: row8, col: col8 } = currentLetters8[index8];
+      discoveredTiles8.push({ row: row8, col: col8 });
+  }
+
+  // Remove only the discovered word's letters from `currentLetters8`
+  currentLetters8 = currentLetters8.filter(
+      (_, i8) => i8 < startIndex8 || i8 >= startIndex8 + wordLength8
+  );
+}
+
+// Update the list of discovered words
+function updateWordList8() {
+    const wordList8 = document.getElementById("wordList");
+    wordList8.innerHTML = ""; // Clear existing list
+    predefinedWords8.forEach((word8) => {
+        const li8 = document.createElement("li");
+        li8.textContent = word8;
+        li8.className = discoveredWords8.includes(word8) ? "discovered" : "";
+        wordList8.appendChild(li8);
+    });
+}
+
+// Reset the game
+function resetGame8() {
+    snake8 = [{ x: 0, y: 0 }];
+    direction8 = { x: 0, y: 0 };
+    discoveredWords8 = [];
+    discoveredTiles8 = [];
+    currentLetters8 = [];
+    generateGrid8();
+    updateWordList8();
+    gameRunning8 = true;
+}
+
+// Handle keyboard input for controlling the snake
+document.addEventListener("keydown", (event8) => {
+    if (!gameRunning8) return;
+    switch (event8.key) {
+        case "ArrowUp":
+            direction8 = { x: 0, y: -1 };
+            break;
+        case "ArrowDown":
+            direction8 = { x: 0, y: 1 };
+            break;
+        case "ArrowLeft":
+            direction8 = { x: -1, y: 0 };
+            break;
+        case "ArrowRight":
+            direction8 = { x: 1, y: 0 };
+            break;
+    }
 });
 
-// Inicia o jogo 
-pickAndScrambleWord();
+// Game loop
+function gameLoop8() {
+    if (gameRunning8) {
+        ctx8.clearRect(0, 0, canvas8.width, canvas8.height); // Clear canvas
+        drawGrid8();
+        drawSnake8();
+        moveSnake8();
+    }
+    setTimeout(gameLoop8, 200); // Run the loop every 200ms
+}
+
+// Add event listener for reset button
+resetButton8.addEventListener("click", resetGame8);
+
+// Initialize the game
+generateGrid8();
+updateWordList8();
+gameLoop8();
+
+
+
+
 
 //
 //
@@ -920,3 +1046,5 @@ document.addEventListener("DOMContentLoaded", () => {
   createFallingNumbers7();
   animate7();
 });
+
+

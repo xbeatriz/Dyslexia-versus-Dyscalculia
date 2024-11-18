@@ -299,3 +299,93 @@ li {
 #incorrect:hover {
   background-color: #e53935;
 }
+
+
+/*
+DYSLEXIA GAME CSS
+STYLES
+CSS
+*/
+#dyslexiaGameCanvas {
+  border: 2px solid black;
+  background-color: #f9f9f9;
+}
+
+#resetButton {
+  padding: 12px 24px; /* Slightly larger padding for better click area */
+  font-size: 18px; /* Increased font size for readability */
+  font-weight: 600; /* Added boldness for emphasis */
+  background-color: #ff4d4d; /* A soft red color for a clear call-to-action */
+  color: #fff; /* White text for contrast */
+  border: none; /* Remove default border */
+  border-radius: 8px; /* Rounded corners for a modern look */
+  cursor: pointer; /* Cursor to indicate clickability */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transition on hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+#resetButton:hover {
+  background-color: #ff3333; /* Darker red on hover */
+  transform: translateY(-2px); /* Slight lift effect */
+}
+
+#resetButton:active {
+  background-color: #e60000; /* Even darker red when clicked */
+  transform: translateY(1px); /* Subtle pressed effect */
+}
+
+#resetButton:focus {
+  outline: none; /* Removes outline on focus */
+  box-shadow: 0 0 0 3px rgba(255, 77, 77, 0.6); /* Glow effect to indicate focus */
+}
+
+
+#wordList li {
+  margin: 8px 0; /* Increased margin for better spacing */
+  padding: 8px 15px; /* Slightly larger padding for a more balanced feel */
+  border-radius: 6px; /* Slightly more rounded corners */
+  background-color: #f0f0f0; /* Softer background color */
+  color: #444; /* Darker text for better contrast */
+  font-size: 16px; /* Improved readability */
+  transition: all 0.3s ease; /* Smooth transitions for hover effects */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#wordList li:hover {
+  background-color: #e0e0e0; /* Slightly darker on hover */
+  transform: translateY(-2px); /* Subtle lift effect on hover */
+}
+
+#wordList li .delete-button {
+  background-color: transparent;
+  border: none;
+  color: #999;
+  font-size: 14px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+#wordList li .delete-button:hover {
+  color: #f44336; /* Red color for delete button on hover */
+}
+
+#wordList li.discovered {
+  background-color: #4caf50; /* Green background for discovered words */
+  color: white; /* White text for discovered words */
+  font-weight: bold; /* Bold for emphasis */
+}
+
+#wordList li.discovered:hover {
+  background-color: #45a049; /* Slightly darker green on hover */
+  transform: none; /* No lift effect for discovered items */
+}
+
+#wordList li.discovered .delete-button {
+  color: #fff; /* White delete button on discovered items */
+}
+
+#wordList li.discovered .delete-button:hover {
+  color: #ffeb3b; /* Yellow delete button on hover for discovered words */
+}
