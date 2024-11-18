@@ -137,7 +137,7 @@ function drawScrambledTextCanvas(canvas1) {
     ctx1.fillStyle = commonFillColor;
     ctx1.fillRect(0, 0, canvas1.width, canvas1.height); // Preenche o fundo com a cor
 
-    const fontSize = Math.max(24, canvas1.height / 10);
+    const fontSize = Math.max(20, canvas1.height / 10);
     ctx1.font = `${fontSize}px Montserrat`;
     ctx1.fillStyle = "#FFFFFF"; 
     ctx1.textAlign = "left";
@@ -175,7 +175,7 @@ function drawFocusTextCanvas(canvas2) {
     ctx2.fillStyle = commonFillColor; 
     ctx2.fillRect(0, 0, canvas2.width, canvas2.height); 
 
-    const fontSize = Math.max(24, canvas2.height / 5);
+    const fontSize = Math.max(20, canvas2.height / 5);
     ctx2.font = `${fontSize}px Montserrat`;
     ctx2.fillStyle = "#FFFFFF"; 
     ctx2.textAlign = "left"; 
@@ -229,7 +229,7 @@ function drawTasksCanvas(canvas3) {
     ctx3.fillStyle = commonFillColor; 
     ctx3.fillRect(0, 0, canvas3.width, canvas3.height); 
 
-    const fontSize = Math.max(24, canvas3.height / 15);
+    const fontSize = Math.max(20, canvas3.height / 15);
     ctx3.font = `${fontSize}px Montserrat`;
     ctx3.fillStyle = "#FFFFFF"; 
     ctx3.textAlign = "left";
@@ -307,7 +307,7 @@ function scrambleWord(word) {
 // Função para desenhar a palavra embaralhada no canvas
 function drawScrambledWord(word) {
   ctxx.clearRect(0, 0, canvasgamex.width, canvasgamex.height);
-  ctxx.font = "30px Arial";
+  ctxx.font = "20px Montserrat";
   ctxx.fillStyle = "#000";
   ctxx.textAlign = "center";
   ctxx.textBaseline = "middle";
@@ -317,7 +317,7 @@ function drawScrambledWord(word) {
 //canvas para guardar a resposta do jogador
 function drawCorrectWordOnSecondCanvas(word) {
   ctxSecond.clearRect(0, 0, secondCanvas.width, secondCanvas.height); // Limpa o segundo canvas
-  ctxSecond.font = "30px Arial";
+  ctxSecond.font = "20px Montserrat";
   ctxSecond.fillStyle = "#008000"; 
   ctxSecond.textAlign = "center";
   ctxSecond.textBaseline = "middle";
@@ -609,7 +609,7 @@ function drawNumbersAndForms(canvas6) {
       const angle = (Math.PI / 6) * i - Math.PI / 2;
       const numX = x + Math.cos(angle) * (radius - 15);
       const numY = y + Math.sin(angle) * (radius - 15);
-      ctx6.font = `${radius * 0.2}px Arial`;
+      ctx6.font = `${radius * 0.2}px Montserrat`;
       ctx6.fillStyle = "#000";
       ctx6.textAlign = "center";
       ctx6.textBaseline = "middle";
@@ -806,7 +806,7 @@ function generateEquation7() {
 
 // Renderizar a equação no canvas
 function renderEquation7() {
-  ctx7.font = "36px Montserrat";
+  ctx7.font = "20px Montserrat";
   ctx7.fillStyle = "white";
   ctx7.textAlign = "center";
   ctx7.fillText(currentEquation7, canvas7.width / 2, canvas7.height / 2);
@@ -814,7 +814,7 @@ function renderEquation7() {
 
 // Renderizar a pontuação
 function renderScore7() {
-  ctx7.font = "24px Montserrat";
+  ctx7.font = "16px Montserrat";
   ctx7.fillStyle = "black";
   ctx7.textAlign = "left";
   ctx7.fillText(`Pontuação: ${score7}`, 10, 30);
@@ -875,7 +875,7 @@ function evaluateAnswer7(playerChoice) {
 // Finalizar o jogo
 function endGame7() {
   ctx7.clearRect(0, 0, canvas7.width, canvas7.height);
-  ctx7.font = "24px";
+  ctx7.font = "20px Montserrat";
   ctx7.fillStyle = "white";
   ctx7.textAlign = "center";
   ctx7.fillText(

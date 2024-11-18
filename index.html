@@ -70,26 +70,31 @@
 
     <!-- Dyslexia Game Section -->
     <section id="dyslexia-game" class="section hidden">
-      <div class="gamet-content">
-        <h2>Dyslexia Game</h2>
-        <p>
-          Welcome to the Dyslexia Game!
-          <br>
-          Here you'll experience reading challenges similar to those faced by individuals with dyslexia.
-          <br>
-          Hope you can have a litle fun with this experience! 
-        </p>
-      </div>
-      <div class="game-content">
-        <div class="canvas-container">
-          <canvas id="scrambleCanvas" width="500" height="150"></canvas>
-          <canvas id="secondCanvas" width="500" height="150" style="display: none;"></canvas>
-          <input type="text" id="guessInput" placeholder="Guess the word here">
-          <button id="submitGuess">Submit Guess</button>
-          <p id="feedbackMessage"></p>
+      <div id="game-container">
+        <div id="left-panel">
+          <h1>Welcome to the Calculation Game!</h1>
+          <p>
+          Test your math skills in this fun and challenging game.
+          The objective is simple: you will see an equation in the middle of the screen, and your task will be to decide whether the answer is correct or not.
+          </p>
+          <p>
+          Every time you get it right, you earn points. If you make a mistake, don't worry, you can try again!
+          </p>
+          <p>
+          Instructions:
+          <ul>
+          <li>Press the <strong>Correct</strong> button if the equation is correct.</li>
+          <li>Press the <strong>Incorrect</strong> button if the equation is wrong.</li>
+          </ul>
+          </p>
+          <p>
+          Try to achieve the highest score possible. Good luck!
+          </p>
         </div>
-      </div>
-      </div>
+        <div id="right-panel">
+            <canvas width="500" height="300" id="dyslexiaGameCanvas"></canvas>
+        </div>
+    </div>
       <a href="#dislexia" class="scroll-arrow previous">&#8593;</a>
       <a href="#dyscalculia" class="scroll-arrow next">&#8595;</a>
     </section>

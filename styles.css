@@ -86,13 +86,13 @@ ul {
 }
 
 li {
-  font-size: 20px;
+  font-size: 16px;
   line-height: 1.5;
   margin: 8px;
 }
 
 .animated-text {
-  font-size: 34px;
+  font-size: 32px;
   font-weight: 600;
   min-width: 280px;
 }
@@ -257,7 +257,7 @@ li {
 
 #dyslexia-game p,
 #dyscalculia-game p {
-  font-size: 20px;
+  font-size: 16px;
 }
 
 /* STYLES FOR THE DYSCALCULIA GAME SECTION */
@@ -275,7 +275,7 @@ li {
 }
 
 .buttonDyscalculia {
-  font-size: 18px;
+  font-size: 16px;
   padding: 10px 20px;
   margin: 0;
   border: none;
