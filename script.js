@@ -177,8 +177,8 @@ function drawFocusTextCanvas(canvas2) {
     ctx2.fillStyle = commonFillColor;
     ctx2.fillRect(0, 0, canvas2.width, canvas2.height);
 
-    const fontSize = Math.max(20, canvas2.height / 5);
-    ctx2.font = `${fontSize}px Montserrat`;
+    const fontSize = Math.max(16, canvas2.height / 5);
+    ctx2.font = `24px Montserrat`;
     ctx2.fillStyle = "#FFFFFF";
     ctx2.textAlign = "left";
     ctx2.textBaseline = "middle";
@@ -268,7 +268,7 @@ function drawTasksCanvas(canvas3) {
     ctx3.fillRect(0, 0, canvas3.width, canvas3.height);
 
     // Configurações de texto
-    const fontSize = Math.min(lineSpacing * 0.5, 30); // Ajusta o tamanho da fonte
+    const fontSize = Math.min(lineSpacing * 0.5, 24); // Ajusta o tamanho da fonte
     ctx3.font = `${fontSize}px Montserrat`;
     ctx3.fillStyle = "#FFFFFF"; // Cor do texto
     ctx3.textAlign = "left";
