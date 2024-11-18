@@ -114,13 +114,15 @@ function drawScrambledTextCanvas(canvas1) {
   ];
 
   function scrambleWord(word) {
-    if (word.length < 4) return word;
-    let middle = word.slice(1, -1).split("");
-    for (let i = middle.length - 1; i > 0; i--) {
+    if (word.length < 2) return word; // Não faz sentido embaralhar palavras de 1 caractere ou menos
+
+    let scrambled = word.split("");
+    for (let i = scrambled.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
-      [middle[i], middle[j]] = [middle[j], middle[i]];
+      [scrambled[i], scrambled[j]] = [scrambled[j], scrambled[i]];
     }
-    return word[0] + middle.join("") + word[word.length - 1];
+
+    return scrambled.join("");
   }
 
   function scrambleTextLines() {
@@ -205,44 +207,90 @@ function drawFocusTextCanvas(canvas2) {
 //
 // 3º CANVAS: LISTA DE TAREFAS DESORDENANDO
 //
+
 function drawTasksCanvas(canvas3) {
   const ctx3 = canvas3.getContext("2d");
   const tasks = [
     "Task 1: Read book",
     "Task 2: Practice coding",
     "Task 3: Take a walk",
+    "Task 4: Write a journal",
+    "Task 5: Learn a new skill",
+    "Task 6: Meditate for 10 minutes",
   ];
-  const positions = tasks.map((_, i) => i * 50 + 50); // Posições iniciais para cada linha
 
-  function shufflePositions() {
-    positions.forEach((_, i) => {
-      positions[i] += Math.random() < 0.5 ? -5 : 5;
-      if (positions[i] < 30) positions[i] = 30;
-      if (positions[i] > canvas3.height - 30)
-        positions[i] = canvas3.height - 30;
+  const padding = 20; // Espaço superior/inferior no canvas
+  const totalHeight = canvas3.height - 2 * padding; // Altura disponível para as tarefas
+  const lineSpacing = totalHeight / tasks.length; // Espaçamento entre as tarefas
+  const targetPositions = tasks.map((_, i) => padding + i * lineSpacing); // Posições finais das tarefas
+  let currentPositions = [...targetPositions]; // Posições animadas
+  let isSwapping = false; // Flag para controlar se há uma troca em andamento
+
+  function swapRandomTasks() {
+    if (isSwapping) return; // Evita múltiplas trocas simultâneas
+    isSwapping = true;
+
+    // Escolhe duas tarefas aleatórias diferentes
+    const index1 = Math.floor(Math.random() * tasks.length);
+    let index2;
+    do {
+      index2 = Math.floor(Math.random() * tasks.length);
+    } while (index1 === index2);
+
+    // Troca as posições-alvo
+    [targetPositions[index1], targetPositions[index2]] = [
+      targetPositions[index2],
+      targetPositions[index1],
+    ];
+
+    // Aguarda a animação terminar antes de permitir outra troca
+    setTimeout(() => {
+      isSwapping = false;
+    }, 1000); // Tempo de animação (1 segundo)
+  }
+
+  function animatePositions() {
+    // Suaviza o movimento de cada posição atual para a posição alvo
+    currentPositions = currentPositions.map((current, i) => {
+      const target = targetPositions[i];
+      const diff = target - current;
+      if (Math.abs(diff) < 1) return target; // Considera como "alinhado"
+      return current + diff * 0.1; // Movimento suave (10% da diferença)
     });
   }
 
   function draw() {
-    ctx3.clearRect(0, 0, canvas3.width, canvas3.height); // Limpa o canvas a cada iteração
+    // Limpa o canvas
+    ctx3.clearRect(0, 0, canvas3.width, canvas3.height);
 
-    ctx3.fillStyle = commonFillColor;
+    // Fundo do canvas com cor personalizada
+    ctx3.fillStyle = "#a6a09dff"; // Cor de fundo
     ctx3.fillRect(0, 0, canvas3.width, canvas3.height);
 
-    const fontSize = Math.max(20, canvas3.height / 15);
+    // Configurações de texto
+    const fontSize = Math.min(lineSpacing * 0.5, 30); // Ajusta o tamanho da fonte
     ctx3.font = `${fontSize}px Montserrat`;
-    ctx3.fillStyle = "#FFFFFF";
+    ctx3.fillStyle = "#FFFFFF"; // Cor do texto
     ctx3.textAlign = "left";
     ctx3.textBaseline = "middle";
 
+    // Desenha as tarefas
     tasks.forEach((task, i) => {
-      ctx3.fillText(task, 10, positions[i]);
+      ctx3.fillText(task, 10, currentPositions[i]);
     });
 
-    shufflePositions();
+    // Atualiza as posições para a animação
+    animatePositions();
+
+    // Requisita o próximo quadro de animação
+    requestAnimationFrame(draw);
   }
 
-  setInterval(draw, 200);
+  // Inicia o loop de animação
+  draw();
+
+  // Troca de tarefas a cada 2 segundos
+  setInterval(swapRandomTasks, 2000);
 }
 
 // Inicializa cada canvas
