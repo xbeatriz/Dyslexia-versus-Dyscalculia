@@ -553,8 +553,8 @@ function drawConfusedForms(canvas) {
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
       size: Math.random() * 40 + 40, // Tamanhos variando entre 40 e 80
-      dx: (Math.random() - 0.5) * 12,
-      dy: (Math.random() - 0.5) * 12,
+      dx: (Math.random() - 0.5) * 6,
+      dy: (Math.random() - 0.5) * 6,
       type: type,
       color: getRandomColor(), // Cor aleatória para cada forma
     };

@@ -15,7 +15,7 @@ GLOBAL STYLES
 body {
   background-color: #2f3542;
   color: #fff;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Montserrat";
   scroll-behavior: smooth;
 }
 
