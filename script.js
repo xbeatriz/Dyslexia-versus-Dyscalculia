@@ -875,6 +875,17 @@ function drawNumbersAndForms(canvas6) {
     // Inverter as velocidades
     [clock1.dx, clock2.dx] = [clock2.dx, clock1.dx];
     [clock1.dy, clock2.dy] = [clock2.dy, clock1.dy];
+
+    // Corrigir posições para garantir que não fiquem presos nas bordas
+    correctPosition(clock1);
+    correctPosition(clock2);
+  }
+
+  function correctPosition(clock) {
+    if (clock.x - clock.radius < 0) clock.x = clock.radius;
+    if (clock.x + clock.radius > canvas6.width) clock.x = canvas6.width - clock.radius;
+    if (clock.y - clock.radius < 0) clock.y = clock.radius;
+    if (clock.y + clock.radius > canvas6.height) clock.y = canvas6.height - clock.radius;
   }
 
   function updateClocks() {
@@ -885,16 +896,20 @@ function drawNumbersAndForms(canvas6) {
       clock.x += clock.dx;
       clock.y += clock.dy;
 
-      if (
-        clock.x + clock.radius > canvas6.width ||
-        clock.x - clock.radius < 0
-      ) {
+      if (clock.x + clock.radius >= canvas6.width) {
+        clock.x = canvas6.width - clock.radius;
         clock.dx *= -1;
       }
-      if (
-        clock.y + clock.radius > canvas6.height ||
-        clock.y - clock.radius < 0
-      ) {
+      if (clock.x - clock.radius <= 0) {
+        clock.x = clock.radius;
+        clock.dx *= -1;
+      }
+      if (clock.y + clock.radius >= canvas6.height) {
+        clock.y = canvas6.height - clock.radius;
+        clock.dy *= -1;
+      }
+      if (clock.y - clock.radius <= 0) {
+        clock.y = clock.radius;
         clock.dy *= -1;
       }
 
