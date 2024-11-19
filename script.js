@@ -109,8 +109,14 @@ function drawScrambledTextCanvas(canvas1) {
 
   const textLines = [
     "Dyslexia",
-    "Friends who have dyslexia described to me how they experience reading...",
-    "I remembered reading about typoglycemia...",
+    "Friends who have dyslexia described to me how they experience reading ...",
+    "I remembered reading about typoglycemia ...",
+    "When I try to read , it feels like the letters rearrange themselves, leaving me lost in the text .",
+    "If I try to read , the letters escape from the page ...",
+    "Sometimes , the letters seem to dance around the page , making it hard to focus on the words .",
+    "The letters twist and blur as I try to read .",
+    "Words seem to vanish off the page when I look away .",
+    "The letters seem to jump around, making reading exhausting ."
   ];
 
   function scrambleWord(word) {
@@ -139,7 +145,7 @@ function drawScrambledTextCanvas(canvas1) {
     ctx1.fillStyle = commonFillColor;
     ctx1.fillRect(0, 0, canvas1.width, canvas1.height); // Preenche o fundo com a cor
 
-    const fontSize = Math.max(20, canvas1.height / 10);
+    const fontSize = Math.max(16, canvas1.height / 20);
     ctx1.font = `${fontSize}px Montserrat`;
     ctx1.fillStyle = "#FFFFFF";
     ctx1.textAlign = "left";
@@ -167,6 +173,7 @@ function drawFocusTextCanvas(canvas2) {
     "Sometimes people with dyslexia are not capable of reading things";
   const text2 = "because dyslexia it's not just about writing,";
   const text3 = "that also modifies your physical.";
+  
 
   let blurRadius = 20;
   let increasing = false; // Controla o estado do loop
@@ -177,8 +184,8 @@ function drawFocusTextCanvas(canvas2) {
     ctx2.fillStyle = commonFillColor;
     ctx2.fillRect(0, 0, canvas2.width, canvas2.height);
 
-    const fontSize = Math.max(16, canvas2.height / 5);
-    ctx2.font = `24px Montserrat`;
+    const fontSize = Math.max(16, canvas2.height / 10);
+    ctx2.font = `20px Montserrat`;
     ctx2.fillStyle = "#FFFFFF";
     ctx2.textAlign = "left";
     ctx2.textBaseline = "middle";
