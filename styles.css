@@ -6,6 +6,9 @@ GLOBAL STYLES
 ///
 */
 
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+
 * {
   margin: 0;
   padding: 0;
@@ -15,7 +18,7 @@ GLOBAL STYLES
 body {
   background-color: #2f3542;
   color: #fff;
-  font-family: "Montserrat";
+  font-family: 'Montserrat';
   scroll-behavior: smooth;
 }
 
