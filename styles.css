@@ -43,6 +43,11 @@ body {
   width: 50%;
   padding: 20px;
   overflow-y: auto;
+  direction: rtl;
+}
+
+#left-panel > * {
+  direction: ltr;
 }
 
 #left-panel h2 {
@@ -83,6 +88,37 @@ li {
   line-height: 1.5;
   margin: 8px;
 }
+
+
+/*
+///
+///
+SCROLL BAR STYLE
+///
+///
+*/
+/* Style the entire scrollbar */
+::-webkit-scrollbar {
+  width: 8px; /* Adjust scrollbar width */
+}
+
+/* Style the scrollbar track (background) */
+::-webkit-scrollbar-track {
+  background: #f4f4f4; /* Light gray background */
+  border-radius: 10px; /* Rounded corners */
+}
+
+/* Style the scrollbar thumb (the draggable part) */
+::-webkit-scrollbar-thumb {
+  background: #888; /* Gray thumb */
+  border-radius: 10px; /* Rounded corners */
+}
+
+/* Add hover effects to the thumb */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Darker on hover */
+}
+
 
 /*
 ///
