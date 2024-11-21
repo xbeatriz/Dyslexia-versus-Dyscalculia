@@ -341,24 +341,90 @@ let gameRunning8 = false; // Track if the game is running
 // Generate Letter Grid with Predefined Words
 function generateGrid8() {
   const alphabet8 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  lettersGrid8 = Array.from({ length: rows8 }, () =>
-    Array.from(
-      { length: cols8 },
-      () => alphabet8[Math.floor(Math.random() * alphabet8.length)]
-    )
-  );
 
-  predefinedWords8.forEach((word) => {
-    const startRow8 = Math.floor(Math.random() * rows8);
-    const startCol8 = Math.floor(Math.random() * (cols8 - word.length));
+  let attempts = 0;
+  let allWordsPlaced = false;
 
-    for (let i8 = 0; i8 < word.length; i8++) {
-      lettersGrid8[startRow8][startCol8 + i8] = word[i8];
+  // Tente criar a grade até que todas as palavras sejam colocadas
+  while (!allWordsPlaced && attempts < 10) {
+    attempts++;
+    allWordsPlaced = true;
+
+    // Inicializa a grade com espaços vazios
+    lettersGrid8 = Array.from({ length: rows8 }, () =>
+      Array.from({ length: cols8 }, () => null)
+    );
+
+    for (const word of predefinedWords8) {
+      let placed = false;
+
+      // Tente colocar a palavra na grade
+      for (let i = 0; i < 100 && !placed; i++) {
+        const horizontal = Math.random() > 0.5; // Decide orientação (horizontal ou vertical)
+        const startRow8 = Math.floor(
+          Math.random() * (horizontal ? rows8 : rows8 - word.length)
+        );
+        const startCol8 = Math.floor(
+          Math.random() * (horizontal ? cols8 - word.length : cols8)
+        );
+
+        let fits = true;
+
+        // Verifica se a palavra cabe no espaço desejado
+        for (let i8 = 0; i8 < word.length; i8++) {
+          const row8 = horizontal ? startRow8 : startRow8 + i8;
+          const col8 = horizontal ? startCol8 + i8 : startCol8;
+
+          if (
+            row8 >= rows8 ||
+            col8 >= cols8 ||
+            (lettersGrid8[row8][col8] !== null &&
+              lettersGrid8[row8][col8] !== word[i8])
+          ) {
+            fits = false;
+            break;
+          }
+        }
+
+        // Coloca a palavra na grade, se couber
+        if (fits) {
+          for (let i8 = 0; i8 < word.length; i8++) {
+            const row8 = horizontal ? startRow8 : startRow8 + i8;
+            const col8 = horizontal ? startCol8 + i8 : startCol8;
+            lettersGrid8[row8][col8] = word[i8];
+          }
+          placed = true;
+        }
+      }
+
+      // Se a palavra não foi colocada, sinalize erro
+      if (!placed) {
+        console.warn(`Não foi possível colocar a palavra: "${word}" nesta tentativa.`);
+        allWordsPlaced = false;
+        break;
+      }
     }
-  });
+  }
+
+  if (!allWordsPlaced) {
+    console.error("Falha ao gerar a grade com todas as palavras após várias tentativas.");
+  } else {
+    console.log("Grade gerada com sucesso!");
+  }
+
+  // Preenche os espaços vazios com letras aleatórias
+  for (let row8 = 0; row8 < rows8; row8++) {
+    for (let col8 = 0; col8 < cols8; col8++) {
+      if (lettersGrid8[row8][col8] === null) {
+        lettersGrid8[row8][col8] =
+          alphabet8[Math.floor(Math.random() * alphabet8.length)];
+      }
+    }
+  }
 
   console.log("Generated Grid:", lettersGrid8);
 }
+
 
 function drawGrid8() {
   for (let row8 = 0; row8 < rows8; row8++) {
@@ -367,34 +433,23 @@ function drawGrid8() {
         (tile) => tile.row === row8 && tile.col === col8
       );
 
-      // Apply a gradient effect for the background
       const tileX = col8 * tileSize8;
       const tileY = row8 * tileSize8;
-      const tileGradient = ctx8.createLinearGradient(
-        tileX,
-        tileY,
-        tileX + tileSize8,
-        tileY + tileSize8
-      );
-      tileGradient.addColorStop(0, tileDiscovered8 ? "#6c3" : "#f2f2f2");
-      tileGradient.addColorStop(1, tileDiscovered8 ? "#7c4" : "#e6e6e6");
 
-      ctx8.fillStyle = tileGradient;
+      // Background styling
+      ctx8.fillStyle = tileDiscovered8 ? "#6c3" : "#f2f2f2";
       ctx8.fillRect(tileX, tileY, tileSize8, tileSize8);
 
-      // Stylish border with rounded corners
+      // Border styling
       ctx8.strokeStyle = "#ccc";
       ctx8.lineWidth = 1;
-      ctx8.lineJoin = "round"; // Rounded corners for strokes
       ctx8.strokeRect(tileX, tileY, tileSize8, tileSize8);
 
-      // Improved font and text styling
-      ctx8.fillStyle = tileDiscovered8 ? "#fff" : "#333"; // White text for discovered tiles
-      ctx8.font = "bold 18px 'Montserrat', sans-serif"; // Increased font size for readability
+      // Text styling
+      ctx8.fillStyle = "#333";
+      ctx8.font = "bold 18px Arial";
       ctx8.textAlign = "center";
       ctx8.textBaseline = "middle";
-
-      // Render the letter centered in the tile
       ctx8.fillText(
         lettersGrid8[row8][col8],
         tileX + tileSize8 / 2,
@@ -403,6 +458,7 @@ function drawGrid8() {
     }
   }
 }
+
 
 // Draw the snake
 function drawSnake8() {
@@ -511,10 +567,11 @@ function resetGame8() {
   discoveredWords8 = [];
   discoveredTiles8 = [];
   currentLetters8 = [];
-  generateGrid8();
-  updateWordList8();
+  generateGrid8(); // Gera nova grade com palavras
+  updateWordList8(); // Atualiza a lista de palavras
   gameRunning8 = true;
 }
+
 
 // Handle keyboard input for controlling the snake
 document.addEventListener("keydown", (event8) => {
