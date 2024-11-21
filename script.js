@@ -1,3 +1,10 @@
+//
+//
+//
+//FLOW OF PAGES
+//
+//
+
 document.addEventListener("DOMContentLoaded", () => {
   const sections = document.querySelectorAll(".section");
   const arrows = document.querySelectorAll(".scroll-arrow");
@@ -80,24 +87,24 @@ document.addEventListener("DOMContentLoaded", () => {
 //
 //Dyslexia canvas
 //cor comum para todos os canvas
-const commonFillColor = "#434e66"; // Exemplo de cor
+const commonFillColor = "#434e66"; 
 
-// Seleciona todos os canvas do painel direito
+
 const canvasIds1 = ["dyslexiaCanvas", "focusCanvas", "tasksCanvas"];
 const canvases1 = canvasIds1.map((id) => document.getElementById(id));
 
-// Ajusta as dimensões de cada canvas com base no container pai
+// Ajusta as dimensões de cada canvas
 function resizeCanvases() {
   const parent1 = canvases1[0].parentElement.getBoundingClientRect();
 
   canvases1.forEach((canvas) => {
-    canvas.width = parent1.width; // Largura igual à do pai
+    canvas.width = parent1.width; 
     canvas.height =
       (parent1.height - (canvases1.length - 1) * 24) / canvases1.length; // Divide a altura igualmente
   });
 }
 
-// Inicializa as dimensões e vincula ao redimensionamento da janela
+// Inicializa as dimensões 
 resizeCanvases();
 window.addEventListener("resize", resizeCanvases);
 
@@ -120,7 +127,7 @@ function drawScrambledTextCanvas(canvas1) {
   ];
 
   function scrambleWord(word) {
-    if (word.length < 2) return word; // Não faz sentido embaralhar palavras de 1 caractere ou menos
+    if (word.length < 2) return word; 
 
     let scrambled = word.split("");
     for (let i = scrambled.length - 1; i > 0; i--) {
@@ -143,16 +150,16 @@ function drawScrambledTextCanvas(canvas1) {
   function draw() {
     const scrambledLines = scrambleTextLines();
 
-    // Aplica a sombra e o fundo
-    ctx1.save(); // Salva o estado atual do contexto
+   
+    ctx1.save(); 
     ctx1.shadowColor = "rgba(0, 0, 0, 0.2)";
     ctx1.shadowBlur = 6;
     ctx1.shadowOffsetX = 0;
     ctx1.shadowOffsetY = 4;
 
-    ctx1.fillStyle = commonFillColor; // Cor de fundo
-    ctx1.fillRect(0, 0, canvas1.width, canvas1.height); // Preenche o fundo com a cor e sombra
-    ctx1.restore(); // Restaura o contexto (remove a sombra para o texto)
+    ctx1.fillStyle = commonFillColor; 
+    ctx1.fillRect(0, 0, canvas1.width, canvas1.height); 
+    ctx1.restore(); 
 
     const fontSize = Math.max(16, canvas1.height / 20);
     ctx1.font = `${fontSize}px Montserrat`;
@@ -235,15 +242,15 @@ function drawTasksCanvas(canvas3) {
     "Task 6: Meditate for 10 minutes",
   ];
 
-  const padding = 20; // Espaço superior/inferior no canvas
-  const totalHeight = canvas3.height - 2 * padding; // Altura disponível para as tarefas
-  const lineSpacing = totalHeight / tasks.length; // Espaçamento entre as tarefas
-  const targetPositions = tasks.map((_, i) => padding + i * lineSpacing); // Posições finais das tarefas
-  let currentPositions = [...targetPositions]; // Posições animadas
-  let isSwapping = false; // Flag para controlar se há uma troca em andamento
+  const padding = 20; 
+  const totalHeight = canvas3.height - 2 * padding; 
+  const lineSpacing = totalHeight / tasks.length; 
+  const targetPositions = tasks.map((_, i) => padding + i * lineSpacing); 
+  let currentPositions = [...targetPositions]; 
+  let isSwapping = false; 
 
   function swapRandomTasks() {
-    if (isSwapping) return; // Evita múltiplas trocas simultâneas
+    if (isSwapping) return; 
     isSwapping = true;
 
     // Escolhe duas tarefas aleatórias diferentes
@@ -259,18 +266,18 @@ function drawTasksCanvas(canvas3) {
       targetPositions[index1],
     ];
 
-    // Aguarda a animação terminar antes de permitir outra troca
+   
     setTimeout(() => {
       isSwapping = false;
     }, 1000); // Tempo de animação (1 segundo)
   }
 
   function animatePositions() {
-    // Suaviza o movimento de cada posição atual para a posição alvo
+    
     currentPositions = currentPositions.map((current, i) => {
       const target = targetPositions[i];
       const diff = target - current;
-      if (Math.abs(diff) < 1) return target; // Considera como "alinhado"
+      if (Math.abs(diff) < 1) return target; 
       return current + diff * 0.1; // Movimento suave (10% da diferença)
     });
   }
@@ -279,14 +286,14 @@ function drawTasksCanvas(canvas3) {
     // Limpa o canvas
     ctx3.clearRect(0, 0, canvas3.width, canvas3.height);
 
-    // Fundo do canvas com cor personalizada
-    ctx3.fillStyle = commonFillColor; // Cor de fundo
+   
+    ctx3.fillStyle = commonFillColor; 
     ctx3.fillRect(0, 0, canvas3.width, canvas3.height);
 
-    // Configurações de texto
-    const fontSize = Math.min(lineSpacing * 0.5, 24); // Ajusta o tamanho da fonte
+   
+    const fontSize = Math.min(lineSpacing * 0.5, 24); 
     ctx3.font = `${fontSize}px Montserrat`;
-    ctx3.fillStyle = "#FFFFFF"; // Cor do texto
+    ctx3.fillStyle = "#FFFFFF"; 
     ctx3.textAlign = "left";
     ctx3.textBaseline = "middle";
 
@@ -338,14 +345,14 @@ let predefinedWords8 = [
   "LIGHT",
   "DYSCALCULIA",
   "ADVENTURE",
-]; // Expanded word list
-let discoveredWords8 = []; // Discovered words by the player
+]; 
+let discoveredWords8 = []; 
 let snake8 = [{ x: 0, y: 0 }]; // Snake starting position
-let direction8 = { x: 0, y: 0 }; // Initial direction (stationary)
+let direction8 = { x: 0, y: 0 }; 
 let currentLetters8 = []; // Letters collected by the snake
 let lettersGrid8 = []; // Grid of letters
-let discoveredTiles8 = []; // Tracks tiles that belong to discovered words
-let gameRunning8 = false; // Track if the game is running
+let discoveredTiles8 = []; 
+let gameRunning8 = true; // Track if the game is running
 
 // Generate Letter Grid with Predefined Words
 function generateGrid8() {
@@ -354,12 +361,12 @@ function generateGrid8() {
   let attempts = 0;
   let allWordsPlaced = false;
 
-  // Tente criar a grade até que todas as palavras sejam colocadas
+  
   while (!allWordsPlaced && attempts < 10) {
     attempts++;
     allWordsPlaced = true;
 
-    // Inicializa a grade com espaços vazios
+    
     lettersGrid8 = Array.from({ length: rows8 }, () =>
       Array.from({ length: cols8 }, () => null)
     );
@@ -367,7 +374,7 @@ function generateGrid8() {
     for (const word of predefinedWords8) {
       let placed = false;
 
-      // Tente colocar a palavra na grade
+      
       for (let i = 0; i < 100 && !placed; i++) {
         const horizontal = Math.random() > 0.5; // Decide orientação (horizontal ou vertical)
         const startRow8 = Math.floor(
@@ -379,7 +386,7 @@ function generateGrid8() {
 
         let fits = true;
 
-        // Verifica se a palavra cabe no espaço desejado
+        
         for (let i8 = 0; i8 < word.length; i8++) {
           const row8 = horizontal ? startRow8 : startRow8 + i8;
           const col8 = horizontal ? startCol8 + i8 : startCol8;
@@ -395,7 +402,7 @@ function generateGrid8() {
           }
         }
 
-        // Coloca a palavra na grade, se couber
+        
         if (fits) {
           for (let i8 = 0; i8 < word.length; i8++) {
             const row8 = horizontal ? startRow8 : startRow8 + i8;
@@ -406,7 +413,7 @@ function generateGrid8() {
         }
       }
 
-      // Se a palavra não foi colocada, sinalize erro
+      // Se a palavra não foi colocada, sinaliza erro
       if (!placed) {
         console.warn(`Não foi possível colocar a palavra: "${word}" nesta tentativa.`);
         allWordsPlaced = false;
@@ -445,18 +452,18 @@ function drawGrid8() {
       const tileX = col8 * tileSize8;
       const tileY = row8 * tileSize8;
 
-      // Background styling
+      
       ctx8.fillStyle = tileDiscovered8 ? "#6c3" : "#f2f2f2";
       ctx8.fillRect(tileX, tileY, tileSize8, tileSize8);
 
-      // Border styling
+      
       ctx8.strokeStyle = "#ccc";
       ctx8.lineWidth = 1;
       ctx8.strokeRect(tileX, tileY, tileSize8, tileSize8);
 
-      // Text styling
+      
       ctx8.fillStyle = "#333";
-      ctx8.font = "bold 18px Arial";
+      ctx8.font = "18px Montserrat";
       ctx8.textAlign = "center";
       ctx8.textBaseline = "middle";
       ctx8.fillText(
@@ -506,7 +513,7 @@ function moveSnake8() {
   checkForWords8();
 
   if (currentLetters8.length > rows8 * cols8) {
-    currentLetters8.shift(); // Prevent unbounded growth if necessary
+    currentLetters8.shift(); 
   }
 
   snake8.pop();
@@ -576,8 +583,8 @@ function resetGame8() {
   discoveredWords8 = [];
   discoveredTiles8 = [];
   currentLetters8 = [];
-  generateGrid8(); // Gera nova grade com palavras
-  updateWordList8(); // Atualiza a lista de palavras
+  generateGrid8(); 
+  updateWordList8(); 
   gameRunning8 = true;
 }
 
@@ -612,7 +619,7 @@ function gameLoop8() {
   setTimeout(gameLoop8, 200); // Run the loop every 200ms
 }
 
-// Add event listener for reset button
+
 resetButton8.addEventListener("click", resetGame8);
 
 // Initialize the game
@@ -624,27 +631,27 @@ gameLoop8();
 //
 //DYSCALCULIA CANVAS
 
-// Seleciona todos os canvas do painel direito
+
 const canvasIds2 = ["confusedForms", "numbersAndChange", "numbersAndForms"];
 const canvases2 = canvasIds2.map((id) => document.getElementById(id));
 
-// Ajusta as dimensões de cada canvas com base no container pai
+// Ajusta as dimensões de cada canvas
 function resizeCanvases2() {
   const parent2 = canvases2[0].parentElement.getBoundingClientRect();
 
   canvases2.forEach((canvas) => {
-    canvas.width = parent2.width; // Largura igual à do pai
+    canvas.width = parent2.width; 
     canvas.height =
       (parent2.height - (canvases2.length - 1) * 24) / canvases2.length; // Divide a altura igualmente
 
-    // Define a cor de fundo de cada canvas
+    //cor de fundo de cada canvas
     const ctx = canvas.getContext("2d");
     ctx.fillStyle = commonFillColor;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
   });
 }
 
-// Inicializa as dimensões e vincula ao redimensionamento da janela
+// Inicializa as dimensões
 resizeCanvases2();
 window.addEventListener("resize", resizeCanvases2);
 
@@ -656,7 +663,7 @@ function drawConfusedForms(canvas) {
   const ctx = canvas.getContext("2d");
   const shapes = [];
 
-  // Gerar uma cor aleatória em formato hexadecimal
+  // Gerar uma cor aleatória
   function getRandomColor() {
     const letters = "0123456789ABCDEF";
     let color = "#";
@@ -666,14 +673,14 @@ function drawConfusedForms(canvas) {
     return color;
   }
 
-  // Função para criar uma nova forma com propriedades aleatórias
+  // Função para criar uma nova forma
   function createShape() {
     const shapeTypes = ["circle", "square", "triangle"];
     const type = shapeTypes[Math.floor(Math.random() * shapeTypes.length)];
     return {
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
-      size: Math.random() * 40 + 40, // Tamanhos variando entre 40 e 80
+      size: Math.random() * 40 + 40, // Tamanhos 
       dx: (Math.random() - 0.5) * 6,
       dy: (Math.random() - 0.5) * 6,
       type: type,
@@ -849,7 +856,7 @@ function drawNumbersAndForms(canvas6) {
     },
   ];
 
-  // Adiciona relógios pequenos
+  // relógios pequenos
   for (let i = 0; i < 3; i++) {
     const smallClock = {
       x:
@@ -1183,7 +1190,7 @@ function endGame7() {
   document.getElementById("incorrect").disabled = true;
 }
 
-// Resetar o jogo
+// Reiniciar o jogo
 function resetGame7() {
   // Redefine variáveis
   currentEquation7 = "";
@@ -1220,7 +1227,7 @@ function animate7() {
   requestAnimationFrame(animate7);
 }
 
-// Configura os botões
+// Configurar os botões
 document
   .getElementById("correct")
   .addEventListener("click", () => evaluateAnswer7(true));
@@ -1229,7 +1236,7 @@ document
   .addEventListener("click", () => evaluateAnswer7(false));
 document.getElementById("reset").addEventListener("click", resetGame7);
 
-// Inicializa o jogo
+// Iniciar o jogo
 document.addEventListener("DOMContentLoaded", () => {
   generateEquation7();
   createFallingNumbers7();

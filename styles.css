@@ -102,26 +102,26 @@ SCROLL BAR STYLE
 ///
 ///
 */
-/* Style the entire scrollbar */
+
 ::-webkit-scrollbar {
-  width: 8px; /* Adjust scrollbar width */
+  width: 8px; 
 }
 
-/* Style the scrollbar track (background) */
+
 ::-webkit-scrollbar-track {
-  background: #f4f4f4; /* Light gray background */
-  border-radius: 10px; /* Rounded corners */
+  background: #f4f4f4; 
+  border-radius: 10px; 
 }
 
-/* Style the scrollbar thumb (the draggable part) */
+
 ::-webkit-scrollbar-thumb {
-  background: #888; /* Gray thumb */
-  border-radius: 10px; /* Rounded corners */
+  background: #888; 
+  border-radius: 10px; 
 }
 
-/* Add hover effects to the thumb */
+
 ::-webkit-scrollbar-thumb:hover {
-  background: #555; /* Darker on hover */
+  background: #555; 
 }
 
 
@@ -301,7 +301,7 @@ STYLES FOR THE DYSCALCULIA GAME SECTION
 */
 
 #gameCanvas {
-
+  align-items: center;
   margin-bottom: 20px;
   background-color: #434e66;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
