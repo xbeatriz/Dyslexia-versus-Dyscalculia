@@ -335,16 +335,16 @@ const tileSize8 = 20; // Size of each grid tile
 const rows8 = canvas8.height / tileSize8;
 const cols8 = canvas8.width / tileSize8;
 let predefinedWords8 = [
-  "PICTURE",
-  "HOUSE",
-  "THUNDER",
-  "DIAMOND",
-  "CUPCAKE",
+  "TEXT",
+  "WORD",
   "GAME",
+  "WRITING",
+  "NUMBER",
+  "LETTER",
   "DYSLEXIA",
-  "LIGHT",
+  "DISTRACTION",
   "DYSCALCULIA",
-  "ADVENTURE",
+  "CONFUSION",
 ]; 
 let discoveredWords8 = []; 
 let snake8 = [{ x: 0, y: 0 }]; // Snake starting position
