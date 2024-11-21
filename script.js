@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
 //
 //Dyslexia canvas
 //cor comum para todos os canvas
-const commonFillColor = "#A6A09DFF"; // Exemplo de cor
+const commonFillColor = "#434e66"; // Exemplo de cor
 
 // Seleciona todos os canvas do painel direito
 const canvasIds1 = ["dyslexiaCanvas", "focusCanvas", "tasksCanvas"];
@@ -142,8 +142,17 @@ function drawScrambledTextCanvas(canvas1) {
 
   function draw() {
     const scrambledLines = scrambleTextLines();
-    ctx1.fillStyle = commonFillColor;
-    ctx1.fillRect(0, 0, canvas1.width, canvas1.height); // Preenche o fundo com a cor
+
+    // Aplica a sombra e o fundo
+    ctx1.save(); // Salva o estado atual do contexto
+    ctx1.shadowColor = "rgba(0, 0, 0, 0.2)";
+    ctx1.shadowBlur = 6;
+    ctx1.shadowOffsetX = 0;
+    ctx1.shadowOffsetY = 4;
+
+    ctx1.fillStyle = commonFillColor; // Cor de fundo
+    ctx1.fillRect(0, 0, canvas1.width, canvas1.height); // Preenche o fundo com a cor e sombra
+    ctx1.restore(); // Restaura o contexto (remove a sombra para o texto)
 
     const fontSize = Math.max(16, canvas1.height / 20);
     ctx1.font = `${fontSize}px Montserrat`;
@@ -271,7 +280,7 @@ function drawTasksCanvas(canvas3) {
     ctx3.clearRect(0, 0, canvas3.width, canvas3.height);
 
     // Fundo do canvas com cor personalizada
-    ctx3.fillStyle = "#a6a09dff"; // Cor de fundo
+    ctx3.fillStyle = commonFillColor; // Cor de fundo
     ctx3.fillRect(0, 0, canvas3.width, canvas3.height);
 
     // Configurações de texto
@@ -1023,6 +1032,7 @@ const operations7 = ["+", "-", "*", "/"];
 
 // Gerar números aleatórios para o fundo
 function createFallingNumbers7() {
+  fallingNumbers7 = []; // Garante reset ao recriar os números
   for (let i = 0; i < fallingNumbersCount7; i++) {
     fallingNumbers7.push({
       x: Math.random() * canvas7.width,
@@ -1090,7 +1100,7 @@ function generateEquation7() {
 
 // Renderizar a equação no canvas
 function renderEquation7() {
-  ctx7.font = "20px Montserrat";
+  ctx7.font = "24px Montserrat";
   ctx7.fillStyle = "white";
   ctx7.textAlign = "center";
   ctx7.fillText(currentEquation7, canvas7.width / 2, canvas7.height / 2);
@@ -1099,7 +1109,7 @@ function renderEquation7() {
 // Renderizar a pontuação
 function renderScore7() {
   ctx7.font = "16px Montserrat";
-  ctx7.fillStyle = "black";
+  ctx7.fillStyle = "white";
   ctx7.textAlign = "left";
   ctx7.fillText(`Pontuação: ${score7}`, 10, 30);
   ctx7.fillText(`Perguntas: ${questionCount7}/20`, 10, 50);
@@ -1173,6 +1183,27 @@ function endGame7() {
   document.getElementById("incorrect").disabled = true;
 }
 
+// Resetar o jogo
+function resetGame7() {
+  // Redefine variáveis
+  currentEquation7 = "";
+  isCorrect7 = false;
+  score7 = 0;
+  questionCount7 = 0;
+  particles7 = [];
+  fallingNumbers7 = [];
+
+  // Recria os números de fundo
+  createFallingNumbers7();
+
+  // Habilita os botões
+  document.getElementById("correct").disabled = false;
+  document.getElementById("incorrect").disabled = false;
+
+  // Gera uma nova equação
+  generateEquation7();
+}
+
 // Animação do jogo
 function animate7() {
   ctx7.clearRect(0, 0, canvas7.width, canvas7.height);
@@ -1196,6 +1227,7 @@ document
 document
   .getElementById("incorrect")
   .addEventListener("click", () => evaluateAnswer7(false));
+document.getElementById("reset").addEventListener("click", resetGame7);
 
 // Inicializa o jogo
 document.addEventListener("DOMContentLoaded", () => {

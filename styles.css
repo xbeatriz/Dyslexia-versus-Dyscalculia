@@ -74,6 +74,7 @@ body {
 
 canvas {
   border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 #game-container {
@@ -300,9 +301,10 @@ STYLES FOR THE DYSCALCULIA GAME SECTION
 */
 
 #gameCanvas {
-  border: 1px solid white;
+
   margin-bottom: 20px;
-  background-color: #a6a09dff;
+  background-color: #434e66;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 #buttons-container {
@@ -338,6 +340,10 @@ STYLES FOR THE DYSCALCULIA GAME SECTION
   background-color: #e53935;
 }
 
+#reset {
+  background-color: #434e66;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+}
 /*
 ///
 ///
@@ -355,7 +361,7 @@ DYSLEXIA GAME
   padding: 12px 24px;
   font-size: 18px;
   font-weight: 600;
-  background-color: #ff7f50;
+  background-color: #3c5997;
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -365,18 +371,18 @@ DYSLEXIA GAME
 }
 
 #resetButton:hover {
-  background-color: #f0612d;
+  background-color: #434e66;
   transform: translateY(-2px);
 }
 
 #resetButton:active {
-  background-color: #fe4400;
+  background-color: #3c5997;
   transform: translateY(1px);
 }
 
 #resetButton:focus {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(255, 124, 77, 0.6);
+  box-shadow: 0 0 0 3px rgba(77, 139, 255, 0.6);
 }
 
 #wordList {
@@ -392,8 +398,9 @@ DYSLEXIA GAME
   margin: 8px 0;
   padding: 8px 15px;
   border-radius: 6px;
-  background-color: #f0f0f0;
-  color: #444;
+  background-color: #434e66;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  color: #ffffff;
   font-size: 16px;
   transition: all 0.3s ease;
   display: flex;
@@ -403,6 +410,7 @@ DYSLEXIA GAME
 
 #wordList li:hover {
   background-color: #e0e0e0;
+  color: #434e66;
   transform: translateY(-2px);
 }
 
@@ -420,13 +428,13 @@ DYSLEXIA GAME
 }
 
 #wordList li.discovered {
-  background-color: #ff7f50;
+  background-color: #3c5997;
   color: white;
   font-weight: bold;
 }
 
 #wordList li.discovered:hover {
-  background-color: #45a049;
+  background-color: #5178ca;
   transform: none;
 }
 
